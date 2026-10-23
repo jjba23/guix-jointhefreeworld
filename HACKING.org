@@ -79,12 +79,20 @@ when adding a key:
 #+end_src
 
 Add a =.key= file here for every key that will ever appear in
-=.guix-authorizations=, and push the branch with the others:
+=.guix-authorizations=.  Set the remote once, push the authenticated branch, and
+then push the keyring branch:
 
 #+begin_src sh
   git remote add origin ssh://git@codeberg.org/jjba23/guix-jointhefreeworld.git
-  git push -u origin trunk keyring
+  git push -u origin trunk
+  git push --no-verify origin keyring
 #+end_src
+
+The keyring branch is the root of trust and is not part of the channel's
+authenticated history, so it is pushed with =--no-verify=: the =pre-push= hook
+installed by =guix git authenticate= would otherwise try to authenticate a
+commit that is not a descendant of the introduction and refuse the push.  The
+branch contains only public keys.
 
 ** The introductory commit
 

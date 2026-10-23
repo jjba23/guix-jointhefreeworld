@@ -87,7 +87,10 @@ Add a =.key= file here for every key that will ever appear in
 =.guix-authorizations= (already in this repository) lists the keys whose
 signatures are accepted.  The first commit that introduces it must be signed by
 the maintainer; that commit and the signing key are the *channel introduction*
-users need:
+users need.  It has been created already: the introductory commit is
+=b0ac3f05075d7959860fc9e1db5871acddea3986=, signed by the key with fingerprint
+=83BC 6E1C 8726 B8C2 97F8  D16E 24F4 6738 CE11 4AF6=, and the =keyring= branch
+(created with the commands below) contains the matching =.key= file.
 
 #+begin_src sh
   git add .guix-authorizations
@@ -101,7 +104,7 @@ fingerprint:
 #+begin_src scheme
   (introduction
    (make-channel-introduction
-    "<introductory-commit>"
+    "b0ac3f05075d7959860fc9e1db5871acddea3986"
     (openpgp-fingerprint
      "83BC 6E1C 8726 B8C2 97F8  D16E 24F4 6738 CE11 4AF6")))
 #+end_src
@@ -124,7 +127,7 @@ Users put it in their channel specification:
 ** Verifying before pushing
 
 #+begin_src sh
-  guix git authenticate <introductory-commit> \
+  guix git authenticate b0ac3f05075d7959860fc9e1db5871acddea3986 \
     "83BC 6E1C 8726 B8C2 97F8  D16E 24F4 6738 CE11 4AF6"
 #+end_src
 
@@ -149,10 +152,10 @@ it as a channel alongside Guix:
   guix pull -C /tmp/channels.scm --profile=/tmp/jfw-profile
 #+end_src
 
-Until the introductory commit exists and is advertised, Guix warns that the
-channel lacks an =introduction= even though =.guix-authorizations= is present.
-That warning is expected during preparation; it disappears once users provide
-the introduction.
+The introduction is advertised in this repository's =channels.scm=, so a user
+who copies that file gets an authenticated channel.  The local =keyring= branch
+must be pushed along with =trunk=; without it, authentication cannot load the
+public key.
 
 * Security checklist
 

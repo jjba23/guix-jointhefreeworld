@@ -123,11 +123,11 @@ the checkout you run it from:
 
 - Every source is fetched from its Codeberg repository and pinned by a SHA-256
   hash, so a moved tag cannot silently change what is built.
-- The channel is prepared for Guix's commit authentication:
-  =.guix-authorizations= names the maintainer's OpenPGP key, and
-  =.guix-channel= names the =keyring= branch.  See [[file:HACKING.org][HACKING.org]] for the
-  one-time keyring and signed-introduction steps, and for the introduction to
-  advertise to users.
+- The channel is authenticated with Guix's commit authentication:
+  =.guix-authorizations= names the maintainer's OpenPGP key, =.guix-channel=
+  names the =keyring= branch, and the introduction in =channels.scm= pins the
+  first signed commit.  Guix verifies every fetched commit against the keys in
+  =.guix-authorizations=.
 - No deployment secrets, session keys, database files or =env.scm= files are in
   this channel.  The web services that need them are not packaged here; see
   below.

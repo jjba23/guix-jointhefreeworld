@@ -7,6 +7,22 @@
 This file covers the work that is not reading the package catalogue: updating
 and adding packages, publishing the channel, and authenticating its history.
 
+* Tasks
+
+The repository has a =maak.scm=.  With Maak installed, =maak --list= shows the
+tasks; the ones used most are:
+
+#+begin_src sh
+  maak build                 # every package
+  maak build maak            # one package
+  maak fmt                   # guix style over the Scheme sources
+  maak lint                  # every package, including network checks
+  maak check                 # lint offline, build, authenticate
+  maak publish               # push trunk and the keyring branch
+  maak shell                 # a shell with the whole collection
+  maak show-introduction     # the introduction for channels.scm
+#+end_src
+
 * Updating a package to a new release
 
 The hash is the recursive hash of the checkout, which is what =git-fetch=
@@ -86,6 +102,9 @@ then push the keyring branch:
   git remote add origin ssh://git@codeberg.org/jjba23/guix-jointhefreeworld.git
   git push -u origin trunk
   git push --no-verify origin keyring
+
+With Maak installed, =maak publish= runs the last two commands against the
+=codeberg= remote.
 #+end_src
 
 The keyring branch is the root of trust and is not part of the channel's

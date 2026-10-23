@@ -132,3 +132,14 @@ Linting every package reaches the network for the updater and CVE checks; use
   (format #t
           "(introduction~% (make-channel-introduction~%  ~s~%  (openpgp-fingerprint~%   ~s)))~%"
           introductory-commit signing-fingerprint))
+
+(define (publish)
+  "Push the authenticated trunk and the keyring branch to Codeberg.
+
+The keyring branch is the root of trust and is not part of the channel's
+authenticated history, so it is pushed with --no-verify: the pre-push hook
+installed by `guix git authenticate' would otherwise try to authenticate a
+commit that is not a descendant of the introduction and refuse the push."
+  (run (list "git" "push" "codeberg" "trunk") #:verbose? #t)
+  (run (list "git" "push" "--no-verify" "codeberg" "keyring")
+       #:verbose? #t))

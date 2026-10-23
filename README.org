@@ -170,6 +170,9 @@ Every definition is an ordinary Guix package: an =origin=, a build system,
 =arguments= and inputs, written the way packages are written in the Guix
 repository itself.  There is no channel-specific macro to learn.
 
+The repository has a =maak.scm=.  With Maak installed, =maak check= lints,
+builds and authenticates the channel, and =maak --list= shows the rest.
+
 See [[file:HACKING.org][HACKING.org]] for updating a package, adding one, and publishing and
 authenticating the channel.
 

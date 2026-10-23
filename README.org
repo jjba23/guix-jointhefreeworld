@@ -12,22 +12,6 @@
 [[https://jointhefreeworld.org/ggg/dist/gnu-guix.svg]]  [[https://jointhefreeworld.org/ggg/dist/scheme-guile.svg]]  [[https://jointhefreeworld.org/ggg/dist/gnu-emacs.svg]]  [[https://jointhefreeworld.org/ggg/dist/gtk4.svg]]  [[https://jointhefreeworld.org/ggg/dist/wayland.svg]]
 [[https://jointhefreeworld.org/ggg/dist/license-agpl3+.svg]]  [[https://jointhefreeworld.org/ggg/dist/codeberg.svg]]  [[https://jointhefreeworld.org/ggg/dist/maak.svg]]  [[https://img.shields.io/badge/Guix-channel-6f4e9c.svg]]
 
-/Channel packaging is AGPL-3.0-or-later; each package keeps its upstream license./
-
-*A curated, cryptographically authenticated GNU Guix channel that keeps the
-jointhefreeworld collection at its latest release: Guile libraries, command-line
-programs, Emacs packages, a GTK4 Wayland dock, and the site builder behind
-[[https://jointhefreeworld.org][jointhefreeworld.org]].*
-
-#+begin_quote
-*One =guix pull=, the whole Lisp-flavoured toolbox.*
-
-No copy-pasting package definitions. No “which checkout has the newest =maak=?”
-No rebuilding half the stack by hand. Add the channel, pull once, and install
-the pieces you want.
-#+end_quote
-
-* What is this, in fifteen seconds
 
 =guix-jointhefreeworld= is a [[https://guix.gnu.org/manual/en/html_node/Channels.html][GNU Guix channel]]:
 a package collection that Guix can pull alongside its own.  It is not a fork of
@@ -321,30 +305,6 @@ want and enable the modes you like:
 - =welkomscherm= is a quiet welcome screen and dashboard.
 - =tekengrootte= makes face sizes proportional to one adjustable scale.
 
-** The site builder
-
-=jointhefreeworld= installs the Emacs Lisp program that builds the
-jointhefreeworld.org site from a checkout's Org sources, plus the Emacs packages
-it uses.  It does not contain the site's sources; it builds the checkout you run
-it from:
-
-#+begin_src sh
-  git clone https://codeberg.org/jjba23/jointhefreeworld
-  cd jointhefreeworld
-  guix install jointhefreeworld
-
-  jointhefreeworld-build              # writes ./public
-  jointhefreeworld-serve              # serves ./public on port 50011
-#+end_src
-
-For a production build, set =CI=true= so the canonical URLs, cards, and feed use
-the real host instead of =localhost=.  =jointhefreeworld-serve= takes a port from
-=PORT=:
-
-#+begin_src sh
-  CI=true jointhefreeworld-build
-  PORT=8080 jointhefreeworld-serve
-#+end_src
 
 * Configuration
 

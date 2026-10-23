@@ -62,17 +62,20 @@ present in the =.guix-authorizations= of both parents.
 
 Guix loads the public keys from the branch named in =.guix-channel=
 (=keyring= by default).  The =.key= files live at the *top level* of that
-branch, which is best kept as an orphan branch:
+branch, which is best kept as an orphan branch.  The branch already exists in
+this repository; these are the commands used to create it and the ones to repeat
+when adding a key:
 
 #+begin_src sh
   gpg --export --armor 83BC6E1C8726B8C297F8D16E24F46738CE114AF6 \
       > 83BC6E1C8726B8C297F8D16E24F46738CE114AF6.key
 
   git checkout --orphan keyring
-  git rm -rf .
+  git rm -rf --cached .
   git add 83BC6E1C8726B8C297F8D16E24F46738CE114AF6.key
   git commit -m "Add the channel keyring"
   git checkout trunk
+  rm 83BC6E1C8726B8C297F8D16E24F46738CE114AF6.key
 #+end_src
 
 Add a =.key= file here for every key that will ever appear in

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">guix-jointhefreeworld</title>
+  <desc id="desc">A GNU Guix channel for the jointhefreeworld collection of Guile libraries, command-line programs, Emacs packages, a GTK4 Wayland dock and a static site builder.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111318"/>
+      <stop offset="0.58" stop-color="#171a21"/>
+      <stop offset="1" stop-color="#201b1a"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.12" cy="0.18" r="0.55">
+      <stop offset="0" stop-color="#d98b5f" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#d98b5f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.88" cy="0.82" r="0.62">
+      <stop offset="0" stop-color="#8b7bd8" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#8b7bd8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e6b36a"/>
+      <stop offset="1" stop-color="#c96f4a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <rect width="1200" height="300" fill="url(#glowA)"/>
+  <rect width="1200" height="300" fill="url(#glowB)"/>
+  <rect x="0" y="0" width="1200" height="4" fill="url(#gold)"/>
+
+  <!-- Lisp mark -->
+  <g transform="translate(72 74)">
+    <rect width="86" height="86" rx="20" fill="#1e222b" stroke="#3a3f4b" stroke-width="2"/>
+    <text x="43" y="61" font-family="DejaVu Serif, Liberation Serif, serif" font-size="54" font-weight="700" fill="#e6b36a" text-anchor="middle">λ</text>
+  </g>
+
+  <!-- Title and subtitle -->
+  <text x="188" y="124" font-family="DejaVu Sans, Liberation Sans, sans-serif" font-size="54" font-weight="700" fill="#f4efe4" letter-spacing="-0.8">guix-jointhefreeworld</text>
+  <text x="190" y="164" font-family="DejaVu Sans, Liberation Sans, sans-serif" font-size="21" fill="#c9c3b8">the latest jointhefreeworld software, packaged for GNU Guix</text>
+
+  <!-- Pills -->
+  <g font-family="DejaVu Sans, Liberation Sans, sans-serif" font-size="15" fill="#e9e3d8">
+    <rect x="190" y="196" width="126" height="30" rx="15" fill="#222731" stroke="#3a3f4b"/>
+    <text x="253" y="216" text-anchor="middle">Guile Scheme</text>
+    <rect x="328" y="196" width="112" height="30" rx="15" fill="#222731" stroke="#3a3f4b"/>
+    <text x="384" y="216" text-anchor="middle">GNU Emacs</text>
+    <rect x="452" y="196" width="142" height="30" rx="15" fill="#222731" stroke="#3a3f4b"/>
+    <text x="523" y="216" text-anchor="middle">GTK4 · Wayland</text>
+    <rect x="606" y="196" width="148" height="30" rx="15" fill="#222731" stroke="#3a3f4b"/>
+    <text x="680" y="216" text-anchor="middle">signed channel</text>
+  </g>
+
+  <!-- S-expression motif -->
+  <g font-family="DejaVu Sans Mono, Liberation Mono, monospace" font-size="17" fill="#8f97a8" opacity="0.72">
+    <text x="866" y="86">(channel</text>
+    <text x="886" y="112">(name 'jointhefreeworld)</text>
+    <text x="886" y="138">(branch "trunk")</text>
+    <text x="886" y="164">(introduction …))</text>
+  </g>
+  <g stroke="#e6b36a" stroke-width="2" opacity="0.55">
+    <line x1="866" y1="196" x2="1118" y2="196"/>
+  </g>
+  <text x="866" y="224" font-family="DejaVu Sans Mono, Liberation Mono, monospace" font-size="14" fill="#c9c3b8" opacity="0.85">$ guix pull</text>
+  <text x="866" y="246" font-family="DejaVu Sans Mono, Liberation Mono, monospace" font-size="14" fill="#c9c3b8" opacity="0.85">$ guix install maak ggg …</text>
+</svg>

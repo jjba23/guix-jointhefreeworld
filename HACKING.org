@@ -79,7 +79,8 @@ Add a =.key= file here for every key that will ever appear in
 =.guix-authorizations=, and push the branch with the others:
 
 #+begin_src sh
-  git push origin trunk keyring
+  git remote add origin ssh://git@codeberg.org/jjba23/guix-jointhefreeworld.git
+  git push -u origin trunk keyring
 #+end_src
 
 ** The introductory commit

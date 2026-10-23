@@ -3,7 +3,7 @@
 #+author: Josep Bigorra
 #+email: jjbigorra@gmail.com
 #+language: en
-#+options: toc:t num:nil
+#+options: toc:1 num:nil
 #+html_head: <meta name="description" content="A signed GNU Guix channel for the latest jointhefreeworld Guile libraries, command-line programs, Emacs packages, GTK4 dock, and site builder." />
 
 #+attr_html: :width 100% :alt guix-jointhefreeworld — a GNU Guix channel for the jointhefreeworld collection

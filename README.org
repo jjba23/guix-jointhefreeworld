@@ -411,7 +411,7 @@ package table names the command.
 
 | Package                     | Version | Command         | What it is                                       |
 |-----------------------------+---------+-----------------+--------------------------------------------------|
-| =maak=                      |  0.12.1 | =maak=          | Command runner à la Make, with Lisp inside       |
+| =maak=                      |  0.12.2 | =maak=          | Command runner à la Make, with Lisp inside       |
 | =ggg=                       |  0.16.1 | =ggg=           | SVG badge and glyph generator                    |
 | =iter-vitae=                |   1.0.1 | =iter-vitae=    | Curriculum vitae generator                       |
 | =lenkesamler=               |   0.0.2 | =lenkesamler=   | Bookmark collector and converter                 |

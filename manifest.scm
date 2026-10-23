@@ -22,10 +22,10 @@
 ;;
 ;; Build or enter the whole collection from a checkout of this channel:
 ;;
-;;   guix build -L . -m manifest.scm
-;;   guix shell -L . -m manifest.scm
+;;   guix build -L channel -m manifest.scm
+;;   guix shell -L channel -m manifest.scm
 ;;
-;; `-L .' is what makes `(jointhefreeworld packages)' resolvable before the
+;; `-L channel' is what makes `(jointhefreeworld packages)' resolvable before the
 ;; channel has been pulled.
 ;;
 ;;; Code:

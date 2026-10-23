@@ -16,5 +16,6 @@
 
 (channel
  (version 0)
+ (directory "channel")
  (url "https://codeberg.org/jjba23/guix-jointhefreeworld")
  (keyring-reference "keyring"))

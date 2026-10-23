@@ -29,12 +29,12 @@ says so; the same command with =--branch trunk= gives the values.
 * Adding a package
 
 Add a =define-public= form to the module the package belongs to, export the name
-from that module, re-export it from =jointhefreeworld/packages.scm=, and add it
+from that module, re-export it from =channel/jointhefreeworld/packages.scm=, and add it
 to =manifest.scm=.  Then build and lint it:
 
 #+begin_src sh
-  guix build -L . <package>
-  guix lint -L . <package>
+  guix build -L channel <package>
+  guix lint -L channel <package>
 #+end_src
 
 * Publishing the channel
@@ -140,7 +140,7 @@ authorized key.  Push only after it succeeds.
 From a checkout, build every package:
 
 #+begin_src sh
-  guix build -L . -m manifest.scm
+  guix build -L channel -m manifest.scm
 #+end_src
 
 To test what users get, commit the checkout to a local Git repository and pull
@@ -168,4 +168,4 @@ public key.
 - Every commit is signed, and only keys in =.guix-authorizations= are accepted.
 - The =.key= files in the =keyring= branch match the fingerprints in
   =.guix-authorizations= and the introduction.
-- Run =guix lint -L .= over new or changed packages.
+- Run =guix lint -L channel= over new or changed packages.

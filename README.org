@@ -38,12 +38,12 @@ A checkout is enough for trying a package or hacking on the channel:
   git clone https://codeberg.org/jjba23/guix-jointhefreeworld
   cd guix-jointhefreeworld
 
-  guix install -L . maak
-  guix shell -L . -m manifest.scm        # the whole collection
-  guix build -L . -m manifest.scm        # build all of it
+  guix install -L channel maak
+  guix shell -L channel -m manifest.scm        # the whole collection
+  guix build -L channel -m manifest.scm        # build all of it
 #+end_src
 
-=-L .= adds the checkout to Guile's load path, which is what makes
+=-L channel= adds the channel's module directory to Guile's load path, which is what makes
 =(jointhefreeworld packages)= resolvable before the channel has been pulled.
 
 * What is in the channel
@@ -155,14 +155,15 @@ The repository is one module per kind of package:
   manifest.scm                     every package, for `guix build -m'
   channels.scm                     an example channel list
   HACKING.org                      updating, adding, publishing, authenticating
-  jointhefreeworld/
-    packages.scm                   imports and re-exports all packages
-    packages/
-      guile.scm                    the Guile libraries
-      applications.scm             the command-line programs
-      emacs.scm                    the Emacs packages
-      misc.scm                     heks-bash and lambdock
-      site.scm                     the jointhefreeworld site builder
+  channel/                         the directory declared in .guix-channel
+    jointhefreeworld/
+      packages.scm                 imports and re-exports all packages
+      packages/
+        guile.scm                  the Guile libraries
+        applications.scm           the command-line programs
+        emacs.scm                  the Emacs packages
+        misc.scm                   heks-bash and lambdock
+        site.scm                   the jointhefreeworld site builder
 #+end_example
 
 Every definition is an ordinary Guix package: an =origin=, a build system,

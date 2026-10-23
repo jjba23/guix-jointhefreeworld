@@ -1,0 +1,11 @@
+;; This file is part of guix-jointhefreeworld.
+;;
+;; It lists the OpenPGP keys whose signatures make a commit to this channel
+;; authentic.  The first commit that introduces it must be signed by one of
+;; these keys; that commit and its signer are the channel introduction that
+;; users put in their channels.scm.
+
+(authorizations
+ (version 0)
+ (("83BC 6E1C 8726 B8C2 97F8  D16E 24F4 6738 CE11 4AF6"
+   (name "Josep Bigorra"))))

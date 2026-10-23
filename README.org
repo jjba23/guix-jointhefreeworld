@@ -1,0 +1,179 @@
+#+title: guix-jointhefreeworld
+#+subtitle: a GNU Guix channel for the jointhefreeworld collection
+#+author: Josep Bigorra
+#+email: jjbigorra@gmail.com
+#+language: en
+#+options: num:nil toc:t
+
+This is a [[https://guix.gnu.org/manual/en/html_node/Channels.html][GNU Guix channel]]
+for the jointhefreeworld collection: Guile libraries, command-line programs,
+Emacs packages, a GTK4 Wayland dock and the static site builder behind
+[[https://jointhefreeworld.org][jointhefreeworld.org]].  Each package follows a
+released tag of its project, so a pull gives the latest version rather than the
+older copy the Guix channel happens to carry.
+
+* Quick start
+
+Append the channel to your channel list, keeping Guix itself:
+
+#+begin_src scheme
+  ;; ~/.config/guix/channels.scm
+  (cons* (channel
+          (name 'jointhefreeworld)
+          (url "https://codeberg.org/jjba23/guix-jointhefreeworld")
+          (branch "trunk"))
+         %default-channels)
+#+end_src
+
+Then pull once and install what you need:
+
+#+begin_src sh
+  guix pull
+  guix install maak ggg iter-vitae mutastructura
+#+end_src
+
+A checkout is enough for trying a package or hacking on the channel:
+
+#+begin_src sh
+  git clone https://codeberg.org/jjba23/guix-jointhefreeworld
+  cd guix-jointhefreeworld
+
+  guix install -L . maak
+  guix shell -L . -m manifest.scm        # the whole collection
+  guix build -L . -m manifest.scm        # build all of it
+#+end_src
+
+=-L .= adds the checkout to Guile's load path, which is what makes
+=(jointhefreeworld packages)= resolvable before the channel has been pulled.
+
+* What is in the channel
+
+The channel is split into modules by what a package is.  Import the module you
+need, or =(jointhefreeworld packages)= for all of them.
+
+** Guile libraries — =(jointhefreeworld packages guile)=
+
+| Package                   | Version | What it is                                             |
+|---------------------------+---------+--------------------------------------------------------|
+| =guile-kracht=            |   0.3.1 | Opt-in prelude that enhances Guile's standard library  |
+| =guile-scriba=            |   0.4.1 | Structured logging, from console lines to JSON on disk |
+| =guile-veritas=           |   0.8.1 | Testing framework with an embedded DSL                 |
+| =guile-bewaking=          |   0.4.2 | Encrypted, lifetime-limited authentication tokens      |
+| =guile-hygguile=          |   2.7.3 | Web UI components built from SXML                      |
+| =guile-orgwebalchemy=     |   1.2.1 | Org mode to HTML and Markdown converter                |
+| =guile-openapi-generator= |   0.0.6 | OpenAPI 3 to Guile code generator                      |
+| =guile-olive-css=         |   0.6.4 | Utility-class CSS generator, with a tree shaker        |
+
+** Programs — =(jointhefreeworld packages applications)=
+
+| Package                     | Version | What it is                                         |
+|-----------------------------+---------+----------------------------------------------------|
+| =maak=                      |  0.12.1 | Command runner à la Make, with Lisp inside         |
+| =ggg=                       |  0.16.1 | SVG badge and glyph generator                      |
+| =iter-vitae=                |   1.0.1 | Curriculum vitae generator                         |
+| =lenkesamler=               |   0.0.2 | Bookmark collector and converter                   |
+| =consceal=                  |   0.0.6 | Secret manager and deployer                        |
+| =skapa=                     |   0.0.3 | Interactive project scaffolder                     |
+| =araneola=                  |   0.0.1 | Site crawler and link checker                      |
+| =mutastructura=             |   0.9.1 | Relational database schema migrations              |
+| =cask-and-cons=             |   0.1.2 | Desktop setup tasks, named and written in Scheme   |
+| =guile-carvoeiro-water-fun= |   0.1.0 | Small multilingual static site generator (library) |
+
+The programs install a command in =bin/=.  Their launchers are wrapped with the
+Guile and the libraries they need, so =guix install= is enough to run them.
+=guile-carvoeiro-water-fun= is the exception: it is a library with its assets
+under =share/=.
+
+** Emacs packages — =(jointhefreeworld packages emacs)=
+
+| Package              | Version | What it is                                       |
+|----------------------+---------+--------------------------------------------------|
+| =emacs-maak=         |   0.9.0 | Discover and run Maak tasks from Emacs           |
+| =emacs-modusregel=   |   0.7.0 | Clean and fast mode line                         |
+| =emacs-veritas=      |   0.1.2 | Emacs integration for the Veritas test framework |
+| =emacs-welkomscherm= |   1.2.1 | Quiet welcome screen and dashboard               |
+| =emacs-tekengrootte= |   0.2.0 | Proportionally scaled face sizes                 |
+
+** Other — =(jointhefreeworld packages misc)=
+
+| Package           | Version | What it is                                          |
+|-------------------+---------+-----------------------------------------------------|
+| =guile-heks-bash= |   1.3.0 | Bash configuration generated from Scheme            |
+| =lambdock=        |   0.7.5 | Wayland dock built with GTK4, configurable in Guile |
+
+** The web site — =(jointhefreeworld packages site)=
+
+| Package            | Version | What it is                                |
+|--------------------+---------+-------------------------------------------|
+| =jointhefreeworld= |   1.0.1 | The jointhefreeworld.org site and builder |
+
+=jointhefreeworld= installs the Emacs Lisp program that exports a checkout's Org
+sources into a static site, together with the Emacs packages it uses.  It builds
+the checkout you run it from:
+
+#+begin_src sh
+  git clone https://codeberg.org/jjba23/jointhefreeworld
+  cd jointhefreeworld
+  guix install jointhefreeworld
+  jointhefreeworld-build              # writes ./public
+  jointhefreeworld-serve              # serves ./public on port 50011
+#+end_src
+
+* Security and authentication
+
+- Every source is fetched from its Codeberg repository and pinned by a SHA-256
+  hash, so a moved tag cannot silently change what is built.
+- The channel is prepared for Guix's commit authentication:
+  =.guix-authorizations= names the maintainer's OpenPGP key, and
+  =.guix-channel= names the =keyring= branch.  See [[file:HACKING.org][HACKING.org]] for the
+  one-time keyring and signed-introduction steps, and for the introduction to
+  advertise to users.
+- No deployment secrets, session keys, database files or =env.scm= files are in
+  this channel.  The web services that need them are not packaged here; see
+  below.
+
+* What is not packaged
+
+- *Artanis web services* (byggsteg, lucidplan, pingwing, wikimusic, torikomi)
+  are deployment applications.  They read their configuration from a working
+  tree and write a database and logs beside themselves, and a deployment needs
+  its own =env.scm= and secrets.  They are run from their own checkouts.
+- *symbanta* and *symbanta-dashboard* need a full Maven or npm dependency
+  closure, which is not vendored.
+- *free-alacarte* is a Haskell library and is not part of this channel.
+- *heks-emacs*, *heks-linux* and *wolk-jjba* are personal configurations, not
+  installable programs.  *private-notes* and *static-assets* are data.
+  *wolkenschloss* has no public repository.
+
+* Hacking on the channel
+
+The repository is one module per kind of package:
+
+#+begin_example
+  .guix-channel                    channel metadata and primary URL
+  .guix-authorizations             keys whose signatures are accepted
+  manifest.scm                     every package, for `guix build -m'
+  channels.scm                     an example channel list
+  HACKING.org                      updating, adding, publishing, authenticating
+  jointhefreeworld/
+    packages.scm                   imports and re-exports all packages
+    packages/
+      guile.scm                    the Guile libraries
+      applications.scm             the command-line programs
+      emacs.scm                    the Emacs packages
+      misc.scm                     heks-bash and lambdock
+      site.scm                     the jointhefreeworld site builder
+#+end_example
+
+Every definition is an ordinary Guix package: an =origin=, a build system,
+=arguments= and inputs, written the way packages are written in the Guix
+repository itself.  There is no channel-specific macro to learn.
+
+See [[file:HACKING.org][HACKING.org]] for updating a package, adding one, and publishing and
+authenticating the channel.
+
+* License
+
+The packaging code is licensed under the GNU Affero General Public License,
+version 3 or later; see =COPYING=.  Each package carries its own project's
+license, and the field in its definition names it.

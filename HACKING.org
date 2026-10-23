@@ -1,0 +1,167 @@
+#+title: Hacking on guix-jointhefreeworld
+#+author: Josep Bigorra
+#+email: jjbigorra@gmail.com
+#+language: en
+#+options: num:nil toc:t
+
+This file covers the work that is not reading the package catalogue: updating
+and adding packages, publishing the channel, and authenticating its history.
+
+* Updating a package to a new release
+
+The hash is the recursive hash of the checkout, which is what =git-fetch=
+produces:
+
+#+begin_src sh
+  git clone --depth 1 --branch v0.13.0 https://codeberg.org/jjba23/maak.git /tmp/maak
+  guix hash -x -r /tmp/maak
+  git -C /tmp/maak rev-parse HEAD
+#+end_src
+
+Raise the package's =version= and replace the =sha256= in its =origin=.  The
+=commit= field is =(string-append "v" version)=, so it follows the version
+without a second edit; the hash is what pins the content if the tag moves.  To
+pin a commit instead of a tag, put the full SHA-1 in =commit=.
+
+Projects without a release tag are pinned to a commit and carry a version that
+says so; the same command with =--branch trunk= gives the values.
+
+* Adding a package
+
+Add a =define-public= form to the module the package belongs to, export the name
+from that module, re-export it from =jointhefreeworld/packages.scm=, and add it
+to =manifest.scm=.  Then build and lint it:
+
+#+begin_src sh
+  guix build -L . <package>
+  guix lint -L . <package>
+#+end_src
+
+* Publishing the channel
+
+The repository must be reachable at the URL in =channels.scm= and
+=.guix-channel=, on the branch named there (=trunk= by default).  Nothing else
+is required for users who do not authenticate; for users who do, the steps
+below are.
+
+** Signing commits
+
+Guix's channel authentication is Git commit signing.  Configure Git once:
+
+#+begin_src sh
+  git config user.name "Josep Bigorra"
+  git config user.email "jjbigorra@gmail.com"
+  git config user.signingkey 83BC6E1C8726B8C297F8D16E24F46738CE114AF6
+  git config commit.gpgsign true
+#+end_src
+
+From then on every commit must be signed.  Merge commits must be signed by a key
+present in the =.guix-authorizations= of both parents.
+
+** The keyring branch
+
+Guix loads the public keys from the branch named in =.guix-channel=
+(=keyring= by default).  The =.key= files live at the *top level* of that
+branch, which is best kept as an orphan branch:
+
+#+begin_src sh
+  gpg --export --armor 83BC6E1C8726B8C297F8D16E24F46738CE114AF6 \
+      > 83BC6E1C8726B8C297F8D16E24F46738CE114AF6.key
+
+  git checkout --orphan keyring
+  git rm -rf .
+  git add 83BC6E1C8726B8C297F8D16E24F46738CE114AF6.key
+  git commit -m "Add the channel keyring"
+  git checkout trunk
+#+end_src
+
+Add a =.key= file here for every key that will ever appear in
+=.guix-authorizations=, and push the branch with the others:
+
+#+begin_src sh
+  git push origin trunk keyring
+#+end_src
+
+** The introductory commit
+
+=.guix-authorizations= (already in this repository) lists the keys whose
+signatures are accepted.  The first commit that introduces it must be signed by
+the maintainer; that commit and the signing key are the *channel introduction*
+users need:
+
+#+begin_src sh
+  git add .guix-authorizations
+  git commit -S -m "Authorize the channel maintainer"
+  git rev-parse HEAD
+#+end_src
+
+Write the resulting commit hash down.  The introduction is that hash plus the
+fingerprint:
+
+#+begin_src scheme
+  (introduction
+   (make-channel-introduction
+    "<introductory-commit>"
+    (openpgp-fingerprint
+     "83BC 6E1C 8726 B8C2 97F8  D16E 24F4 6738 CE11 4AF6")))
+#+end_src
+
+Advertise it, for example in the channel's README and release announcement.
+Users put it in their channel specification:
+
+#+begin_src scheme
+  (channel
+   (name 'jointhefreeworld)
+   (url "https://codeberg.org/jjba23/guix-jointhefreeworld")
+   (branch "trunk")
+   (introduction
+    (make-channel-introduction
+     "<introductory-commit>"
+     (openpgp-fingerprint
+      "83BC 6E1C 8726 B8C2 97F8  D16E 24F4 6738 CE11 4AF6"))))
+#+end_src
+
+** Verifying before pushing
+
+#+begin_src sh
+  guix git authenticate <introductory-commit> \
+    "83BC 6E1C 8726 B8C2 97F8  D16E 24F4 6738 CE11 4AF6"
+#+end_src
+
+If that succeeds, every commit from the introduction to =HEAD= is signed by an
+authorized key.  Push only after it succeeds.
+
+* Testing the channel
+
+From a checkout, build every package:
+
+#+begin_src sh
+  guix build -L . -m manifest.scm
+#+end_src
+
+To test what users get, commit the checkout to a local Git repository and pull
+it as a channel alongside Guix:
+
+#+begin_src sh
+  guix describe -f channels > /tmp/channels.scm
+  # Add a (channel (name 'jointhefreeworld) (url "file:///path/to/checkout")
+  # (branch "trunk")) to that list, then:
+  guix pull -C /tmp/channels.scm --profile=/tmp/jfw-profile
+#+end_src
+
+Until the introductory commit exists and is advertised, Guix warns that the
+channel lacks an =introduction= even though =.guix-authorizations= is present.
+That warning is expected during preparation; it disappears once users provide
+the introduction.
+
+* Security checklist
+
+- No secrets in the repository: no =env.scm=, session keys, tokens, database
+  files or deployment credentials.  The web services that need them are not
+  packaged here.
+- Every source is pinned by a SHA-256 hash; a moved tag fails the build rather
+  than changing it silently.
+- Every commit is signed, and only keys in =.guix-authorizations= are accepted.
+- The =.key= files in the =keyring= branch match the fingerprints in
+  =.guix-authorizations= and the introduction.
+- Run =guix lint -L .= over new or changed packages.

@@ -169,6 +169,9 @@ public key.
 - Every source is pinned by a SHA-256 hash; a moved tag fails the build rather
   than changing it silently.
 - Every commit is signed, and only keys in =.guix-authorizations= are accepted.
+- Do not rebase, amend or force-push commits at or after the introduction:
+  authentication follows the commit graph, and rewriting it invalidates the
+  introduction users pinned.
 - The =.key= files in the =keyring= branch match the fingerprints in
   =.guix-authorizations= and the introduction.
 - Run =guix lint -L channel= over new or changed packages.

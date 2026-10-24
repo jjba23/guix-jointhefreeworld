@@ -102,7 +102,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "140wialbg3g6p2cxkwv0d6ig9kxlwg21h6a9bp60p0rjml4ynvhc"))))
+        (base32 "1k6h6xyv71441h2bvv1vxmmaykcs833q8851qaa7rp1k7iwdm9hz"))))
     (build-system meson-build-system)
     (arguments
      (list #:parallel-build? #t

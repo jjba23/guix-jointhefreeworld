@@ -66,7 +66,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1rvib7wzzr96a6zx1yr5a9vi4rnfpaa8zjlv873ka47a7ml4p84k"))))
+        (base32 "0d8s6gpblq260s5a83k1rkkiyk5vy0yn00h50awp2wmzgr3i29zq"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -142,7 +142,7 @@ complexity that comes with its history.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1hzph183hv433i18rcis9b368f05dlph9jg9kzkdvjrbka5r784q"))))
+        (base32 "1fkzgdqdwl5c3h27fym8qb2h2jkllzz0f6n7fh431p5dap40q0r7"))))
     (build-system guile-build-system)
     (arguments
      (list

@@ -57,7 +57,7 @@
 (define-public maak
   (package
     (name "maak")
-    (version "0.12.2")
+    (version "0.12.3")
     (source
      (origin
        (method git-fetch)
@@ -66,7 +66,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1xi3jicimdn9w7jjhzdhqm1r159nlqnbxaggi0w9d9v4x9697lrg"))))
+        (base32 "1rvib7wzzr96a6zx1yr5a9vi4rnfpaa8zjlv873ka47a7ml4p84k"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -133,7 +133,7 @@ complexity that comes with its history.")
 (define-public ggg
   (package
     (name "ggg")
-    (version "0.16.1")
+    (version "0.16.3")
     (source
      (origin
        (method git-fetch)
@@ -142,7 +142,7 @@ complexity that comes with its history.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1xb5n0vrj2l1srsh0d7rhy3g581f2ng83y3gf3mc9wh6pbizlkk8"))))
+        (base32 "1hzph183hv433i18rcis9b368f05dlph9jg9kzkdvjrbka5r784q"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -193,7 +193,7 @@ from S-expressions, producing pixel-perfect output.")
 (define-public iter-vitae
   (package
     (name "iter-vitae")
-    (version "1.0.2")
+    (version "1.0.3")
     (source
      (origin
        (method git-fetch)
@@ -202,7 +202,7 @@ from S-expressions, producing pixel-perfect output.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "02ihlz3vjw781hmpc1iifp1f3cvvqqmi98fg8h8msh87hb43hmcw"))))
+        (base32 "16kys92mwkba04nazmvmal9s0p1anbjcvv7cgbgx71189dqcylhf"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -253,7 +253,7 @@ be updated and evolved over the years, and it supports multilingual content.")
 (define-public lenkesamler
   (package
     (name "lenkesamler")
-    (version "0.0.3")
+    (version "0.0.4")
     (source
      (origin
        (method git-fetch)
@@ -262,7 +262,7 @@ be updated and evolved over the years, and it supports multilingual content.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0pdg0p31a6b8awy9cbmvdndx3fdlzkbphbc6ci7xx73zg16i59vg"))))
+        (base32 "1xs0618fmhacq50bribmnlh075jp3kddnlczpmvk6529w0m5ndi3"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -406,7 +406,7 @@ ever holding them in the clear.")
 (define-public skapa
   (package
     (name "skapa")
-    (version "0.0.4")
+    (version "0.0.5")
     (source
      (origin
        (method git-fetch)
@@ -415,7 +415,7 @@ ever holding them in the clear.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1yqnjkzbz6qa8d78q4b451762zyrm3vffjrszgnb6m475ic6ajz0"))))
+        (base32 "15r052wvglk5nf64cnhlnk44nj9vk0wshx05s9jzm5rfhk96zb28"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -479,7 +479,7 @@ a template system that a project can extend.")
 (define-public araneola
   (package
     (name "araneola")
-    (version "0.0.2")
+    (version "0.0.4")
     (source
      (origin
        (method git-fetch)
@@ -488,7 +488,7 @@ a template system that a project can extend.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1q2zfdjcy4fz3b30vv6vn5sgaisiy074n9blqh6driq9cyah9qcm"))))
+        (base32 "1lg2ldnr9vyq1dr9a2azmbcq4paa8wcwmd43f8fdq5lvspqwhxw1"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -559,7 +559,7 @@ file from what it found.")
 (define-public mutastructura
   (package
     (name "mutastructura")
-    (version "0.9.2")
+    (version "0.9.3")
     (source
      (origin
        (method git-fetch)
@@ -568,7 +568,7 @@ file from what it found.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0i1ri8knxw37a4142zkmvy6c7rx6c0a9a3wfayj25kn04rn1i7si"))))
+        (base32 "1sldpk7qaa3fzxxc6cdnylkr60xn4msb1hxymaf763rcj5wga4s5"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -725,7 +725,7 @@ runs on rather than a script that assumes the answer.")
 (define-public guile-carvoeiro-water-fun
   (package
     (name "guile-carvoeiro-water-fun")
-    (version "0.1.0")
+    (version "0.1.2")
     (source
      (origin
        (method git-fetch)
@@ -734,7 +734,7 @@ runs on rather than a script that assumes the answer.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1rvnl5dncvvc4gjvwppkyxinjsva42kmz7w0dw1slqkj81wxmdn3"))))
+        (base32 "0ppchnkl77cyhyzicvxsdpnfppx7p1p9651xbqvf4y2cqfylsmwn"))))
     (build-system guile-build-system)
     (arguments
      (list

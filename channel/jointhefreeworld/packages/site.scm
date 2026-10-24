@@ -52,7 +52,7 @@
 (define-public jointhefreeworld
   (package
     (name "jointhefreeworld")
-    (version "1.0.1")
+    (version "1.0.2")
     (source
      (origin
        (method git-fetch)
@@ -61,7 +61,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1xjb4p3pvb2vr6hl4iv0gxh6i57496zwcspc6f4mf0wcwswdwg38"))))
+        (base32 "01lbjq4ccx9yrv9y8s715gdaab06y6pyp7n0i4pd26zq5jrbdnaa"))))
     (build-system trivial-build-system)
     (arguments
      (list

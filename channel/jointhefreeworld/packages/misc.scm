@@ -45,7 +45,7 @@
 (define-public guile-heks-bash
   (package
     (name "guile-heks-bash")
-    (version "1.3.0")
+    (version "1.3.1")
     (source
      (origin
        (method git-fetch)
@@ -54,7 +54,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1iqqkl9p5dxza1rqfc7y29jp0hkimmni946s9i7kncx4q69aps4n"))))
+        (base32 "0hq077d5q1k032pp1zs7wqr8df9930gaypib6zrmakrfbj2999fl"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -93,7 +93,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "0.7.5")
+    (version "0.7.6")
     (source
      (origin
        (method git-fetch)
@@ -102,7 +102,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0jlrnj3w4qa68v257532k0sq3mf9prl2s77dr30cgnpzpfnprsqb"))))
+        (base32 "140wialbg3g6p2cxkwv0d6ig9kxlwg21h6a9bp60p0rjml4ynvhc"))))
     (build-system meson-build-system)
     (arguments
      (list #:parallel-build? #t

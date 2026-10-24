@@ -78,7 +78,7 @@ without forking the language's standard library.")
 (define-public guile-scriba
   (package
     (name "guile-scriba")
-    (version "0.4.2")
+    (version "0.4.3")
     (source
      (origin
        (method git-fetch)
@@ -87,7 +87,7 @@ without forking the language's standard library.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1r6b2dscn4xnw9ry1d4b0g7jfhc8z0p5pmx0n18b2c90lrnn7mfm"))))
+        (base32 "003p3zzygdsmiklgh24rimyh7v6rxg0qkm0wwwx19kql60k8x9lc"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -108,7 +108,7 @@ variables, dynamically scoped log contexts and ahead-of-time level filtering.")
 (define-public guile-veritas
   (package
     (name "guile-veritas")
-    (version "0.8.2")
+    (version "0.8.3")
     (source
      (origin
        (method git-fetch)
@@ -117,7 +117,7 @@ variables, dynamically scoped log contexts and ahead-of-time level filtering.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1c371ab8grh9q1idypavl56rniyl9ycddr7x8fljcq6p7v8ijnk3"))))
+        (base32 "1d49v76jplybsq5viy7znd944qivwyghy4kvz5zfj97nwwmrf5f7"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -138,7 +138,7 @@ failures with the values that produced them.")
 (define-public guile-bewaking
   (package
     (name "guile-bewaking")
-    (version "0.4.3")
+    (version "0.4.5")
     (source
      (origin
        (method git-fetch)
@@ -147,7 +147,7 @@ failures with the values that produced them.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0l5knqx2bdvlizyrgd1162v43b8smdlrns8q7zr65rz9acm0gk9l"))))
+        (base32 "0fm5wg35vb0rkghmfgvbqcbm5jj3bxsqqf0s0f0aprplyg5k4rwf"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -168,7 +168,7 @@ as web session cookies or as authenticating API calls.")
 (define-public guile-hygguile
   (package
     (name "guile-hygguile")
-    (version "2.7.4")
+    (version "2.7.5")
     (source
      (origin
        (method git-fetch)
@@ -177,7 +177,7 @@ as web session cookies or as authenticating API calls.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1qs6fn0c32aqs6s693gc638zvkwx55f2kwgkifwv1bkm9sknw3b4"))))
+        (base32 "0vqlvg0c66svsl38g625iprc216vfzipd2by5znqp2bg4n84ay5m"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -197,7 +197,7 @@ counterparts, easing the learning curve and reducing cognitive load.")
 (define-public guile-orgwebalchemy
   (package
     (name "guile-orgwebalchemy")
-    (version "1.2.2")
+    (version "1.2.3")
     (source
      (origin
        (method git-fetch)
@@ -206,7 +206,7 @@ counterparts, easing the learning curve and reducing cognitive load.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "11mvqs3j7zl9fm0gb1g35956b2cjl5j24dxx0907ax4jvdrsnz1f"))))
+        (base32 "1srx0shy5kzrnwdm4zcasf7zc0m25hc67xqq95rjmhni6k2cc893"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -225,7 +225,7 @@ renderers.")
 (define-public guile-openapi-generator
   (package
     (name "guile-openapi-generator")
-    (version "0.0.7")
+    (version "0.0.9")
     (source
      (origin
        (method git-fetch)
@@ -234,7 +234,7 @@ renderers.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1nqnlnh192bhvs0fijh5sgfj0250cnqz3a4qddgdkvldydqlx6w3"))))
+        (base32 "0iqix5zb96zgh5z0r0ldi783ciyych7if2pzzksjm28mqc8vgm3s"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -256,7 +256,7 @@ schemes described by the specification.")
 (define-public guile-olive-css
   (package
     (name "guile-olive-css")
-    (version "0.6.5")
+    (version "0.6.6")
     (source
      (origin
        (method git-fetch)
@@ -265,7 +265,7 @@ schemes described by the specification.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "004414jd1cxka0nzmmmc33xr56c8vv7y7p7mchy12k7ml8lp6cfq"))))
+        (base32 "0gv69wqgvjyhvn44h2135mlglj1apavsls3bjzfn2s3x1yqsdds0"))))
     (build-system guile-build-system)
     (arguments
      (list

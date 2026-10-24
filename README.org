@@ -483,11 +483,6 @@ package table names the command.
 | =araneola=                  |   0.0.2 | =araneola=      | Site crawler and link checker                    |
 | =mutastructura=             |   0.9.2 | =mutastructura= | Relational database schema migrations            |
 | =cask-and-cons=             |   0.1.2 | =caco=          | Desktop setup tasks, named and written in Scheme |
-| =guile-carvoeiro-water-fun= |   0.1.0 | — (library)     | Small multilingual static site generator         |
-
-=guile-carvoeiro-water-fun= is the exception in this group: it is a library with
-its CSS, images, scripts, and translation files installed under =share/=, not a
-command.
 
 ** Emacs packages — =(jointhefreeworld packages emacs)=
 :PROPERTIES:

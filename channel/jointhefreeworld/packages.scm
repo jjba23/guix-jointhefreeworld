@@ -50,7 +50,6 @@
                araneola
                mutastructura
                cask-and-cons
-               guile-carvoeiro-water-fun
                emacs-maak
                emacs-modusregel
                emacs-veritas

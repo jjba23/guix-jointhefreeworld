@@ -51,8 +51,7 @@
             skapa
             araneola
             mutastructura
-            cask-and-cons
-            guile-carvoeiro-water-fun))
+            cask-and-cons))
 
 (define-public maak
   (package
@@ -721,43 +720,3 @@ two machines in step -- into one command with named tasks.  The tasks are
 written in Guile Scheme, so a task can be a value computed from the machine it
 runs on rather than a script that assumes the answer.")
     (license license:gpl3+)))
-
-(define-public guile-carvoeiro-water-fun
-  (package
-    (name "guile-carvoeiro-water-fun")
-    (version "0.1.2")
-    (source
-     (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://codeberg.org/jjba23/carvoeiro-water-fun.git")
-             (commit (string-append "v" version))))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32 "0ppchnkl77cyhyzicvxsdpnfppx7p1p9651xbqvf4y2cqfylsmwn"))))
-    (build-system guile-build-system)
-    (arguments
-     (list
-      #:source-directory "src"
-      #:phases
-      #~(modify-phases %standard-phases
-          (add-before 'build 'install-resources
-            (lambda _
-              (copy-recursively
-               "resources"
-               (string-append
-                #$output "/share/carvoeiro-water-fun/resources")))))))
-    (native-inputs
-     (list guile-3.0))
-    (propagated-inputs
-     (list guile-hygguile
-           guile-kracht))
-    (home-page "https://codeberg.org/jjba23/carvoeiro-water-fun")
-    (synopsis "Small multilingual web site generator written in Guile Scheme")
-    (description
-     "Carvoeiro Water Fun builds the web site of the event it is named after: a
-handful of pages in English and Portuguese, generated from Scheme values into
-SXML and HTML.  It is included here as the library it is, with its CSS, images,
-scripts and translation files installed under share/carvoeiro-water-fun, so that
-a checkout of the site can build without fetching its own copy of them.")
-    (license license:agpl3+)))

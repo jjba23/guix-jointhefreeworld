@@ -24,6 +24,9 @@ release tag, so one pull gives you the latest versions together, with the
 dependencies and launchers they were tested with.
 
 ** Who it is for
+:PROPERTIES:
+:CUSTOM_ID: who-it-is-for
+:END:
 
 - *Guix users* who want the newest =maak=, =ggg=, =iter-vitae=,
   =mutastructura=, or =emacs-modusregel= without writing package definitions.
@@ -38,6 +41,9 @@ dependencies and launchers they were tested with.
   Lisp-flavoured software collection for Guix.
 
 ** What you get
+:PROPERTIES:
+:CUSTOM_ID: what-you-get
+:END:
 
 A single channel containing:
 
@@ -50,9 +56,12 @@ A single channel containing:
   static site.
 
 The full catalogue, with versions and entry points, is
-[[*Package catalogue][below]].
+[[#package-catalogue][below]].
 
 * Why you'll like it
+:PROPERTIES:
+:CUSTOM_ID: why-you-ll-like-it
+:END:
 
 - *Latest releases, not leftovers.*  Each package follows its project's release
   tag.  When a new tag is published, the channel is updated; =guix pull= brings
@@ -62,7 +71,7 @@ The full catalogue, with versions and entry points, is
   pieces that were tested together.
 - *Authenticated, not merely downloaded.*  The channel is signed with OpenPGP.
   Guix verifies every commit it fetches against the maintainer key in
-  [[file:.guix-authorizations][=.guix-authorizations=]]; see [[*Authentication and security][Authentication and security]].
+  [[file:.guix-authorizations][=.guix-authorizations=]]; see [[#authentication-and-security][Authentication and security]].
 - *Reproducible by content.*  Every source is pinned by a SHA-256 hash.  A moved
   tag fails the build instead of silently changing what you install.
 - *Commands that just work.*  Program launchers are wrapped with the Guile and
@@ -80,8 +89,14 @@ The full catalogue, with versions and entry points, is
   file, and a signed history.  You can read the whole thing over a coffee.
 
 * Quick start
+:PROPERTIES:
+:CUSTOM_ID: quick-start
+:END:
 
 ** Requirements
+:PROPERTIES:
+:CUSTOM_ID: requirements
+:END:
 
 | Requirement                   | Why                                                                                                                |
 |-------------------------------+--------------------------------------------------------------------------------------------------------------------|
@@ -95,6 +110,9 @@ Nothing here needs root.  Guix installs into your profile; the packages do not
 write outside the store, and Guix manages profiles and caches.
 
 ** Install as a channel (recommended)
+:PROPERTIES:
+:CUSTOM_ID: install-as-a-channel-recommended
+:END:
 
 Append the channel to your channel list, keeping Guix itself:
 
@@ -140,6 +158,9 @@ Check that the channel is there:
 You should see =jointhefreeworld= next to =guix=, at a commit on =trunk=.
 
 ** Try a checkout without pulling
+:PROPERTIES:
+:CUSTOM_ID: try-a-checkout-without-pulling
+:END:
 
 A checkout is enough for trying a package, reading the definitions, or hacking
 on the channel:
@@ -163,6 +184,9 @@ pulled.  The checkout workflow does not authenticate anything; use it for
 development, and use the channel when you want the signed history.
 
 ** Verify the channel
+:PROPERTIES:
+:CUSTOM_ID: verify-the-channel
+:END:
 
 =guix pull= authenticates automatically when the =introduction= is present.
 If you want to check a checkout by hand:
@@ -176,6 +200,9 @@ That verifies every commit from the introduction to =HEAD=.  If it succeeds,
 the history you are about to build is the history the maintainer signed.
 
 ** Update, pin, or remove
+:PROPERTIES:
+:CUSTOM_ID: update-pin-or-remove
+:END:
 
 #+begin_src sh
   # Update the channel and your packages
@@ -192,8 +219,14 @@ your =channels.scm= instead of a =branch=.  To pin Guix itself as well, use
 its entry, run =guix pull= again, and =guix remove= the packages you installed.
 
 * Quick start with the tools
+:PROPERTIES:
+:CUSTOM_ID: quick-start-with-the-tools
+:END:
 
 ** Command-line programs
+:PROPERTIES:
+:CUSTOM_ID: command-line-programs
+:END:
 
 Every program installs a command in =bin/=.  The launchers are wrapped with the
 Guile and the libraries they need, so these work directly after =guix install=.
@@ -225,6 +258,9 @@ A few of these deserve a word:
   tasks live.
 
 ** A tiny Maak example
+:PROPERTIES:
+:CUSTOM_ID: a-tiny-maak-example
+:END:
 
 If you have never used =maak=, a task file is just a Scheme module:
 
@@ -250,6 +286,9 @@ The channel's own [[file:maak.scm][=maak.scm=]] is a larger example: =maak check
 builds, and authenticates this repository.
 
 ** Guile libraries
+:PROPERTIES:
+:CUSTOM_ID: guile-libraries
+:END:
 
 The libraries are ordinary Guile packages; install the ones you need and import
 their modules.  The short version:
@@ -278,6 +317,9 @@ is for.  Some starting points:
 #+end_src
 
 ** Emacs packages
+:PROPERTIES:
+:CUSTOM_ID: emacs-packages
+:END:
 
 The Emacs packages install into Guix's Emacs load path.  Require the ones you
 want and enable the modes you like:
@@ -304,8 +346,14 @@ want and enable the modes you like:
 
 
 * Configuration
+:PROPERTIES:
+:CUSTOM_ID: configuration
+:END:
 
 ** The channel entry
+:PROPERTIES:
+:CUSTOM_ID: the-channel-entry
+:END:
 
 The channel specification has four fields worth knowing:
 
@@ -334,6 +382,9 @@ The commit above is an example, not a promise; use the commit =guix describe=
 reports after a pull.
 
 ** Emacs packages
+:PROPERTIES:
+:CUSTOM_ID: emacs-packages-2
+:END:
 
 The Emacs packages are ordinary libraries after installation.  A few knobs
 worth knowing:
@@ -360,6 +411,9 @@ under =C-c v=, =modusregel= has a customization group of the same name, and
 =welkomscherm= exposes its sections as a list you can edit.
 
 ** The site builder
+:PROPERTIES:
+:CUSTOM_ID: the-site-builder
+:END:
 
 =jointhefreeworld-build= reads =CI= to decide whether absolute URLs point at
 =localhost= or at the real host, and =jointhefreeworld-serve= reads =PORT=:
@@ -373,6 +427,9 @@ The build writes =./public= beside the checkout's =docs/=, =static/=, and
 =maak.scm=.  It does not need a running server.
 
 ** Maak
+:PROPERTIES:
+:CUSTOM_ID: maak
+:END:
 
 Maak reads =./maak.scm= by default.  =maak --help= lists the options; the ones
 worth remembering are =-f/--file= for another Maak file, =-C/--directory= to
@@ -380,6 +437,9 @@ enter a directory first, =-t/--tasks= to name tasks outright, and =--dry-run= to
 see the commands without running them.
 
 * Package catalogue
+:PROPERTIES:
+:CUSTOM_ID: package-catalogue
+:END:
 
 The channel is split into modules by what a package is.  Import the module you
 need, or =(jointhefreeworld packages)= for all of them.
@@ -395,16 +455,19 @@ exporter, an OpenAPI generator, and a CSS generator.
 
 | Package                   | Version | What it is                                             |
 |---------------------------+---------+--------------------------------------------------------|
-| =guile-kracht=            |   0.3.1 | Opt-in prelude that enhances Guile's standard library  |
-| =guile-scriba=            |   0.4.1 | Structured logging, from console lines to JSON on disk |
-| =guile-veritas=           |   0.8.1 | Testing framework with an embedded DSL                 |
-| =guile-bewaking=          |   0.4.2 | Encrypted, lifetime-limited authentication tokens      |
-| =guile-hygguile=          |   2.7.3 | Web UI components built from SXML                      |
-| =guile-orgwebalchemy=     |   1.2.1 | Org mode to HTML and Markdown converter                |
-| =guile-openapi-generator= |   0.0.6 | OpenAPI 3 to Guile code generator                      |
-| =guile-olive-css=         |   0.6.4 | Utility-class CSS generator, with a tree shaker        |
+| =guile-kracht=            |   0.3.2 | Opt-in prelude that enhances Guile's standard library  |
+| =guile-scriba=            |   0.4.2 | Structured logging, from console lines to JSON on disk |
+| =guile-veritas=           |   0.8.2 | Testing framework with an embedded DSL                 |
+| =guile-bewaking=          |   0.4.3 | Encrypted, lifetime-limited authentication tokens      |
+| =guile-hygguile=          |   2.7.4 | Web UI components built from SXML                      |
+| =guile-orgwebalchemy=     |   1.2.2 | Org mode to HTML and Markdown converter                |
+| =guile-openapi-generator= |   0.0.7 | OpenAPI 3 to Guile code generator                      |
+| =guile-olive-css=         |   0.6.5 | Utility-class CSS generator, with a tree shaker        |
 
 ** Programs — =(jointhefreeworld packages applications)=
+:PROPERTIES:
+:CUSTOM_ID: programs-jointhefreeworld-packages-applications
+:END:
 
 The command-line programs.  Each installs a wrapped launcher in =bin/=; the
 package table names the command.
@@ -413,12 +476,12 @@ package table names the command.
 |-----------------------------+---------+-----------------+--------------------------------------------------|
 | =maak=                      |  0.12.2 | =maak=          | Command runner à la Make, with Lisp inside       |
 | =ggg=                       |  0.16.1 | =ggg=           | SVG badge and glyph generator                    |
-| =iter-vitae=                |   1.0.1 | =iter-vitae=    | Curriculum vitae generator                       |
-| =lenkesamler=               |   0.0.2 | =lenkesamler=   | Bookmark collector and converter                 |
-| =consceal=                  |   0.0.6 | =consceal=      | Secret manager and deployer                      |
-| =skapa=                     |   0.0.3 | =skapa=         | Interactive project scaffolder                   |
-| =araneola=                  |   0.0.1 | =araneola=      | Site crawler and link checker                    |
-| =mutastructura=             |   0.9.1 | =mutastructura= | Relational database schema migrations            |
+| =iter-vitae=                |   1.0.2 | =iter-vitae=    | Curriculum vitae generator                       |
+| =lenkesamler=               |   0.0.3 | =lenkesamler=   | Bookmark collector and converter                 |
+| =consceal=                  |   0.0.8 | =consceal=      | Secret manager and deployer                      |
+| =skapa=                     |   0.0.4 | =skapa=         | Interactive project scaffolder                   |
+| =araneola=                  |   0.0.2 | =araneola=      | Site crawler and link checker                    |
+| =mutastructura=             |   0.9.2 | =mutastructura= | Relational database schema migrations            |
 | =cask-and-cons=             |   0.1.2 | =caco=          | Desktop setup tasks, named and written in Scheme |
 | =guile-carvoeiro-water-fun= |   0.1.0 | — (library)     | Small multilingual static site generator         |
 
@@ -427,16 +490,22 @@ its CSS, images, scripts, and translation files installed under =share/=, not a
 command.
 
 ** Emacs packages — =(jointhefreeworld packages emacs)=
+:PROPERTIES:
+:CUSTOM_ID: emacs-packages-jointhefreeworld-packages-emacs
+:END:
 
 | Package              | Version | Entry point                  | What it is                                       |
 |----------------------+---------+------------------------------+--------------------------------------------------|
-| =emacs-maak=         |   0.9.0 | =M-x maak-run-task=          | Discover and run Maak tasks from Emacs           |
-| =emacs-modusregel=   |   0.7.0 | =M-x modusregel-mode=        | Clean and fast mode line                         |
-| =emacs-veritas=      |   0.1.2 | =M-x veritas-mode=           | Emacs integration for the Veritas test framework |
-| =emacs-welkomscherm= |   1.2.1 | =M-x welkomscherm=           | Quiet welcome screen and dashboard               |
-| =emacs-tekengrootte= |   0.2.0 | =M-x tekengrootte-set-scale= | Proportionally scaled face sizes                 |
+| =emacs-maak=         |   0.9.2 | =M-x maak-run-task=          | Discover and run Maak tasks from Emacs           |
+| =emacs-modusregel=   |   0.7.1 | =M-x modusregel-mode=        | Clean and fast mode line                         |
+| =emacs-veritas=      |   0.1.3 | =M-x veritas-mode=           | Emacs integration for the Veritas test framework |
+| =emacs-welkomscherm= |   1.2.2 | =M-x welkomscherm=           | Quiet welcome screen and dashboard               |
+| =emacs-tekengrootte= |   0.2.1 | =M-x tekengrootte-set-scale= | Proportionally scaled face sizes                 |
 
 ** Other — =(jointhefreeworld packages misc)=
+:PROPERTIES:
+:CUSTOM_ID: other-jointhefreeworld-packages-misc
+:END:
 
 | Package           | Version | Command / entry point | What it is                                          |
 |-------------------+---------+-----------------------+-----------------------------------------------------|
@@ -444,17 +513,26 @@ command.
 | =lambdock=        |   0.7.5 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
 
 ** The web site — =(jointhefreeworld packages site)=
+:PROPERTIES:
+:CUSTOM_ID: the-web-site-jointhefreeworld-packages-site
+:END:
 
 | Package            | Version | Commands                                           | What it is                                |
 |--------------------+---------+----------------------------------------------------+-------------------------------------------|
 | =jointhefreeworld= |   1.0.1 | =jointhefreeworld-build=, =jointhefreeworld-serve= | The jointhefreeworld.org site and builder |
 
 * Authentication and security
+:PROPERTIES:
+:CUSTOM_ID: authentication-and-security
+:END:
 
 A channel is code you run.  This one is set up so you can tell where it came
 from.
 
 ** The trust chain
+:PROPERTIES:
+:CUSTOM_ID: the-trust-chain
+:END:
 
 - =.guix-authorizations= lists the OpenPGP key whose signatures are accepted.
 - =.guix-channel= names the =keyring= branch and the primary URL.
@@ -480,6 +558,9 @@ If you omit it, Guix can still pull the channel, but it will warn that it cannot
 authenticate it.  Include it unless you have a reason not to.
 
 ** What is verified
+:PROPERTIES:
+:CUSTOM_ID: what-is-verified
+:END:
 
 - *The history.*  Every commit in the channel's authenticated history is signed
   by an authorized key.
@@ -489,6 +570,9 @@ authenticate it.  Include it unless you have a reason not to.
   the sources and inputs the definitions name.
 
 ** What is deliberately absent
+:PROPERTIES:
+:CUSTOM_ID: what-is-deliberately-absent
+:END:
 
 - No =env.scm=, session keys, tokens, database files, or deployment credentials.
 - No Artanis web services.  Those are deployment applications: they need a
@@ -497,12 +581,18 @@ authenticate it.  Include it unless you have a reason not to.
 - No vendored binaries or generated build outputs.
 
 ** Reporting a security issue
+:PROPERTIES:
+:CUSTOM_ID: reporting-a-security-issue
+:END:
 
 Please report security problems privately to [[mailto:jjbigorra@gmail.com][jjbigorra@gmail.com]] rather than
 opening a public issue.  Include the package, the Guix revision from =guix
 describe=, and enough detail to reproduce the problem.
 
 * Project layout and tasks
+:PROPERTIES:
+:CUSTOM_ID: project-layout-and-tasks
+:END:
 
 The repository is one module per kind of package:
 
@@ -549,12 +639,18 @@ See [[file:HACKING.org][HACKING.org]] for the longer version: updating a package
 adding a package, creating the keyring branch, and the signing rules.
 
 * Contributing
+:PROPERTIES:
+:CUSTOM_ID: contributing
+:END:
 
 Contributions of every kind are welcome: a package update, a documentation fix,
 a bug report, a new package, or a note that something does not build on your
 architecture.
 
 ** Where to talk
+:PROPERTIES:
+:CUSTOM_ID: where-to-talk
+:END:
 
 - *Issues and patches:* [[https://codeberg.org/jjba23/guix-jointhefreeworld/issues][the Codeberg issue tracker]] and pull requests.
 - *The projects themselves:* each package names its own repository in its
@@ -564,6 +660,9 @@ architecture.
   [[https://jointhefreeworld.org/code-of-conduct/][Code of Conduct]] applies here too.
 
 ** Before you send a patch
+:PROPERTIES:
+:CUSTOM_ID: before-you-send-a-patch
+:END:
 
 Run the checks the repository uses:
 
@@ -578,6 +677,9 @@ If you change a package, also run =maak lint= for the network-backed checks (the
 updater and CVE checks).
 
 ** Signed commits
+:PROPERTIES:
+:CUSTOM_ID: signed-commits
+:END:
 
 Channel authentication works by signing commits.  If you are sending a patch that
 will be committed to this repository, sign it:
@@ -593,6 +695,9 @@ patch by email or a pull request from a fork, the maintainer can sign it on the
 way in; just say so.
 
 ** First contribution ideas
+:PROPERTIES:
+:CUSTOM_ID: first-contribution-ideas
+:END:
 
 - Try a package on your architecture and report what happens.
 - Improve the description or usage example of a package you use.
@@ -601,6 +706,9 @@ way in; just say so.
 - Improve the README or =HACKING.org= — documentation counts.
 
 * What is not packaged, and why
+:PROPERTIES:
+:CUSTOM_ID: what-is-not-packaged-and-why
+:END:
 
 These projects live in the same account but are not in this channel:
 
@@ -626,13 +734,22 @@ These projects live in the same account but are not in this channel:
   URL a channel could fetch it from.
 
 * FAQ
+:PROPERTIES:
+:CUSTOM_ID: faq
+:END:
 
 ** Is this an official GNU Guix channel?
+:PROPERTIES:
+:CUSTOM_ID: is-this-an-official-gnu-guix-channel
+:END:
 
 No.  It is a personal/community channel maintained by Josep Bigorra.  It follows
 Guix's channel format and authentication rules, but it is not part of Guix.
 
 ** Why not just submit everything to Guix?
+:PROPERTIES:
+:CUSTOM_ID: why-not-just-submit-everything-to-guix
+:END:
 
 Some of these packages are in Guix already, at older revisions.  This channel
 exists so the latest releases can be used together without waiting for the next
@@ -640,33 +757,51 @@ import.  Upstreaming is welcome; a package that lands in Guix can still stay
 here for the release cadence.
 
 ** Do I have to authenticate the channel?
+:PROPERTIES:
+:CUSTOM_ID: do-i-have-to-authenticate-the-channel
+:END:
 
 It is strongly recommended.  Without the =introduction=, Guix can fetch the
 channel but cannot verify it; it will warn.  With it, every commit is checked
 against the maintainer key.
 
 ** Does it work on Guix System and on a foreign distribution?
+:PROPERTIES:
+:CUSTOM_ID: does-it-work-on-guix-system-and-on-a-foreign-distribution
+:END:
 
 Yes.  A channel is a package collection, not a system service.  Any Guix that
 can pull channels can use it.
 
 ** What about other architectures?
+:PROPERTIES:
+:CUSTOM_ID: what-about-other-architectures
+:END:
 
 The Guile and Emacs packages are architecture-independent Scheme and Emacs Lisp.
 =lambdock= needs GTK4 and Wayland.  If something fails on your architecture,
 please open an issue with the output of =guix describe= and the build log.
 
 ** How do I pin a revision?
+:PROPERTIES:
+:CUSTOM_ID: how-do-i-pin-a-revision
+:END:
 
 Give the channel a =commit= instead of a =branch= in =channels.scm=.  To pin
 Guix as well, use =guix time-machine= with the same channels file.
 
 ** How do I remove the channel?
+:PROPERTIES:
+:CUSTOM_ID: how-do-i-remove-the-channel
+:END:
 
 Delete its entry from =channels.scm=, run =guix pull= again, and =guix remove=
 the packages you no longer want.
 
 * Acknowledgements
+:PROPERTIES:
+:CUSTOM_ID: acknowledgements
+:END:
 
 This channel stands on the shoulders of
 [[https://guix.gnu.org/][GNU Guix]],
@@ -681,6 +816,9 @@ And to the people who try the packages, report what breaks, and send a patch:
 thank you.  That is what keeps a channel alive.
 
 * License
+:PROPERTIES:
+:CUSTOM_ID: license
+:END:
 
 The packaging code in this channel is licensed under the GNU Affero General
 Public License, version 3 or later; see [[file:COPYING][=COPYING=]].  Each package carries

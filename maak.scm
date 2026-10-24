@@ -104,8 +104,9 @@ Linting every package reaches the network for the updater and CVE checks; use
 
 (define (fmt)
   "Format every Scheme source with the Guix style guide."
-  ($ '("find . -maxdepth 8 -name '*.scm' -type f -exec guix style -f {} \\;")
-     #:verbose? #t))
+  (run (list "find" "." "-maxdepth" "8" "-name" "*.scm" "-type" "f"
+             "-exec" "guix" "style" "-f" "{}" ";")
+       #:verbose? #t))
 
 (define (authenticate)
   "Verify the channel's commit signatures from the introduction to HEAD."
@@ -139,6 +140,5 @@ The keyring branch is the root of trust and is not part of the channel's
 authenticated history, so it is pushed with --no-verify: the pre-push hook
 installed by `guix git authenticate' would otherwise try to authenticate a
 commit that is not a descendant of the introduction and refuse the push."
-  (run (list "git" "push" "codeberg" "trunk") #:verbose? #t)
-  (run (list "git" "push" "--no-verify" "codeberg" "keyring")
-       #:verbose? #t))
+  (git (list "push" "codeberg" "trunk") #:verbose? #t)
+  (git (list "push" "--no-verify" "codeberg" "keyring") #:verbose? #t))

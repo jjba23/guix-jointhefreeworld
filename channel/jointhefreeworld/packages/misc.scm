@@ -95,7 +95,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "0.8.0")
+    (version "0.8.1")
     (source
      (origin
        (method git-fetch)
@@ -104,7 +104,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0ws9brgga44v28mn3wfazv3s4nkvcra2xi7visr0y91jx8mb9dgd"))))
+        (base32 "1a94zpjhgvaympnhimgwivg4xnqx2qz4dmfs5jb5iwbdnganx7qb"))))
     (build-system meson-build-system)
     (arguments
      (list #:parallel-build? #t

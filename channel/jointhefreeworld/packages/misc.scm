@@ -132,7 +132,7 @@ restart.")
 (define-public heks-toon
   (package
     (name "heks-toon")
-    (version "0.0.2")
+    (version "0.2.0")
     (source
      (origin
        (method git-fetch)
@@ -141,7 +141,7 @@ restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "062744f7d5lkwy9h9jbw5p8mp0dj5wcsv71qpchf4xwin9d0w24k"))))
+        (base32 "1bmzykadq2ybh8gl662mfzv422wabvqaap7v5mk3c5div2ln9w6h"))))
     (build-system meson-build-system)
     (arguments
      (list #:glib-or-gtk? #t

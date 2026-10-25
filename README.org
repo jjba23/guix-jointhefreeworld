@@ -4,7 +4,7 @@
 #+email: jjbigorra@gmail.com
 #+language: en
 #+options: toc:1 num:nil
-#+html_head: <meta name="description" content="A signed GNU Guix channel for the latest jointhefreeworld Guile libraries, command-line programs, Emacs packages, GTK4 dock, and site builder." />
+#+html_head: <meta name="description" content="A signed GNU Guix channel for the latest jointhefreeworld Guile libraries, command-line programs, Emacs packages, GTK4 apps, and site builder." />
 
 [[https://jointhefreeworld.org/ggg/dist/gnu-guix.svg]]  [[https://jointhefreeworld.org/ggg/dist/scheme-guile.svg]]  [[https://jointhefreeworld.org/ggg/dist/gnu-emacs.svg]]  [[https://jointhefreeworld.org/ggg/dist/gtk4.svg]]  [[https://jointhefreeworld.org/ggg/dist/wayland.svg]]
 [[https://jointhefreeworld.org/ggg/dist/license-agpl3+.svg]]  [[https://jointhefreeworld.org/ggg/dist/codeberg.svg]]  [[https://jointhefreeworld.org/ggg/dist/maak.svg]]  [[https://img.shields.io/badge/Guix-channel-6f4e9c.svg]]
@@ -51,6 +51,8 @@ A single channel containing:
 - the *command-line programs* that build, test, migrate, generate, and deploy;
 - the *Emacs packages* for editing, testing, and looking at Emacs;
 - *lambdock*, a GTK4 Wayland dock you can reprogram while it runs;
+- *heks-toon*, the GTK4 window with the desktop's keyboard reference, wallpapers
+  and palettes, painted from the palette the desktop is wearing;
 - *heks-bash*, a Bash configuration generated from Scheme;
 - the *jointhefreeworld site builder*, which turns Org sources into the published
   static site.
@@ -506,6 +508,7 @@ package table names the command.
 |-------------------+---------+-----------------------+-----------------------------------------------------|
 | =guile-heks-bash= |   1.3.0 | — (library)           | Bash configuration generated from Scheme            |
 | =lambdock=        |   0.8.0 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
+| =heks-toon=       |   0.0.1 | =heks-toon=           | Keyboard reference, wallpapers and palettes in GTK4 |
 
 ** The web site — =(jointhefreeworld packages site)=
 :PROPERTIES:
@@ -607,7 +610,7 @@ The repository is one module per kind of package:
         guile.scm                  the Guile libraries
         applications.scm           the command-line programs
         emacs.scm                  the Emacs packages
-        misc.scm                   heks-bash and lambdock
+        misc.scm                   heks-bash, lambdock and heks-toon
         site.scm                   the jointhefreeworld site builder
 #+end_example
 
@@ -774,8 +777,10 @@ can pull channels can use it.
 :END:
 
 The Guile and Emacs packages are architecture-independent Scheme and Emacs Lisp.
-=lambdock= needs GTK4 and Wayland.  If something fails on your architecture,
-please open an issue with the output of =guix describe= and the build log.
+=heks-toon= and =lambdock= are C and GTK4, so they need a platform GTK4 supports;
+=lambdock= also wants a Wayland compositor.  If something fails on your
+architecture, please open an issue with the output of =guix describe= and the
+build log.
 
 ** How do I pin a revision?
 :PROPERTIES:

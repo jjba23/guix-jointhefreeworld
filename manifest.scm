@@ -58,4 +58,5 @@
        emacs-tekengrootte
        guile-heks-bash
        lambdock
+       heks-toon
        jointhefreeworld))

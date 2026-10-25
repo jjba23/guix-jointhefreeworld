@@ -20,9 +20,10 @@
 
 ;;; Commentary:
 ;;
-;; A shell configuration written in Scheme and a dock written in C and GTK.
-;; They share nothing but their author and their home on Codeberg, so each is
-;; written out in the build system it actually uses.
+;; A shell configuration written in Scheme, a dock written in C and GTK, and
+;; the window that shows the desktop's own keyboard reference, wallpapers and
+;; palettes.  They share nothing but their author and their home on Codeberg, so
+;; each is written out in the build system it actually uses.
 ;;
 ;;; Code:
 
@@ -40,7 +41,8 @@
   #:use-module (gnu packages guile)
   #:use-module (gnu packages pkg-config)
   #:export (guile-heks-bash
-            lambdock))
+            lambdock
+            heks-toon))
 
 (define-public guile-heks-bash
   (package
@@ -125,4 +127,42 @@ management protocol, themes itself with CSS, slides out of the edge it was
 given, places itself on any monitor, and embeds a GNU Guile Scheme engine so
 that its configuration can be changed while it runs, from a REPL, without a
 restart.")
+    (license license:gpl3+)))
+
+(define-public heks-toon
+  (package
+    (name "heks-toon")
+    (version "0.0.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://codeberg.org/jjba23/heks-toon.git")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "11w9x0q17llykgy507lqv6lkk93c9br991gkb9qwz2bg194bb5nj"))))
+    (build-system meson-build-system)
+    (arguments
+     (list #:glib-or-gtk? #t
+           #:parallel-build? #t
+           #:parallel-tests? #t))
+    (native-inputs
+     (list (list glib "bin")
+           pkg-config))
+    (inputs
+     (list gdk-pixbuf
+           gtk
+           guile-3.0))
+    (home-page "https://codeberg.org/jjba23/heks-toon")
+    (synopsis "Keyboard reference, wallpapers and palettes of Heks GNU/Linux")
+    (description
+     "heks-toon is one GTK4 window with three views: the keyboard reference of a
+Heks GNU/Linux desktop, the wallpaper collection with a large preview, and the
+palette chooser, whose cards are painted in the palettes they offer.
+
+The window is painted from the palette the desktop is wearing - a blurred mesh of
+the palette's colours behind translucent panes, with grain over it - and its
+contents, colours and commands all come from an embedded GNU Guile Scheme
+engine.")
     (license license:gpl3+)))

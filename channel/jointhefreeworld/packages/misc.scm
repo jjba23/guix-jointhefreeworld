@@ -37,6 +37,7 @@
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages gettext)
   #:use-module (gnu packages glib)
+  #:use-module (gnu packages gnome)
   #:use-module (gnu packages gtk)
   #:use-module (gnu packages guile)
   #:use-module (gnu packages pkg-config)
@@ -95,7 +96,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "0.8.1")
+    (version "0.8.2")
     (source
      (origin
        (method git-fetch)
@@ -104,10 +105,15 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1a94zpjhgvaympnhimgwivg4xnqx2qz4dmfs5jb5iwbdnganx7qb"))))
+        (base32 "1sgcrdpb44dxs8jqn3ihkz6f5q0g4a5nsqj9f3jlr44l2kigwvrq"))))
     (build-system meson-build-system)
     (arguments
-     (list #:parallel-build? #t
+     ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
+     ;; GIO_EXTRA_MODULES at this closure, which is what lets the dock read the
+     ;; desktop's icon theme (and so resolve the icons of the running apps)
+     ;; instead of falling back to Adwaita.
+     (list #:glib-or-gtk? #t
+           #:parallel-build? #t
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")
@@ -117,7 +123,11 @@ integrates ble.sh, fzf and direnv.")
      (list gtk
            gtk4-layer-shell
            guile-3.0
-           wlr-protocols))
+           wlr-protocols
+           dconf
+           gsettings-desktop-schemas
+           shared-mime-info
+           hicolor-icon-theme))
     (home-page "https://codeberg.org/jjba23/lambdock")
     (synopsis "Wayland desktop dock customizable with GNU Guile Scheme")
     (description

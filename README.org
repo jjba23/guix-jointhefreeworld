@@ -16,7 +16,8 @@ Guix, and it is not an operating system.  It is a small, signed, readable
 collection of packages for the software written around
 [[https://jointhefreeworld.org][jointhefreeworld]] — the Guile libraries the
 projects share, the command-line tools they ship, the Emacs packages that make
-them pleasant to work with, and the builder that publishes the web site itself.
+them pleasant to work with, the icon theme the desktop wears, and the builder
+that publishes the web site itself.
 
 The official Guix channel already carries some of these projects, but at
 whatever revision it last imported.  This channel follows each project's own
@@ -54,6 +55,8 @@ A single channel containing:
 - *heks-toon*, the GTK4 window with the desktop's keyboard reference, wallpapers
   and palettes, painted from the palette the desktop is wearing;
 - *heks-bash*, a Bash configuration generated from Scheme;
+- *skeu-icons*, the icon theme the desktop wears, in its accent and dark
+  variants too;
 - the *jointhefreeworld site builder*, which turns Org sources into the published
   static site.
 
@@ -509,6 +512,7 @@ package table names the command.
 | =guile-heks-bash= |   1.3.0 | — (library)           | Bash configuration generated from Scheme            |
 | =lambdock=        |   0.8.2 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
 | =heks-toon=       |   0.3.1 | =heks-toon=           | Keyboard reference, wallpapers, palettes, docs and reconfigure |
+| =skeu-icons=      |   1.5.1 | — (icon theme)        | Skeuomorphic icons, symbolic layer, fourteen accent variants |
 
 ** The web site — =(jointhefreeworld packages site)=
 :PROPERTIES:

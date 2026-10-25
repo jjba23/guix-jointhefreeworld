@@ -20,10 +20,11 @@
 
 ;;; Commentary:
 ;;
-;; A shell configuration written in Scheme, a dock written in C and GTK, and
-;; the window that shows the desktop's own keyboard reference, wallpapers and
-;; palettes.  They share nothing but their author and their home on Codeberg, so
-;; each is written out in the build system it actually uses.
+;; A shell configuration written in Scheme, a dock written in C and GTK, the
+;; window that shows the desktop's own keyboard reference, wallpapers and
+;; palettes, and the icon theme that paints the desktop those programs appear
+;; on.  They share nothing but their author and their home on Codeberg, so each
+;; is written out in the build system it actually uses.
 ;;
 ;;; Code:
 
@@ -31,6 +32,7 @@
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix git-download)
+  #:use-module (guix build-system gnu)
   #:use-module (guix build-system guile)
   #:use-module (guix build-system meson)
   #:use-module ((guix licenses) #:prefix license:)
@@ -43,7 +45,8 @@
   #:use-module (gnu packages pkg-config)
   #:export (guile-heks-bash
             lambdock
-            heks-toon))
+            heks-toon
+            skeu-icons))
 
 (define-public guile-heks-bash
   (package
@@ -176,3 +179,61 @@ the palette's colours behind translucent panes, with grain over it - and its
 contents, colours and commands all come from an embedded GNU Guile Scheme
 engine.")
     (license license:gpl3+)))
+
+(define-public skeu-icons
+  (package
+    (name "skeu-icons")
+    (version "1.5.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://codeberg.org/jjba23/skeu-icons.git")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1crayf3wr23x71f996v3x2chrcl407rbl4hb06b12vi0flxxk5kg"))))
+    ;; There is nothing to compile: the themes are committed artwork, and the
+    ;; programmes that redraw them are not part of what a desktop installs.
+    (build-system gnu-build-system)
+    (arguments
+     (list
+      #:tests? #f
+      #:modules '((guix build gnu-build-system)
+                  (guix build utils)
+                  (ice-9 ftw))
+      #:phases
+      #~(modify-phases %standard-phases
+          (delete 'configure)
+          (delete 'build)
+          (replace 'install
+            (lambda _
+              (let ((target (string-append #$output "/share/icons")))
+                (mkdir-p target)
+                ;; Every directory carrying an index.theme is one theme.  The
+                ;; accent and dark variants are trees of relative symlinks into
+                ;; skeu-icons, so they are copied with their links intact and
+                ;; keep pointing at their parent once they sit side by side.
+                (for-each
+                 (lambda (name)
+                   (let ((dir (string-append "." "/" name)))
+                     (when (and (file-is-directory? dir)
+                                (file-exists?
+                                 (string-append dir "/index.theme")))
+                       (copy-recursively
+                        dir (string-append target "/" name)))))
+                 (scandir "." (lambda (name)
+                                (string-prefix? "skeu-icons" name))))))))))
+    (home-page "https://codeberg.org/jjba23/skeu-icons")
+    (synopsis "Skeuomorphic icon theme for Linux desktops")
+    (description
+     "Skeu Icons is an icon theme drawn as painted objects rather than flat
+glyphs: folders with enamel, paper and cloth, devices with brushed metal and
+glass, and file types that look like the thing they stand for.  Alongside the
+relief bitmaps it ships a symbolic layer for the Adwaita name contract, the
+same artwork without the -symbolic suffix, and accent variants that repaint the
+folder enamel in fourteen colours, each with a light-ink dark sibling.  The
+toolkits find every name a shell, dock or file manager asks for, because the
+pack links the desktop ids, Icon= values, window classes and MIME names that
+would otherwise fall back to Adwaita.")
+    (license license:cc-by-sa4.0)))

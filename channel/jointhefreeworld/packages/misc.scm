@@ -142,7 +142,7 @@ restart.")
 (define-public heks-toon
   (package
     (name "heks-toon")
-    (version "0.2.1")
+    (version "0.3.0")
     (source
      (origin
        (method git-fetch)
@@ -151,7 +151,7 @@ restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "147i62ffvmyg434n40lnqi90fr71843mi4lvzhak114sa8ryxxwx"))))
+        (base32 "0pwjh2vyfz7jj9j1ifm80pyxjsmglm02j5rkda6b6l4yl1r8n38y"))))
     (build-system meson-build-system)
     (arguments
      (list #:glib-or-gtk? #t
@@ -167,9 +167,9 @@ restart.")
     (home-page "https://codeberg.org/jjba23/heks-toon")
     (synopsis "Keyboard reference, wallpapers and palettes of Heks GNU/Linux")
     (description
-     "heks-toon is one GTK4 window with three views: the keyboard reference of a
-Heks GNU/Linux desktop, the wallpaper collection with a large preview, and the
-palette chooser, whose cards are painted in the palettes they offer.
+     "heks-toon is one GTK4 window with five views: the keyboard reference of a
+Heks GNU/Linux desktop, the wallpaper collection with a large preview, the
+palette chooser, the projects' own documentation, and their reconfigure tasks.
 
 The window is painted from the palette the desktop is wearing - a blurred mesh of
 the palette's colours behind translucent panes, with grain over it - and its

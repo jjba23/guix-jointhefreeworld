@@ -40,7 +40,7 @@
 (define-public emacs-maak
   (package
     (name "emacs-maak")
-    (version "0.9.2")
+    (version "0.9.3")
     (source
      (origin
        (method git-fetch)
@@ -49,7 +49,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "16hrb2blyb7jyf95vhsd4dhkhyjhzx92yk2jdqx6hk5iapqqnm3j"))))
+        (base32 "1hr4rbn9764alwrr0z6k8gfn1apvfxxx4fy55jjqzm6sjmf4hq4b"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
@@ -67,7 +67,7 @@ command away.")
 (define-public emacs-modusregel
   (package
     (name "emacs-modusregel")
-    (version "0.7.1")
+    (version "0.7.2")
     (source
      (origin
        (method git-fetch)
@@ -76,7 +76,7 @@ command away.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "08qddnaakn77ff5crm4zvka2x3z32x7djv8f7m0j87803sjncwqc"))))
+        (base32 "14lv4ffjqgldl28668af2nb59qkpbz84xxhrnr10gj3kzk12mzn0"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
@@ -93,7 +93,7 @@ counters, and aligns the same way in a graphical frame and in a terminal.")
 (define-public emacs-veritas
   (package
     (name "emacs-veritas")
-    (version "0.1.3")
+    (version "0.1.4")
     (source
      (origin
        (method git-fetch)
@@ -102,7 +102,7 @@ counters, and aligns the same way in a graphical frame and in a terminal.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1nldlh3aknlwlf7fiwx0i0ybjn1sdff1smjlw2ah15afp8vwgh18"))))
+        (base32 "1x68qx7b1x2x92iw08s96pal4agqf6mx3gfmdym3f82mnhcbsk6w"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
@@ -120,7 +120,7 @@ failed.")
 (define-public emacs-welkomscherm
   (package
     (name "emacs-welkomscherm")
-    (version "1.2.2")
+    (version "1.2.3")
     (source
      (origin
        (method git-fetch)
@@ -129,7 +129,7 @@ failed.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1qaw9zljh75p4g91rg8x2zvd9b0a0dqjgdx4cgyahyk6wh3hghah"))))
+        (base32 "1xk6ygs8sr2zrs0660vfxi7ifsghh93rj3nyxl97awjxsy86qgnp"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
@@ -146,7 +146,7 @@ nothing of the editor that Emacs does not already provide.")
 (define-public emacs-tekengrootte
   (package
     (name "emacs-tekengrootte")
-    (version "0.2.1")
+    (version "0.2.2")
     (source
      (origin
        (method git-fetch)
@@ -155,7 +155,7 @@ nothing of the editor that Emacs does not already provide.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1sf4qzi7a469w2ah551ca6l7zsvqbhkrs7h77h71wq5j7dv7ggwx"))))
+        (base32 "1aa68cc7ly0hs188afg5rq5j7z2ncrfzlnl4r70kjm15kv48pxi2"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))

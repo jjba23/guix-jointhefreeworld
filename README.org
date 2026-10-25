@@ -505,7 +505,7 @@ package table names the command.
 | Package           | Version | Command / entry point | What it is                                          |
 |-------------------+---------+-----------------------+-----------------------------------------------------|
 | =guile-heks-bash= |   1.3.0 | — (library)           | Bash configuration generated from Scheme            |
-| =lambdock=        |   0.7.5 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
+| =lambdock=        |   0.8.0 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
 
 ** The web site — =(jointhefreeworld packages site)=
 :PROPERTIES:

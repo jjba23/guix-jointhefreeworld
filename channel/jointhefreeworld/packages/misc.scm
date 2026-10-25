@@ -51,7 +51,7 @@
 (define-public guile-heks-bash
   (package
     (name "guile-heks-bash")
-    (version "1.3.1")
+    (version "1.4.0")
     (source
      (origin
        (method git-fetch)
@@ -60,7 +60,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0hq077d5q1k032pp1zs7wqr8df9930gaypib6zrmakrfbj2999fl"))))
+        (base32 "1xaisbpk9zbsh3ssncmj5axyqcx9l3f7b2mh05244pqh85m0jfny"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -99,7 +99,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "0.10.6")
+    (version "0.10.7")
     (source
      (origin
        (method git-fetch)
@@ -108,7 +108,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1mvm6hkl7bwiw5sqdfjcwdj01f4004y5r72whvhrk2vl7jgpvkxh"))))
+        (base32 "1ncib3zxvlfdf2xkb91n81w16ay0spz1fm66ac6hfg0k6fncacrr"))))
     (build-system meson-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -145,7 +145,7 @@ restart.")
 (define-public heks-toon
   (package
     (name "heks-toon")
-    (version "0.3.1")
+    (version "0.3.2")
     (source
      (origin
        (method git-fetch)
@@ -154,7 +154,7 @@ restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0whcq975mw5swnlgm9g2zdc9rjvxq13hm8gnfy0b7i2ws5fwmpkw"))))
+        (base32 "1y88slwn141pzhnbpvq0w6pnlpwb8m5ikhgkr9ddfjw8w3b31640"))))
     (build-system meson-build-system)
     (arguments
      (list #:glib-or-gtk? #t
@@ -183,7 +183,7 @@ engine.")
 (define-public skeu-icons
   (package
     (name "skeu-icons")
-    (version "1.5.1")
+    (version "1.6.1")
     (source
      (origin
        (method git-fetch)
@@ -192,7 +192,7 @@ engine.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1crayf3wr23x71f996v3x2chrcl407rbl4hb06b12vi0flxxk5kg"))))
+        (base32 "1jwafgh2dycwg6j08ql3mjq003d97rg1lvyrjkzfbxx0g6sfbndc"))))
     ;; There is nothing to compile: the themes are committed artwork, and the
     ;; programmes that redraw them are not part of what a desktop installs.
     (build-system gnu-build-system)

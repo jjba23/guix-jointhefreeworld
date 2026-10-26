@@ -479,7 +479,7 @@ package table names the command.
 
 | Package                     | Version | Command         | What it is                                       |
 |-----------------------------+---------+-----------------+--------------------------------------------------|
-| =maak=                      |  0.12.7 | =maak=          | Command runner à la Make, with Lisp inside       |
+| =maak=                      |  0.14.0 | =maak=          | Command runner à la Make, with Lisp inside       |
 | =ggg=                       |  0.16.4 | =ggg=           | SVG badge and glyph generator                    |
 | =iter-vitae=                |   1.0.4 | =iter-vitae=    | Curriculum vitae generator                       |
 | =lenkesamler=               |   0.0.5 | =lenkesamler=   | Bookmark collector and converter                 |

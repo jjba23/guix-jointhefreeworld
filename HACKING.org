@@ -29,7 +29,7 @@ The hash is the recursive hash of the checkout, which is what =git-fetch=
 produces:
 
 #+begin_src sh
-  git clone --depth 1 --branch v0.12.7 https://codeberg.org/jjba23/maak.git /tmp/maak
+  git clone --depth 1 --branch v0.14.0 https://codeberg.org/jjba23/maak.git /tmp/maak
   guix hash -x -r /tmp/maak
   git -C /tmp/maak rev-parse HEAD
 #+end_src

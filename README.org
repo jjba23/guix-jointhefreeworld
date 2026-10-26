@@ -461,8 +461,8 @@ exporter, an OpenAPI generator, and a CSS generator.
 | Package                   | Version | What it is                                             |
 |---------------------------+---------+--------------------------------------------------------|
 | =guile-kracht=            |   0.3.3 | Opt-in prelude that enhances Guile's standard library  |
-| =guile-scriba=            |   0.4.4 | Structured logging, from console lines to JSON on disk |
-| =guile-veritas=           |   0.8.4 | Testing framework with an embedded DSL                 |
+| =guile-scriba=            |   0.4.5 | Structured logging, from console lines to JSON on disk |
+| =guile-veritas=           |   0.9.0 | Testing framework with an embedded DSL                 |
 | =guile-bewaking=          |   0.4.6 | Encrypted, lifetime-limited authentication tokens      |
 | =guile-hygguile=          |   2.7.6 | Web UI components built from SXML                      |
 | =guile-orgwebalchemy=     |   1.2.4 | Org mode to HTML and Markdown converter                |

@@ -99,7 +99,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "0.10.7")
+    (version "0.10.8")
     (source
      (origin
        (method git-fetch)
@@ -108,7 +108,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1ncib3zxvlfdf2xkb91n81w16ay0spz1fm66ac6hfg0k6fncacrr"))))
+        (base32 "0xg865fgrhn9n549cv91j8f0g9w91pr51rxkmccp9jklwg4lpv9v"))))
     (build-system meson-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and

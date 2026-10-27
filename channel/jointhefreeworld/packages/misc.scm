@@ -183,7 +183,7 @@ engine.")
 (define-public skeu-icons
   (package
     (name "skeu-icons")
-    (version "1.6.1")
+    (version "1.10.0")
     (source
      (origin
        (method git-fetch)
@@ -192,7 +192,7 @@ engine.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1jwafgh2dycwg6j08ql3mjq003d97rg1lvyrjkzfbxx0g6sfbndc"))))
+        (base32 "197sjlm875z1xp1yj9hlqjdcvpbi3k7h3aym78gq2csxmw670ikg"))))
     ;; There is nothing to compile: the themes are committed artwork, and the
     ;; programmes that redraw them are not part of what a desktop installs.
     (build-system gnu-build-system)
@@ -235,5 +235,9 @@ same artwork without the -symbolic suffix, and accent variants that repaint the
 folder enamel in fourteen colours, each with a light-ink dark sibling.  The
 toolkits find every name a shell, dock or file manager asks for, because the
 pack links the desktop ids, Icon= values, window classes and MIME names that
-would otherwise fall back to Adwaita.")
+would otherwise fall back to Adwaita.  Where the era published artwork of its
+own - the drives, discs and peripherals of the desktop, the wastebasket, the
+application marks of Leopard through Mavericks - that artwork is used as it was
+drawn and catalogued with its era, credit and licence, while a program that
+ships its own icon keeps it.")
     (license license:cc-by-sa4.0)))

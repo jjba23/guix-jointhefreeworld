@@ -512,7 +512,7 @@ package table names the command.
 | =guile-heks-bash= |   1.4.0 | — (library)           | Bash configuration generated from Scheme            |
 | =lambdock=        |  0.13.2 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
 | =heks-toon=       |   0.3.2 | =heks-toon=           | Keyboard reference, wallpapers, palettes, docs and reconfigure |
-| =skeu-icons=      |   1.6.1 | — (icon theme)        | Skeuomorphic icons, symbolic layer, fourteen accent variants |
+| =skeu-icons=      |  1.10.0 | — (icon theme)        | Skeuomorphic icons, symbolic layer, fourteen accent variants |
 
 ** The web site — =(jointhefreeworld packages site)=
 :PROPERTIES:

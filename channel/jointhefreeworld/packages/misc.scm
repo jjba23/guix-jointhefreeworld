@@ -99,16 +99,16 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "0.13.2")
+    (version "0.15.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/lambdock.git")
+             (url "https://github.com/jjba23/lambdock.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1i3yn1xys180wv5s3063a89n6wfxkq1cjlc6n58fbxg12v85w8yq"))))
+        (base32 "14r91x3jgnjaf4m6a32560aw35316fvz6npx5bckaix39q92k9b3"))))
     (build-system meson-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -131,7 +131,7 @@ integrates ble.sh, fzf and direnv.")
            gsettings-desktop-schemas
            shared-mime-info
            hicolor-icon-theme))
-    (home-page "https://codeberg.org/jjba23/lambdock")
+    (home-page "https://github.com/jjba23/lambdock")
     (synopsis "Wayland desktop dock customizable with GNU Guile Scheme")
     (description
      "Lambdock is a Wayland-native desktop dock built with GTK4 and
@@ -140,7 +140,7 @@ management protocol, themes itself with CSS, slides out of the edge it was
 given, places itself on any monitor, and embeds a GNU Guile Scheme engine so
 that its configuration can be changed while it runs, from a REPL, without a
 restart.")
-    (license license:gpl3+)))
+    (license license:expat)))
 
 (define-public heks-toon
   (package

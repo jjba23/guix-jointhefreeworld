@@ -7,7 +7,7 @@
 #+html_head: <meta name="description" content="A signed GNU Guix channel for the latest jointhefreeworld Guile libraries, command-line programs, Emacs packages, GTK4 apps, and site builder." />
 
 [[https://jointhefreeworld.org/ggg/dist/gnu-guix.svg]]  [[https://jointhefreeworld.org/ggg/dist/scheme-guile.svg]]  [[https://jointhefreeworld.org/ggg/dist/gnu-emacs.svg]]  [[https://jointhefreeworld.org/ggg/dist/gtk4.svg]]  [[https://jointhefreeworld.org/ggg/dist/wayland.svg]]
-[[https://jointhefreeworld.org/ggg/dist/license-agpl3+.svg]]  [[https://jointhefreeworld.org/ggg/dist/codeberg.svg]]  [[https://jointhefreeworld.org/ggg/dist/maak.svg]]  [[https://img.shields.io/badge/Guix-channel-6f4e9c.svg]]
+[[https://jointhefreeworld.org/ggg/dist/license-mit.svg]]  [[https://jointhefreeworld.org/ggg/dist/codeberg.svg]]  [[https://jointhefreeworld.org/ggg/dist/maak.svg]]  [[https://img.shields.io/badge/Guix-channel-6f4e9c.svg]]
 
 
 =guix-jointhefreeworld= is a [[https://guix.gnu.org/manual/en/html_node/Channels.html][GNU Guix channel]]:
@@ -824,9 +824,9 @@ thank you.  That is what keeps a channel alive.
 :CUSTOM_ID: license
 :END:
 
-The packaging code in this channel is licensed under the GNU Affero General
-Public License, version 3 or later; see [[file:COPYING][=COPYING=]].  Each package carries
-its own project's license, and the field in its definition names it.
+The packaging code in this channel is free and open software, licensed under
+the [[https://opensource.org/license/mit][MIT License]]; see [[file:LICENSE][=LICENSE=]].  Each package carries its own
+project's license, and the field in its definition names it.
 
 #+begin_quote
 Happy hacking — and may your builds be reproducible.

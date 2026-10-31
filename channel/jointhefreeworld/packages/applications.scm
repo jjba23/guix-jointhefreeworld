@@ -715,15 +715,19 @@ runs on rather than a script that assumes the answer.")
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/sift.git")
-             ;; A commit rather than a tag: sift's first release tag is cut by
-             ;; `maak release', and a definition cannot name a tag that does not
-             ;; exist yet.  Every release after this one pins
-             ;; `(string-append "v" version)', like its neighbours here.
-             (commit "a956abb810839a2dc520b98b7caca3fa08cf1ee3")))
+             ;; sift lives on GitHub, like its home-page says: the Codeberg
+             ;; copy this origin used to name is not readable, so the fetch
+             ;; failed before a single phase ran.
+             (url "https://github.com/jjba23/sift.git")
+             ;; A commit rather than a tag: sift states its version once, in
+             ;; src/sift/records.scm, and `maak release' is what writes that
+             ;; number and cuts the tag, so a definition that named the tag
+             ;; would have to be written after the release rather than with
+             ;; it.  The commit is the trunk head whose sources state 0.4.0.
+             (commit "a8fb285ae8ea2d8f32b371c8e28fd11ad6b3d9b6")))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0gf84xxyl07swzik7sxwkv8w737hcalbc8bbbzrkvl30hwv424mn"))))
+        (base32 "0vw8vkzpaqxp59m0sg5yxy1qya32ip866xsl6mmkhskw00aqaw71"))))
     (build-system guile-build-system)
     (arguments
      (list

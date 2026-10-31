@@ -710,7 +710,7 @@ runs on rather than a script that assumes the answer.")
 (define-public sift
   (package
     (name "sift")
-    (version "1.0.1")
+    (version "1.1.0")
     (source
      (origin
        (method git-fetch)
@@ -725,7 +725,7 @@ runs on rather than a script that assumes the answer.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "13cmllxch2hp7v7axr3h2jp5693565g21299m5m9g7ywmrj9ydm9"))))
+        (base32 "1mgcd47jks2zjg054yzcg1ap2w57xlidvk3xlliplb0a8sphzc30"))))
     (build-system guile-build-system)
     (arguments
      (list

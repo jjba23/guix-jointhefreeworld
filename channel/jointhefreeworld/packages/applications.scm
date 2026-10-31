@@ -710,7 +710,7 @@ runs on rather than a script that assumes the answer.")
 (define-public sift
   (package
     (name "sift")
-    (version "0.4.0")
+    (version "1.0.1")
     (source
      (origin
        (method git-fetch)
@@ -719,15 +719,13 @@ runs on rather than a script that assumes the answer.")
              ;; copy this origin used to name is not readable, so the fetch
              ;; failed before a single phase ran.
              (url "https://github.com/jjba23/sift.git")
-             ;; A commit rather than a tag: sift states its version once, in
-             ;; src/sift/records.scm, and `maak release' is what writes that
-             ;; number and cuts the tag, so a definition that named the tag
-             ;; would have to be written after the release rather than with
-             ;; it.  The commit is the trunk head whose sources state 0.4.0.
-             (commit "a8fb285ae8ea2d8f32b371c8e28fd11ad6b3d9b6")))
+             ;; The tag `maak release' cut, now that there is one to name.  The
+             ;; version above is the number the release wrote into the sources,
+             ;; so `sift version' and this definition cannot disagree.
+             (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0vw8vkzpaqxp59m0sg5yxy1qya32ip866xsl6mmkhskw00aqaw71"))))
+        (base32 "13cmllxch2hp7v7axr3h2jp5693565g21299m5m9g7ywmrj9ydm9"))))
     (build-system guile-build-system)
     (arguments
      (list

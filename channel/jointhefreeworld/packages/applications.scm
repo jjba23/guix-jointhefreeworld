@@ -760,7 +760,7 @@ runs on rather than a script that assumes the answer.")
                     (,ccache)))))))))
     (native-inputs (list guile-3.0))
     (inputs (list bash-minimal guile-3.0))
-    (home-page "https://codeberg.org/jjba23/sift")
+    (home-page "https://github.com/jjba23/sift")
     (synopsis
      "Dialect-aware formatter and linter for Scheme, Emacs Lisp and Common Lisp")
     (description
@@ -769,6 +769,6 @@ byte: it reads every comment, blank line and reader prefix as a node of its
 own, so formatting is reversible and idempotent, and its checkers are
 documented, independently testable and aware of which dialect they are looking
 at.  It speaks the shapes an editor and a pipeline need -- a compile-style
-line, JSON, SARIF and GitHub annotations -- and ships an Emacs package that
-puts its findings in Flymake.")
-    (license license:gpl3+)))
+line, JSON, SARIF, GitHub annotations, and a language server the editors talk
+to.")
+    (license license:expat)))

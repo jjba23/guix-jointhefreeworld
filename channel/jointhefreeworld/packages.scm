@@ -27,6 +27,7 @@
                guile-openapi-generator
                guile-olive-css
                maak
+               sift
                ggg
                iter-vitae
                lenkesamler

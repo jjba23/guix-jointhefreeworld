@@ -144,7 +144,7 @@ Then pull once and install what you need:
 
 #+begin_src sh
   guix pull
-  guix install maak ggg iter-vitae mutastructura
+  guix install maak sift ggg iter-vitae mutastructura
 #+end_src
 
 A sample, not a limit: =guix install= takes any number of package names.  For
@@ -239,6 +239,7 @@ Guile and the libraries they need, so these work directly after =guix install=.
 | Command                                                                           | What it does                                    |
 |-----------------------------------------------------------------------------------+-------------------------------------------------|
 | =maak --list=                                                                     | List the tasks in the nearest =maak.scm=.       |
+| =sift ci src/ tests/=                                                             | Check formatting and lint a Lisp project.       |
 | =ggg -f glyphs.scm -d dist=                                                       | Render the badges described in a Scheme file.   |
 | =iter-vitae -f cv.scm -d dist=                                                    | Generate a CV from a Scheme description.        |
 | =lenkesamler -f bookmarks.scm=                                                    | Collect, check, and convert bookmarks.          |
@@ -254,6 +255,10 @@ A few of these deserve a word:
 - =maak= is the command runner the other projects use.  Tasks are ordinary
   Scheme: no DSL, no generated build step.  If you already have a =maak.scm=,
   =maak --list= is the front door.
+- =sift= formats and lints Scheme, Emacs Lisp and Common Lisp.  It reads every
+  comment, blank line and reader prefix as a node of its own, so formatting is
+  reversible and idempotent, and it speaks the shapes an editor and a pipeline
+  need: a compile-style line, JSON, SARIF and GitHub annotations.
 - =mutastructura= applies migrations transactionally and records what it applied
   in a =migrations_history= table.  Running the same directory twice is safe;
   =status= and =validate= let you look before you leap.
@@ -480,6 +485,7 @@ package table names the command.
 | Package                     | Version | Command         | What it is                                       |
 |-----------------------------+---------+-----------------+--------------------------------------------------|
 | =maak=                      |  0.14.0 | =maak=          | Command runner à la Make, with Lisp inside       |
+| =sift=                      |   0.4.0 | =sift=          | Formatter and linter for Scheme, Emacs Lisp, CL  |
 | =ggg=                       |  0.16.4 | =ggg=           | SVG badge and glyph generator                    |
 | =iter-vitae=                |   1.0.4 | =iter-vitae=    | Curriculum vitae generator                       |
 | =lenkesamler=               |   0.0.5 | =lenkesamler=   | Bookmark collector and converter                 |

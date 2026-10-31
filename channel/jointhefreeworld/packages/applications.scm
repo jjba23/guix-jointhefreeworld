@@ -29,6 +29,7 @@
   #:use-module (gnu packages tls)
   #:use-module (jointhefreeworld packages guile)
   #:export (maak
+            sift
             ggg
             iter-vitae
             lenkesamler
@@ -704,4 +705,70 @@ a desktop -- installing a tool, pointing a program at a configuration, keeping
 two machines in step -- into one command with named tasks.  The tasks are
 written in Guile Scheme, so a task can be a value computed from the machine it
 runs on rather than a script that assumes the answer.")
+    (license license:gpl3+)))
+
+(define-public sift
+  (package
+    (name "sift")
+    (version "0.4.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://codeberg.org/jjba23/sift.git")
+             ;; A commit rather than a tag: sift's first release tag is cut by
+             ;; `maak release', and a definition cannot name a tag that does not
+             ;; exist yet.  Every release after this one pins
+             ;; `(string-append "v" version)', like its neighbours here.
+             (commit "a956abb810839a2dc520b98b7caca3fa08cf1ee3")))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0gf84xxyl07swzik7sxwkv8w737hcalbc8bbbzrkvl30hwv424mn"))))
+    (build-system guile-build-system)
+    (arguments
+     (list
+      #:source-directory "src"
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'install-documentation 'install-launcher
+            (lambda _
+              ;; The checkout's launcher adds the src/ next to it to the load
+              ;; path, which is right in a checkout and wrong in the store.  It
+              ;; is installed exactly as written: the wrapper below hands it
+              ;; SIFT_LOAD_PATH, which the launcher already knows how to use,
+              ;; so no substitution has to keep up with the launcher's wording.
+              (let ((bin (string-append #$output "/bin")))
+                (mkdir-p bin)
+                (install-file "bin/sift" bin)
+                (chmod (string-append bin "/sift") #o755))))
+          (add-after 'patch-shebangs 'wrap-program
+            (lambda _
+              (let ((wrapper (string-append #$output "/bin/sift"))
+                    (site (string-append #$output "/share/guile/site/3.0"))
+                    (ccache (string-append #$output
+                                           "/lib/guile/3.0/site-ccache")))
+                (wrap-program wrapper
+                  #:sh (string-append #$bash-minimal "/bin/bash")
+                  `("PATH" ":" prefix
+                    (,(string-append #$guile-3.0 "/bin")))
+                  `("SIFT_LOAD_PATH" ":" =
+                    (,site))
+                  ;; The compiled modules live in a directory of their own, so
+                  ;; Guile has to be told where they are: without it every run
+                  ;; recompiles sift into the user's cache first.
+                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                    (,ccache)))))))))
+    (native-inputs (list guile-3.0))
+    (inputs (list bash-minimal guile-3.0))
+    (home-page "https://codeberg.org/jjba23/sift")
+    (synopsis
+     "Dialect-aware formatter and linter for Scheme, Emacs Lisp and Common Lisp")
+    (description
+     "sift formats and lints Scheme, Emacs Lisp and Common Lisp without losing a
+byte: it reads every comment, blank line and reader prefix as a node of its
+own, so formatting is reversible and idempotent, and its checkers are
+documented, independently testable and aware of which dialect they are looking
+at.  It speaks the shapes an editor and a pipeline need -- a compile-style
+line, JSON, SARIF and GitHub annotations -- and ships an Emacs package that
+puts its findings in Flymake.")
     (license license:gpl3+)))

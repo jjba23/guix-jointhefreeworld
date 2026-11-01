@@ -125,7 +125,7 @@ Append the channel to your channel list, keeping Guix itself:
   ;; ~/.config/guix/channels.scm
   (cons* (channel
           (name 'jointhefreeworld)
-          (url "https://codeberg.org/jjba23/guix-jointhefreeworld")
+          (url "https://github.com/jjba23/guix-jointhefreeworld")
           (branch "trunk")
           (introduction
            (make-channel-introduction
@@ -171,7 +171,7 @@ A checkout is enough for trying a package, reading the definitions, or hacking
 on the channel:
 
 #+begin_src sh
-  git clone https://codeberg.org/jjba23/guix-jointhefreeworld
+  git clone https://github.com/jjba23/guix-jointhefreeworld
   cd guix-jointhefreeworld
 
   # Build or install one package from the checkout
@@ -370,7 +370,7 @@ The channel specification has four fields worth knowing:
 | Field          | What it does                                                                                                           |
 |----------------+------------------------------------------------------------------------------------------------------------------------|
 | =name=         | The name Guix uses for the channel.  Keep =jointhefreeworld= so the commands in this README match.                     |
-| =url=          | The repository Guix fetches.  Use the Codeberg URL above.                                                              |
+| =url=          | The repository Guix fetches.  Use the GitHub URL above.                                                                |
 | =branch=       | =trunk= tracks the latest signed commit.  Replace it with =commit= to pin a revision.                                  |
 | =introduction= | The trust anchor: the first signed commit and its signing key.  Omit it only if you accept an unauthenticated channel. |
 
@@ -379,7 +379,7 @@ To pin a revision, replace =branch= with =commit= and keep the introduction:
 #+begin_src scheme
   (channel
    (name 'jointhefreeworld)
-   (url "https://codeberg.org/jjba23/guix-jointhefreeworld")
+   (url "https://github.com/jjba23/guix-jointhefreeworld")
    (commit "4856480b0ff083a321b0cca9852346ef3a3b1892")
    (introduction
     (make-channel-introduction
@@ -641,7 +641,7 @@ The repository has a [[file:maak.scm][=maak.scm=]].  With Maak installed,
 | =maak shell=             | Enter a shell with the whole collection.                          |
 | =maak authenticate=      | Verify the signed history from the introduction to HEAD.          |
 | =maak show-introduction= | Print the introduction for a =channels.scm=.                      |
-| =maak publish=           | Push =trunk= and the =keyring= branch to Codeberg.                |
+| =maak publish=           | Push =trunk= and the =keyring= branch to GitHub.                  |
 
 See [[file:HACKING.org][HACKING.org]] for the longer version: updating a package to a new release,
 adding a package, creating the keyring branch, and the signing rules.
@@ -660,7 +660,7 @@ architecture.
 :CUSTOM_ID: where-to-talk
 :END:
 
-- *Issues and patches:* [[https://codeberg.org/jjba23/guix-jointhefreeworld/issues][the Codeberg issue tracker]] and pull requests.
+- *Issues and patches:* [[https://github.com/jjba23/guix-jointhefreeworld/issues][the GitHub issue tracker]] and pull requests.
 - *The projects themselves:* each package names its own repository in its
   definition; bugs in a program are usually best reported where its source
   lives.
@@ -819,7 +819,7 @@ This channel stands on the shoulders of
 [[https://www.gnu.org/software/emacs/][GNU Emacs]],
 [[https://gtk.org/][GTK]],
 [[https://wayland.freedesktop.org/][Wayland]], and
-[[https://codeberg.org/][Codeberg]].  It exists because those projects make it
+[[https://github.com/][GitHub]].  It exists because those projects make it
 possible to build a toolchain out of Lisp and to share it reproducibly.
 
 And to the people who try the packages, report what breaks, and send a patch:

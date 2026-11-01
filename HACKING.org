@@ -99,12 +99,12 @@ Add a =.key= file here for every key that will ever appear in
 then push the keyring branch:
 
 #+begin_src sh
-  git remote add origin ssh://git@codeberg.org/jjba23/guix-jointhefreeworld.git
+  git remote add origin git@github.com:jjba23/guix-jointhefreeworld.git
   git push -u origin trunk
   git push --no-verify origin keyring
 
 With Maak installed, =maak publish= runs the last two commands against the
-=codeberg= remote.
+=origin= remote.
 #+end_src
 
 The keyring branch is the root of trust and is not part of the channel's
@@ -146,7 +146,7 @@ Users put it in their channel specification:
 #+begin_src scheme
   (channel
    (name 'jointhefreeworld)
-   (url "https://codeberg.org/jjba23/guix-jointhefreeworld")
+   (url "https://github.com/jjba23/guix-jointhefreeworld")
    (branch "trunk")
    (introduction
     (make-channel-introduction

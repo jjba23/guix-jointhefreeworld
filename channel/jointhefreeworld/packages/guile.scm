@@ -93,7 +93,7 @@ variables, dynamically scoped log contexts and ahead-of-time level filtering.")
 (define-public guile-veritas
   (package
     (name "guile-veritas")
-    (version "0.9.0")
+    (version "1.1.1")
     (source
      (origin
        (method git-fetch)
@@ -102,7 +102,7 @@ variables, dynamically scoped log contexts and ahead-of-time level filtering.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1pr8yjnxkrp2fylmn8ihjapin7iz94jqi4hbc6yd0ajll11ajxc9"))))
+        (base32 "1jqs3m7qhcc25s5zky26ps6jx5qmfpswkhygslqasp3ryb2kafma"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))

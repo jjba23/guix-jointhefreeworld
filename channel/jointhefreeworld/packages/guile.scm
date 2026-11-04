@@ -123,7 +123,7 @@ failures with the values that produced them.")
 (define-public guile-bewaking
   (package
     (name "guile-bewaking")
-    (version "0.4.6")
+    (version "0.4.7")
     (source
      (origin
        (method git-fetch)
@@ -132,7 +132,7 @@ failures with the values that produced them.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1kl6vnw9wi8nvya7jxxnsb3qhdc50aj1pc5vpz1p4jrmr20mb8vq"))))
+        (base32 "037czgxcpay9d7yawz2byi1y5nnpp012qpi810p5lvz3xgg1avpy"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))

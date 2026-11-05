@@ -93,16 +93,16 @@ variables, dynamically scoped log contexts and ahead-of-time level filtering.")
 (define-public guile-veritas
   (package
     (name "guile-veritas")
-    (version "1.1.1")
+    (version "1.3.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/veritas.git")
+             (url "https://github.com/jjba23/veritas.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1jqs3m7qhcc25s5zky26ps6jx5qmfpswkhygslqasp3ryb2kafma"))))
+        (base32 "08dspfvqni1z4yr2vqal2vfik4g8krv8d13lkl7sfciq6rkxwj96"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -111,14 +111,14 @@ variables, dynamically scoped log contexts and ahead-of-time level filtering.")
     (propagated-inputs
      (list guile-fibers
            guile-json-4))
-    (home-page "https://codeberg.org/jjba23/veritas")
+    (home-page "https://github.com/jjba23/veritas")
     (synopsis "Testing framework for Guile")
     (description
      "Veritas is a testing framework for Guile with an embedded domain-specific
 language for defining test suites.  Emphasis is placed on legible, maintainable
 tests: Veritas shuffles them and runs them concurrently by default, and reports
 failures with the values that produced them.")
-    (license license:lgpl3+)))
+    (license license:expat)))
 
 (define-public guile-bewaking
   (package

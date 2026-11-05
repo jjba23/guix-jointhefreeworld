@@ -105,28 +105,28 @@ failed.")
 (define-public emacs-welkomscherm
   (package
     (name "emacs-welkomscherm")
-    (version "1.2.3")
+    (version "1.3.1")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/welkomscherm.el.git")
+             (url "https://github.com/jjba23/welkomscherm.el.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1xk6ygs8sr2zrs0660vfxi7ifsghh93rj3nyxl97awjxsy86qgnp"))))
+        (base32 "13gryfqzravjzxsr82wzr17c3xcghb9yif3n3civdwzpd791lxkr"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
-    (home-page "https://codeberg.org/jjba23/welkomscherm.el")
+    (home-page "https://github.com/jjba23/welkomscherm.el")
     (synopsis "Quiet welcome screen and dashboard for Emacs")
     (description
      "Welkomscherm (Dutch for \"welcome screen\") is a calm dashboard for the
 start of an Emacs session: a centred handful of lines, the links its owner
 chose, and nothing that gets in the way.  It looks the same in a graphical
-frame and in a terminal, it works on any Emacs from 25.1 upwards, and it asks
+frame and in a terminal, it works on any Emacs from 28.1 upwards, and it asks
 nothing of the editor that Emacs does not already provide.")
-    (license license:gpl3+)))
+    (license license:expat)))
 
 (define-public emacs-tekengrootte
   (package

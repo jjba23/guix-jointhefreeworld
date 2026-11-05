@@ -129,8 +129,8 @@ The keyring branch is the root of trust and is not part of the channel's
 authenticated history, so it is pushed with --no-verify: the pre-push hook
 installed by `guix git authenticate' would otherwise try to authenticate a
 commit that is not a descendant of the introduction and refuse the push."
-  (git (list "push" "codeberg" "trunk") #:verbose? #t)
-  (git (list "push" "--no-verify" "codeberg" "keyring") #:verbose? #t))
+  (git (list "push" "origin" "trunk") #:verbose? #t)
+  (git (list "push" "--no-verify" "origin" "keyring") #:verbose? #t))
 
 ;; ====== Agent skills ======
 

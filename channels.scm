@@ -20,7 +20,7 @@
 
 (cons* (channel
         (name 'jointhefreeworld)
-        (url "https://codeberg.org/jjba23/guix-jointhefreeworld")
+        (url "https://github.com/jjba23/guix-jointhefreeworld")
         (branch "trunk")
         (introduction
          (make-channel-introduction

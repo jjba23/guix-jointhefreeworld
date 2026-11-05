@@ -35,7 +35,7 @@ dependencies and launchers they were tested with.
   =mutastructura=, or =emacs-modusregel= without writing package definitions.
 - *Scheme hackers* building on [[https://codeberg.org/jjba23/kracht][Kracht]],
   [[https://codeberg.org/jjba23/scriba][Scriba]],
-  [[https://codeberg.org/jjba23/veritas][Veritas]],
+  [[https://github.com/jjba23/veritas][Veritas]],
   [[https://codeberg.org/jjba23/hygguile][Hygguile]], or the rest of the stack.
 - *Emacs users* who want the jointhefreeworld packages installed the Guix way.
 - *Builders and writers* who publish with =maak=, =iter-vitae=, =ggg=, or the
@@ -468,7 +468,7 @@ exporter, an OpenAPI generator, and a CSS generator.
 |---------------------------+---------+--------------------------------------------------------|
 | =guile-kracht=            |   0.3.3 | Opt-in prelude that enhances Guile's standard library  |
 | =guile-scriba=            |   0.4.5 | Structured logging, from console lines to JSON on disk |
-| =guile-veritas=           |   1.3.0 | Testing framework with an embedded DSL                 |
+| =guile-veritas=           |   1.3.1 | Testing framework with an embedded DSL                 |
 | =guile-bewaking=          |   0.4.7 | Encrypted, lifetime-limited authentication tokens      |
 | =guile-hygguile=          |   2.7.6 | Web UI components built from SXML                      |
 | =guile-orgwebalchemy=     |   1.2.4 | Org mode to HTML and Markdown converter                |

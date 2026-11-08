@@ -23,7 +23,7 @@
   #:use-module (gnu packages guile)
   #:use-module ((gnu packages guile-xyz)
                 #:hide (guile-kracht guile-hygguile
-                        guile-bewaking guile-veritas))
+                                     guile-bewaking guile-veritas))
   #:use-module (gnu packages imagemagick)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages tls)
@@ -88,17 +88,17 @@
             (lambda _
               (let ((wrapper (string-append #$output "/bin/maak")))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append
-                       #$output "/lib/guile/3.0/site-ccache"))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append
+                                   #$output "/lib/guile/3.0/site-ccache"))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -146,18 +146,18 @@ complexity that comes with its history.")
             (lambda _
               (let ((wrapper (string-append #$output "/bin/ggg")))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")
-                     ,(string-append #$imagemagick "/bin")))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append
-                       #$output "/lib/guile/3.0/site-ccache"))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")
+                                 ,(string-append #$imagemagick "/bin")))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append
+                                   #$output "/lib/guile/3.0/site-ccache"))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -208,17 +208,17 @@ from S-expressions, producing pixel-perfect output.")
             (lambda _
               (let ((wrapper (string-append #$output "/bin/iter-vitae")))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append
-                       #$output "/lib/guile/3.0/site-ccache"))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append
+                                   #$output "/lib/guile/3.0/site-ccache"))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -270,28 +270,28 @@ be updated and evolved over the years, and it supports multilingual content.")
                      (dependencies (list #$guile-json-4
                                          #$guile-gnutls)))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency "/bin"))
-                            dependencies)))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/share/guile/site/3.0"))
-                            dependencies)))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append #$output
-                                     "/lib/guile/3.0/site-ccache")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/lib/guile/3.0/site-ccache"))
-                            dependencies))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency "/bin"))
+                                        dependencies)))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/share/guile/site/3.0"))
+                                        dependencies)))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append #$output
+                                                 "/lib/guile/3.0/site-ccache")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/lib/guile/3.0/site-ccache"))
+                                        dependencies))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -347,28 +347,28 @@ Netscape bookmarks file.")
                                          #$guile-kracht
                                          #$guile-uuid)))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency "/bin"))
-                            dependencies)))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/share/guile/site/3.0"))
-                            dependencies)))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append #$output
-                                     "/lib/guile/3.0/site-ccache")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/lib/guile/3.0/site-ccache"))
-                            dependencies))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency "/bin"))
+                                        dependencies)))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/share/guile/site/3.0"))
+                                        dependencies)))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append #$output
+                                                 "/lib/guile/3.0/site-ccache")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/lib/guile/3.0/site-ccache"))
+                                        dependencies))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -421,28 +421,28 @@ ever holding them in the clear.")
                      (dependencies (list #$guile-scriba
                                          #$guile-json-4)))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency "/bin"))
-                            dependencies)))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/share/guile/site/3.0"))
-                            dependencies)))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append #$output
-                                     "/lib/guile/3.0/site-ccache")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/lib/guile/3.0/site-ccache"))
-                            dependencies))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency "/bin"))
+                                        dependencies)))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/share/guile/site/3.0"))
+                                        dependencies)))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append #$output
+                                                 "/lib/guile/3.0/site-ccache")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/lib/guile/3.0/site-ccache"))
+                                        dependencies))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -498,28 +498,28 @@ a template system that a project can extend.")
                                          #$guile-lib
                                          #$guile-gnutls)))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency "/bin"))
-                            dependencies)))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/share/guile/site/3.0"))
-                            dependencies)))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append #$output
-                                     "/lib/guile/3.0/site-ccache")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/lib/guile/3.0/site-ccache"))
-                            dependencies))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency "/bin"))
+                                        dependencies)))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/share/guile/site/3.0"))
+                                        dependencies)))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append #$output
+                                                 "/lib/guile/3.0/site-ccache")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/lib/guile/3.0/site-ccache"))
+                                        dependencies))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -577,32 +577,32 @@ file from what it found.")
                                          #$guile-dbd-postgresql
                                          #$guile-gcrypt)))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency "/bin"))
-                            dependencies)))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/share/guile/site/3.0"))
-                            dependencies)))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append #$output
-                                     "/lib/guile/3.0/site-ccache")
-                     ,@(map (lambda (dependency)
-                              (string-append dependency
-                                             "/lib/guile/3.0/site-ccache"))
-                            dependencies)))
-                  `("GUILE_DBD_PATH" ":" prefix
-                    (,@(map (lambda (dependency)
-                              (string-append dependency "/lib"))
-                            dependencies))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency "/bin"))
+                                        dependencies)))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/share/guile/site/3.0"))
+                                        dependencies)))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append #$output
+                                                 "/lib/guile/3.0/site-ccache")
+                                 ,@(map (lambda (dependency)
+                                          (string-append dependency
+                                                         "/lib/guile/3.0/site-ccache"))
+                                        dependencies)))
+                              `("GUILE_DBD_PATH" ":" prefix
+                                (,@(map (lambda (dependency)
+                                          (string-append dependency "/lib"))
+                                        dependencies))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -672,26 +672,26 @@ what makes a migration safe to run again.")
               ;; launcher lets the wrapper's GUILE_LOAD_PATH do that job.
               (let ((launcher (string-append #$output "/bin/caco")))
                 (call-with-output-file launcher
-                  (lambda (port)
-                    (format port
-                            "#!~a/bin/bash~%exec guile -c '((@ (cask-and-cons main) main) (command-line))' \"$@\"~%"
-                            #$bash-minimal)))
+                                       (lambda (port)
+                                         (format port
+                                                 "#!~a/bin/bash~%exec guile -c '((@ (cask-and-cons main) main) (command-line))' \"$@\"~%"
+                                                 #$bash-minimal)))
                 (chmod launcher #o755))))
           (add-after 'patch-shebangs 'wrap-program
             (lambda _
               (let ((wrapper (string-append #$output "/bin/caco")))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")
-                     ,(string-append #$bash-minimal "/bin")
-                     ,(string-append #$coreutils-minimal "/bin")
-                     ,(string-append #$util-linux "/bin")))
-                  `("GUILE_LOAD_PATH" ":" prefix
-                    (,(string-append #$output "/share/guile/site/3.0")))
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,(string-append
-                       #$output "/lib/guile/3.0/site-ccache"))))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ,(string-append #$bash-minimal "/bin")
+                                 ,(string-append #$coreutils-minimal "/bin")
+                                 ,(string-append #$util-linux "/bin")))
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$output "/share/guile/site/3.0")))
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,(string-append
+                                   #$output "/lib/guile/3.0/site-ccache"))))))))))
     (native-inputs
      (list guile-3.0))
     (inputs
@@ -751,16 +751,16 @@ runs on rather than a script that assumes the answer.")
                     (ccache (string-append #$output
                                            "/lib/guile/3.0/site-ccache")))
                 (wrap-program wrapper
-                  #:sh (string-append #$bash-minimal "/bin/bash")
-                  `("PATH" ":" prefix
-                    (,(string-append #$guile-3.0 "/bin")))
-                  `("SIFT_LOAD_PATH" ":" =
-                    (,site))
-                  ;; The compiled modules live in a directory of their own, so
-                  ;; Guile has to be told where they are: without it every run
-                  ;; recompiles sift into the user's cache first.
-                  `("GUILE_LOAD_COMPILED_PATH" ":" prefix
-                    (,ccache)))))))))
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")))
+                              `("SIFT_LOAD_PATH" ":" =
+                                (,site))
+                              ;; The compiled modules live in a directory of their own, so
+                              ;; Guile has to be told where they are: without it every run
+                              ;; recompiles sift into the user's cache first.
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,ccache)))))))))
     (native-inputs (list guile-3.0))
     (inputs (list bash-minimal guile-3.0))
     (home-page "https://github.com/jjba23/sift")

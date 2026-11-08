@@ -81,9 +81,9 @@
               ((":ensure t") ":ensure nil")
               ((":pin \"melpa-stable\"") ""))
             (call-with-output-file (string-append share "/build.el")
-              (lambda (port)
-                (format port
-                        ";; Load the autoloads the Emacs packages installed beside~%\
+                                   (lambda (port)
+                                     (format port
+                                             ";; Load the autoloads the Emacs packages installed beside~%\
 ;; their sources, the way package-initialize would.~%\
 (let ((dirs (split-string (or (getenv \"EMACSLOADPATH\") \"\") \":\" t)))~%\
   (dolist (dir dirs)~%\
@@ -93,12 +93,12 @@
 (setq jfw/project-root (file-name-as-directory~%\
  (or (getenv \"JFW_PROJECT_ROOT\") default-directory)))~%\
 (jfw/publish)~%"
-                        site)))
+                                             site)))
             (mkdir-p bin)
             (call-with-output-file (string-append bin "/jointhefreeworld-build")
-              (lambda (port)
-                (format port
-                        "#!~a/bin/bash
+                                   (lambda (port)
+                                     (format port
+                                             "#!~a/bin/bash
 set -euo pipefail
 export JFW_PROJECT_ROOT=\"$(pwd)\"
 EMACSLOADPATH=
@@ -112,30 +112,30 @@ done
 export EMACSLOADPATH
 exec emacs -Q --batch -l ~a \"$@\"
 "
-                        #$bash-minimal roots
-                        (string-append share "/build.el"))))
+                                             #$bash-minimal roots
+                                             (string-append share "/build.el"))))
             (chmod (string-append bin "/jointhefreeworld-build") #o755)
             (call-with-output-file (string-append bin "/jointhefreeworld-serve")
-              (lambda (port)
-                (format port
-                        "#!~a/bin/bash
+                                   (lambda (port)
+                                     (format port
+                                             "#!~a/bin/bash
 set -euo pipefail
 exec darkhttpd \"${1:-./public}\" --port \"${PORT:-50011}\"
 "
-                        #$bash-minimal)))
+                                             #$bash-minimal)))
             (chmod (string-append bin "/jointhefreeworld-serve") #o755)
             (wrap-program (string-append bin "/jointhefreeworld-build")
-              #:sh (string-append #$bash-minimal "/bin/bash")
-              `("PATH" ":" prefix
-                (,(string-append #$emacs-no-x "/bin")
-                 ,(string-append #$librsvg "/bin")
-                 ,(string-append #$git "/bin")
-                 ,(string-append #$coreutils-minimal "/bin"))))
+                          #:sh (string-append #$bash-minimal "/bin/bash")
+                          `("PATH" ":" prefix
+                            (,(string-append #$emacs-no-x "/bin")
+                             ,(string-append #$librsvg "/bin")
+                             ,(string-append #$git "/bin")
+                             ,(string-append #$coreutils-minimal "/bin"))))
             (wrap-program (string-append bin "/jointhefreeworld-serve")
-              #:sh (string-append #$bash-minimal "/bin/bash")
-              `("PATH" ":" prefix
-                (,(string-append #$darkhttpd "/bin")
-                 ,(string-append #$coreutils-minimal "/bin"))))))))
+                          #:sh (string-append #$bash-minimal "/bin/bash")
+                          `("PATH" ":" prefix
+                            (,(string-append #$darkhttpd "/bin")
+                             ,(string-append #$coreutils-minimal "/bin"))))))))
     (inputs (list emacs-no-x
                   emacs-esxml
                   emacs-htmlize

@@ -73,11 +73,11 @@
 (define* (build #:optional package)
   "Build PACKAGE, or every package in the channel when none is given."
   (if package
-      (run (list "guix" "build" "-L" channel-directory package)
-           #:verbose? #t)
-      (run (list "guix" "build" "-L" channel-directory
-                 "-m" "manifest.scm")
-           #:verbose? #t)))
+    (run (list "guix" "build" "-L" channel-directory package)
+         #:verbose? #t)
+    (run (list "guix" "build" "-L" channel-directory
+               "-m" "manifest.scm")
+         #:verbose? #t)))
 
 (define* (lint #:optional package)
   "Lint PACKAGE, or every package in the channel when none is given.
@@ -85,9 +85,9 @@
 Linting every package reaches the network for the updater and CVE checks; use
 `maak check' for the offline version."
   (run (if package
-           (list "guix" "lint" "-L" channel-directory package)
-           (append (list "guix" "lint" "-L" channel-directory)
-                   %packages))
+         (list "guix" "lint" "-L" channel-directory package)
+         (append (list "guix" "lint" "-L" channel-directory)
+                 %packages))
        #:verbose? #t))
 
 (define (git-certificate-directory)
@@ -99,16 +99,16 @@ distribution has no /etc/ssl/certs to offer it, and every repository then looks
 unreachable.  When neither variable nor either default file is there, hand
 libgit2 the nss-certs Guix provides instead."
   (and (not (getenv "SSL_CERT_FILE"))
-       (not (getenv "SSL_CERT_DIR"))
-       (not (file-exists? "/etc/ssl/certs/ca-certificates.crt"))
-       (not (file-exists? "/etc/ssl/certs/ca-bundle.crt"))
-       (let ((result (run-pipeline (list (list "guix" "build" "nss-certs"))
-                                   #:capture? #t
-                                   #:allow-failure? #t)))
-         (and (pipeline-ok? result)
-              (string-append (string-trim-both
-                              (car (pipeline-outputs result)))
-                             "/etc/ssl/certs")))))
+    (not (getenv "SSL_CERT_DIR"))
+    (not (file-exists? "/etc/ssl/certs/ca-certificates.crt"))
+    (not (file-exists? "/etc/ssl/certs/ca-bundle.crt"))
+    (let ((result (run-pipeline (list (list "guix" "build" "nss-certs"))
+                                #:capture? #t
+                                #:allow-failure? #t)))
+      (and (pipeline-ok? result)
+        (string-append (string-trim-both
+                        (car (pipeline-outputs result)))
+                       "/etc/ssl/certs")))))
 
 (define (outdated)
   "Report the packages whose project has a release newer than the one pinned.
@@ -122,14 +122,14 @@ network, so it is not part of `maak check'."
              "-m" "manifest.scm")
        #:env (let ((directory (git-certificate-directory)))
                (if directory
-                   (list (string-append "SSL_CERT_DIR=" directory))
-                   '()))
+                 (list (string-append "SSL_CERT_DIR=" directory))
+                 '()))
        #:verbose? #t))
 
 (define (fmt)
   "Format every Scheme source with the Guix style guide."
   (run (list "find" "." "-maxdepth" "8" "-name" "*.scm" "-type" "f"
-             "-exec" "guix" "style" "-f" "{}" ";")
+             "-exec" "sift" "format" "--write" "{}" ";")
        #:verbose? #t))
 
 (define (authenticate)
@@ -343,13 +343,13 @@ over general advice, and the narrowest rule here wins over the broadest.
 (define (slurp path)
   "Return the whole of @var{path} as a string."
   (call-with-input-file path
-    (lambda (port)
-      (let loop ((lines '())
-                 (line (read-line port)))
-        (if (eof-object? line)
-            (string-concatenate-reverse lines)
-            (loop (cons (string-append line "\n") lines)
-                  (read-line port)))))))
+                        (lambda (port)
+                          (let loop ((lines '())
+                                     (line (read-line port)))
+                            (if (eof-object? line)
+                              (string-concatenate-reverse lines)
+                              (loop (cons (string-append line "\n") lines)
+                                    (read-line port)))))))
 
 (define (fetch-skill name repository commit path)
   "Download one skill pinned at @var{commit}, into the reports tree.
@@ -376,19 +376,19 @@ over general advice, and the narrowest rule here wins over the broadest.
                                                   (list-ref skill 3)))))
                      agent-skills)))
     (call-with-output-file "AGENTS.md"
-      (lambda (port)
-        (display agents-header port)
-        (for-each (lambda (skill)
-                    (format port
-                            "~%## ~a~%~%`~a` at `~a`, `~a`, ~a licensed.~%~%"
-                            (list-ref skill 0)
-                            (list-ref skill 1)
-                            (list-ref skill 2)
-                            (list-ref skill 3)
-                            (list-ref skill 4))
-                    (display (list-ref skill 5) port))
-                  skills)
-        (for-each (lambda (practice)
-                    (newline port)
-                    (display practice port))
-                  agent-practices)))))
+                           (lambda (port)
+                             (display agents-header port)
+                             (for-each (lambda (skill)
+                                         (format port
+                                                 "~%## ~a~%~%`~a` at `~a`, `~a`, ~a licensed.~%~%"
+                                                 (list-ref skill 0)
+                                                 (list-ref skill 1)
+                                                 (list-ref skill 2)
+                                                 (list-ref skill 3)
+                                                 (list-ref skill 4))
+                                         (display (list-ref skill 5) port))
+                                       skills)
+                             (for-each (lambda (practice)
+                                         (newline port)
+                                         (display practice port))
+                                       agent-practices)))))

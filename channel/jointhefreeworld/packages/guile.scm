@@ -23,7 +23,7 @@
   #:use-module (gnu packages guile)
   #:use-module ((gnu packages guile-xyz)
                 #:hide (guile-kracht guile-hygguile
-                        guile-bewaking guile-veritas))
+                                     guile-bewaking guile-veritas))
   #:export (guile-kracht
             guile-scriba
             guile-veritas

@@ -15,6 +15,7 @@ tasks; the ones used most are:
 #+begin_src sh
   maak build                 # every package
   maak build maak            # one package
+  maak outdated              # every package, against upstream's releases
   maak fmt                   # guix style over the Scheme sources
   maak lint                  # every package, including network checks
   maak check                 # lint offline, build, authenticate
@@ -25,8 +26,9 @@ tasks; the ones used most are:
 
 * Updating a package to a new release
 
-The hash is the recursive hash of the checkout, which is what =git-fetch=
-produces:
+=maak outdated= prints the packages whose project has a release newer than the
+one pinned.  Then the hash is the recursive hash of the checkout, which is what
+=git-fetch= produces:
 
 #+begin_src sh
   git clone --depth 1 --branch v0.14.0 https://codeberg.org/jjba23/maak.git /tmp/maak

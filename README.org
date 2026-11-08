@@ -633,6 +633,7 @@ The repository has a [[file:maak.scm][=maak.scm=]].  With Maak installed,
 |--------------------------+-------------------------------------------------------------------|
 | =maak build=             | Build every package in the manifest.                              |
 | =maak build maak=        | Build one package.                                                |
+| =maak outdated=          | List the packages whose project has a newer release.              |
 | =maak fmt=               | Run =guix style= over the Scheme sources.                         |
 | =maak lint=              | Lint every package, including network checks.                     |
 | =maak check=             | Lint offline, build every package, then authenticate the history. |

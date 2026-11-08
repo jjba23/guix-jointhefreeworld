@@ -90,6 +90,17 @@ Linting every package reaches the network for the updater and CVE checks; use
                    %packages))
        #:verbose? #t))
 
+(define (outdated)
+  "Report the packages whose project has a release newer than the one pinned.
+
+Every package in the manifest is asked for its latest release, so this reaches
+the network and is not part of `maak check'.  Without a token the GitHub
+updater is rate limited: set GUIX_GITHUB_TOKEN to check the whole collection in
+one go."
+  (run (list "guix" "refresh" "-L" channel-directory
+             "-m" "manifest.scm")
+       #:verbose? #t))
+
 (define (fmt)
   "Format every Scheme source with the Guix style guide."
   (run (list "find" "." "-maxdepth" "8" "-name" "*.scm" "-type" "f"

@@ -62,7 +62,6 @@
     "guile-heks-bash"
     "lambdock"
     "heks-toon"
-    "skeu-icons"
     "jointhefreeworld"))
 
 ;; ====== Tasks ======

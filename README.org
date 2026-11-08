@@ -57,8 +57,6 @@ A single channel containing:
 - *heks-toon*, the GTK4 window with the desktop's keyboard reference, wallpapers
   and palettes, painted from the palette the desktop is wearing;
 - *heks-bash*, a Bash configuration generated from Scheme;
-- *skeu-icons*, the icon theme the desktop wears, in its accent and dark
-  variants too;
 - the *jointhefreeworld site builder*, which turns Org sources into the published
   static site.
 
@@ -519,7 +517,6 @@ package table names the command.
 | =guile-heks-bash= |   2.0.1 | — (library)           | Bash configuration generated from Scheme            |
 | =lambdock=        |   1.2.1 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
 | =heks-toon=       |   0.3.3 | =heks-toon=           | Keyboard reference, wallpapers, palettes, docs and reconfigure |
-| =skeu-icons=      |  1.10.0 | — (icon theme)        | Skeuomorphic icons, symbolic layer, fourteen accent variants |
 
 ** The web site — =(jointhefreeworld packages site)=
 :PROPERTIES:

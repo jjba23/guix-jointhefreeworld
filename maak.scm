@@ -90,15 +90,40 @@ Linting every package reaches the network for the updater and CVE checks; use
                    %packages))
        #:verbose? #t))
 
+(define (git-certificate-directory)
+  "Return the trust store the tag fetches need, or #f.
+
+`guix refresh' reads tags through libgit2, which verifies the certificate of
+every repository against the system's trust store; a Guix installed on another
+distribution has no /etc/ssl/certs to offer it, and every repository then looks
+unreachable.  When neither variable nor either default file is there, hand
+libgit2 the nss-certs Guix provides instead."
+  (and (not (getenv "SSL_CERT_FILE"))
+       (not (getenv "SSL_CERT_DIR"))
+       (not (file-exists? "/etc/ssl/certs/ca-certificates.crt"))
+       (not (file-exists? "/etc/ssl/certs/ca-bundle.crt"))
+       (let ((result (run-pipeline (list (list "guix" "build" "nss-certs"))
+                                   #:capture? #t
+                                   #:allow-failure? #t)))
+         (and (pipeline-ok? result)
+              (string-append (string-trim-both
+                              (car (pipeline-outputs result)))
+                             "/etc/ssl/certs")))))
+
 (define (outdated)
   "Report the packages whose project has a release newer than the one pinned.
 
-Every package in the manifest is asked for its latest release, so this reaches
-the network and is not part of `maak check'.  Without a token the GitHub
-updater is rate limited: set GUIX_GITHUB_TOKEN to check the whole collection in
-one go."
+The `generic-git' updater compares each package's version against its
+repository's tags: one fetch per package, no token, and none of the rate limit
+that the GitHub API puts on an unauthenticated caller.  The check reaches the
+network, so it is not part of `maak check'."
   (run (list "guix" "refresh" "-L" channel-directory
+             "-t" "generic-git"
              "-m" "manifest.scm")
+       #:env (let ((directory (git-certificate-directory)))
+               (if directory
+                   (list (string-append "SSL_CERT_DIR=" directory))
+                   '()))
        #:verbose? #t))
 
 (define (fmt)

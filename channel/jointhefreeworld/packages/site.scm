@@ -37,16 +37,16 @@
 (define-public jointhefreeworld
   (package
     (name "jointhefreeworld")
-    (version "1.0.3")
+    (version "1.3.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/jointhefreeworld.git")
+             (url "https://github.com/jjba23/jointhefreeworld.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1yba3gslhs9xflzc71s39jnpn50f1hylfm1nxdvwf3v2yxzk5jbs"))))
+        (base32 "00v6f9kzr2kgglya3vb6wgyzdbyhxw4gv78s2927fr1xwwn67j8c"))))
     (build-system trivial-build-system)
     (arguments
      (list
@@ -69,6 +69,11 @@
             (mkdir-p share)
             (copy-file (string-append #$source "/jointhefreeworld-site.el")
                        site)
+            ;; The entry point is only a loader: it puts the lisp/ directory
+            ;; beside itself on the load path and requires the modules there,
+            ;; so they are installed next to it.
+            (copy-recursively (string-append #$source "/lisp")
+                              (string-append share "/lisp"))
             (substitute* site
               ;; The packages come from the inputs, not from MELPA.
               (("\\(package-refresh-contents\\)") "nil")

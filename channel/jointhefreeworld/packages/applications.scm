@@ -123,7 +123,7 @@ complexity that comes with its history.")
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/ggg.git")
+             (url "https://github.com/jjba23/ggg.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
@@ -165,7 +165,7 @@ complexity that comes with its history.")
            coreutils-minimal
            imagemagick
            util-linux))
-    (home-page "https://codeberg.org/jjba23/ggg")
+    (home-page "https://github.com/jjba23/ggg")
     (synopsis "SVG badge and glyph generator written in Guile Scheme")
     (description
      "GGG (Guile Glyph Generator) generates pretty SVG images and badges for
@@ -178,16 +178,16 @@ from S-expressions, producing pixel-perfect output.")
 (define-public iter-vitae
   (package
     (name "iter-vitae")
-    (version "1.0.4")
+    (version "1.4.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/iter-vitae.git")
+             (url "https://github.com/jjba23/iter-vitae.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "056q64b9yi319psng32m3v66c0v4c0rmfr56niix8dnc7bbs8wlh"))))
+        (base32 "042iiw68cw5rwk776ghvvnsy1sif5jfhap3i0b6bqv8v9800x6l2"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -225,7 +225,7 @@ from S-expressions, producing pixel-perfect output.")
      (list bash-minimal
            coreutils-minimal
            util-linux))
-    (home-page "https://codeberg.org/jjba23/iter-vitae")
+    (home-page "https://github.com/jjba23/iter-vitae")
     (synopsis "Curriculum vitae generator written in Guile Scheme")
     (description
      "Iter Vitae generates a résumé or curriculum vitae from an S-expression
@@ -464,16 +464,16 @@ a template system that a project can extend.")
 (define-public araneola
   (package
     (name "araneola")
-    (version "0.0.5")
+    (version "0.2.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/araneola.git")
+             (url "https://github.com/jjba23/araneola.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "06flp0c5f28a9y458lfykravp794a52mdj9nw9k8g5mpfspxwvjj"))))
+        (base32 "0ikyvgimg4bgbgcsf03hxc7s071rfmfszr776yk6268m59jkbyg6"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -532,7 +532,7 @@ a template system that a project can extend.")
            guile-json-4
            guile-lib
            guile-scriba))
-    (home-page "https://codeberg.org/jjba23/araneola")
+    (home-page "https://github.com/jjba23/araneola")
     (synopsis "Static site crawler and link checker written in Guile Scheme")
     (description
      "Araneola (a small spider) crawls a web site, reads its pages, and reports
@@ -544,16 +544,16 @@ file from what it found.")
 (define-public mutastructura
   (package
     (name "mutastructura")
-    (version "0.9.4")
+    (version "0.9.6")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/mutastructura.git")
+             (url "https://github.com/jjba23/mutastructura.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0rkqrlwvwaryfcvzmbi2g3j1rmks33mgsczy2vwnahvq0a6ycjaj"))))
+        (base32 "17p17npim2izy76r5hd039pj92qj1nzqrfnhd9hch2j6nj2lc2k4"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -615,7 +615,7 @@ file from what it found.")
            guile-dbd-sqlite3
            guile-dbd-postgresql
            guile-gcrypt))
-    (home-page "https://codeberg.org/jjba23/mutastructura")
+    (home-page "https://github.com/jjba23/mutastructura")
     (synopsis "Relational database schema migrations powered by Guile Scheme")
     (description
      "Mutastructura provides a familiar, declarative and transactional approach
@@ -628,16 +628,16 @@ what makes a migration safe to run again.")
 (define-public cask-and-cons
   (package
     (name "cask-and-cons")
-    (version "0.3.1")
+    (version "0.11.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/cask-and-cons.git")
+             (url "https://github.com/jjba23/cask-and-cons.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0w9q85d8vxwc1ib88y5mk3mhxw8iqk0w4mr4a51rnsb7r0f0gdzp"))))
+        (base32 "0hl1ixnxfihl04k1axrd0zw2lacfcsq8mnnww8xsfdrnqkd94728"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -653,6 +653,7 @@ what makes a migration safe to run again.")
                 (chmod (string-append bin "/caco") #o755)
                 (install-file "src/cask-and-cons/omniwm-settings.toml" data)
                 (install-file "src/cask-and-cons/shell-lib.zsh" data)
+                (install-file "src/cask-and-cons/notes.zsh" data)
                 (install-file "src/cask-and-cons/lesskey" data))))
           (add-before 'build 'patch-data-lookup
             (lambda _
@@ -697,7 +698,7 @@ what makes a migration safe to run again.")
      (list bash-minimal
            coreutils-minimal
            util-linux))
-    (home-page "https://codeberg.org/jjba23/cask-and-cons")
+    (home-page "https://github.com/jjba23/cask-and-cons")
     (synopsis "Desktop setup tasks from a Cask and Cons file")
     (description
      "Cask and Cons collects the repetitive chores of setting up and maintaining

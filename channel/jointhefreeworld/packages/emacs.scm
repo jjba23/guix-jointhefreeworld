@@ -52,20 +52,20 @@ command away.")
 (define-public emacs-modusregel
   (package
     (name "emacs-modusregel")
-    (version "0.7.2")
+    (version "0.9.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/modusregel.git")
+             (url "https://github.com/jjba23/modusregel.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "14lv4ffjqgldl28668af2nb59qkpbz84xxhrnr10gj3kzk12mzn0"))))
+        (base32 "113lr5raj9xqjv5mzis4aiyrx47wkcb3f4n701rrwzm9gwbd0yd9"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
-    (home-page "https://codeberg.org/jjba23/modusregel")
+    (home-page "https://github.com/jjba23/modusregel")
     (synopsis "Clean and fast mode line for Emacs")
     (description
      "Modusregel (Dutch for \"mode line\") is a mode line built with
@@ -78,20 +78,20 @@ counters, and aligns the same way in a graphical frame and in a terminal.")
 (define-public emacs-veritas
   (package
     (name "emacs-veritas")
-    (version "0.1.4")
+    (version "0.2.1")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/veritas.el.git")
+             (url "https://github.com/jjba23/veritas.el.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1x68qx7b1x2x92iw08s96pal4agqf6mx3gfmdym3f82mnhcbsk6w"))))
+        (base32 "0vzfvb10kznwpq3dnv1ldxv4s6jibc0gfpphjav04g71ycjirc04"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
-    (home-page "https://codeberg.org/jjba23/veritas.el")
+    (home-page "https://github.com/jjba23/veritas.el")
     (synopsis "Emacs integration for the Veritas test framework")
     (description
      "veritas.el teaches Emacs the vocabulary of the Veritas test framework:
@@ -131,20 +131,20 @@ nothing of the editor that Emacs does not already provide.")
 (define-public emacs-tekengrootte
   (package
     (name "emacs-tekengrootte")
-    (version "0.2.2")
+    (version "0.4.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/tekengrootte.el.git")
+             (url "https://github.com/jjba23/tekengrootte.el.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1aa68cc7ly0hs188afg5rq5j7z2ncrfzlnl4r70kjm15kv48pxi2"))))
+        (base32 "1qi8aqbn18ii85a6cq8a25w9k500yp6p9nf0a82f9bishcs9c5li"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
-    (home-page "https://codeberg.org/jjba23/tekengrootte.el")
+    (home-page "https://github.com/jjba23/tekengrootte.el")
     (synopsis "Proportionally scaled face sizes for Emacs")
     (description
      "Tekengrootte (Dutch for \"character size\") replaces hard-coded face

@@ -63,16 +63,16 @@ without forking the language's standard library.")
 (define-public guile-scriba
   (package
     (name "guile-scriba")
-    (version "0.4.5")
+    (version "0.5.1")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/scriba.git")
+             (url "https://github.com/jjba23/scriba.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "06b6dqp88n10x495jqazzdb87p2968p3wqccdq2lk2291iyplg73"))))
+        (base32 "01mm6f1v9z26vy2nvs05kw3z3zabns7rkn4bkgslx4gghzd923zn"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -80,7 +80,7 @@ without forking the language's standard library.")
      (list guile-3.0))
     (propagated-inputs
      (list guile-json-4))
-    (home-page "https://codeberg.org/jjba23/scriba")
+    (home-page "https://github.com/jjba23/scriba")
     (synopsis "Structured logging framework for Guile Scheme")
     (description
      "Scriba is a structured logging library for GNU Guile.  It provides modular
@@ -123,16 +123,16 @@ failures with the values that produced them.")
 (define-public guile-bewaking
   (package
     (name "guile-bewaking")
-    (version "0.4.7")
+    (version "0.5.1")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/bewaking.git")
+             (url "https://github.com/jjba23/bewaking.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "037czgxcpay9d7yawz2byi1y5nnpp012qpi810p5lvz3xgg1avpy"))))
+        (base32 "1v0ibpm5svk9zgvxxy4ypinpcif3vk9psq67hjvs0i4kfinwgjcz"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -141,7 +141,7 @@ failures with the values that produced them.")
     (propagated-inputs
      (list guile-gcrypt
            guile-uuid))
-    (home-page "https://codeberg.org/jjba23/bewaking")
+    (home-page "https://github.com/jjba23/bewaking")
     (synopsis "Authentication and authorization tokens for Guile Scheme")
     (description
      "Bewaking creates and verifies lifetime-limited, encrypted digital
@@ -153,16 +153,16 @@ as web session cookies or as authenticating API calls.")
 (define-public guile-hygguile
   (package
     (name "guile-hygguile")
-    (version "2.7.6")
+    (version "2.8.1")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/hygguile.git")
+             (url "https://github.com/jjba23/hygguile.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1pacz5lbw8almz83b7kkphp3gqyrdlxxz96xdzggrrrhgvjdds7x"))))
+        (base32 "179q2kzlx9gdjqnlgf9q4gsxs7klvnls0w167iz1pkb3sccqh9ij"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -170,7 +170,7 @@ as web session cookies or as authenticating API calls.")
      (list guile-3.0))
     (propagated-inputs
      (list guile-uuid))
-    (home-page "https://codeberg.org/jjba23/hygguile")
+    (home-page "https://github.com/jjba23/hygguile")
     (synopsis "Web UI component library for Guile Scheme projects")
     (description
      "Hygguile creates cozy, professional and accessible web user interfaces
@@ -210,16 +210,16 @@ renderers.")
 (define-public guile-openapi-generator
   (package
     (name "guile-openapi-generator")
-    (version "0.0.10")
+    (version "0.1.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/guile-openapi-generator.git")
+             (url "https://github.com/jjba23/guile-openapi-generator.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1zly4yg421r93wrmvcb5ahparnxi7v88ln63l8kachd27b9q11hn"))))
+        (base32 "1pdxn5dv8sgzb61a2d54xkb4h9q3zgvd9ksp7lh1g6253vn9mq1q"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
@@ -228,7 +228,7 @@ renderers.")
     (propagated-inputs
      (list guile-json-4
            guile-curl))
-    (home-page "https://codeberg.org/jjba23/guile-openapi-generator")
+    (home-page "https://github.com/jjba23/guile-openapi-generator")
     (synopsis "OpenAPI 3 to Guile Scheme code generator")
     (description
      "guile-openapi-generator reads OpenAPI 3.x specifications written in YAML or
@@ -241,16 +241,16 @@ schemes described by the specification.")
 (define-public guile-olive-css
   (package
     (name "guile-olive-css")
-    (version "0.6.7")
+    (version "1.1.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/olive-css.git")
+             (url "https://github.com/jjba23/olive-css.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0f3q6lqmjlyfdml2815d626iqyyh61gp3ziybm1s9d3vf8h98d87"))))
+        (base32 "01xbw62acv4mdxiab989d8li2g6asg24mm3dvv9a0b9d2lalqypf"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -264,7 +264,7 @@ schemes described by the specification.")
                (string-append #$output "/share/olive-css/resources")))))))
     (native-inputs
      (list guile-3.0))
-    (home-page "https://codeberg.org/jjba23/olive-css")
+    (home-page "https://github.com/jjba23/olive-css")
     (synopsis "Utility-class CSS framework written in Guile Scheme")
     (description
      "Olive CSS generates a utility-class stylesheet from S-expressions.  Every

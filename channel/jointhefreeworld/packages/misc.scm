@@ -8,8 +8,8 @@
 ;; A shell configuration written in Scheme, a dock written in C and GTK, the
 ;; window that shows the desktop's own keyboard reference, wallpapers and
 ;; palettes, and the icon theme that paints the desktop those programs appear
-;; on.  They share nothing but their author and their home on Codeberg, so each
-;; is written out in the build system it actually uses.
+;; on.  They share nothing but their author, so each is written out in the
+;; build system it actually uses.
 ;;
 ;;; Code:
 
@@ -36,16 +36,16 @@
 (define-public guile-heks-bash
   (package
     (name "guile-heks-bash")
-    (version "1.4.0")
+    (version "2.0.1")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/heks-bash.git")
+             (url "https://github.com/jjba23/heks-bash.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1xaisbpk9zbsh3ssncmj5axyqcx9l3f7b2mh05244pqh85m0jfny"))))
+        (base32 "1zaslbl3sz6v7c3kphlwzgrd8na09ybxxvr9ki6hgbkb8hhk946q"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -57,6 +57,7 @@
               (let ((data (string-append
                            #$output "/share/guile/site/3.0/heks-bash")))
                 (install-file "src/heks-bash/shell-lib.bash" data)
+                (install-file "src/heks-bash/notes.bash" data)
                 (install-file "src/heks-bash/lesskey" data))))
           (add-before 'build 'patch-data-lookup
             (lambda _
@@ -70,7 +71,7 @@
                   "                      (format #f \"src/heks-bash/~a\" name))"))))))))
     (native-inputs
      (list guile-3.0))
-    (home-page "https://codeberg.org/jjba23/heks-bash")
+    (home-page "https://github.com/jjba23/heks-bash")
     (synopsis "Bash configuration written in Guile Scheme")
     (description
      "Heks-bash is a declarative configuration for the Bourne Again Shell.  The

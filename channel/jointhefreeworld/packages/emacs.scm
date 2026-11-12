@@ -105,7 +105,7 @@ failed.")
 (define-public emacs-welkomscherm
   (package
     (name "emacs-welkomscherm")
-    (version "1.5.2")
+    (version "1.5.3")
     (source
      (origin
        (method git-fetch)
@@ -114,7 +114,7 @@ failed.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0zb9d14xb87j40cnmdcqj1c2xwy0k0rs8m3ygz3ribxf4naz2779"))))
+        (base32 "03frqgls74kvpz821sclp72rwk5xjf7s3hazrfvykgxxsjvkndsb"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))

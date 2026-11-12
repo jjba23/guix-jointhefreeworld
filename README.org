@@ -54,6 +54,9 @@ A single channel containing:
 - the *command-line programs* that build, test, migrate, generate, and deploy;
 - the *Emacs packages* for editing, testing, and looking at Emacs;
 - *lambdock*, a GTK4 Wayland dock you can reprogram while it runs;
+- *whelk*, the GTK4 desktop shell next to it: bars, launcher and panels written
+  in Scheme, a layer surface on niri and sway, a dock with struts on X11, and
+  ordinary windows where layer-shell does not exist;
 - *heks-toon*, the GTK4 window with the desktop's keyboard reference, wallpapers
   and palettes, painted from the palette the desktop is wearing;
 - *heks-bash*, a Bash configuration generated from Scheme;
@@ -109,7 +112,7 @@ The full catalogue, with versions and entry points, is
 | Git                           | For the checkout workflow and for verifying the signed history.                                                    |
 | GnuPG                         | Optional, but useful for inspecting the signing key and for maintainers signing commits.                           |
 | Emacs 29.1 or newer           | Only if you want the Emacs packages.  =modusregel= asks for 29.1; the other packages are happier on older Emacsen. |
-| GTK4 and a Wayland compositor | Only if you want =lambdock=.                                                                                       |
+| GTK4 and a Wayland compositor | Only if you want =lambdock= or =whelk=.                                                                            |
 
 Nothing here needs root.  Guix installs into your profile; the packages do not
 write outside the store, and Guix manages profiles and caches.
@@ -485,7 +488,7 @@ package table names the command.
 |-----------------------------+---------+-----------------+--------------------------------------------------|
 | =maak=                      |  0.14.0 | =maak=          | Command runner à la Make, with Lisp inside       |
 | =sift=                      |  1.27.2 | =sift=          | Formatter and linter for Scheme, Emacs Lisp, CL  |
-| =ggg=                       |  0.22.2 | =ggg=           | SVG badge and glyph generator                    |
+| =ggg=                       |   2.0.2 | =ggg=           | SVG badge and glyph generator                    |
 | =iter-vitae=                |   1.5.0 | =iter-vitae=    | Curriculum vitae generator                       |
 | =lenkesamler=               |   0.0.9 | =lenkesamler=   | Bookmark collector and converter                 |
 | =consceal=                  |   0.1.6 | =consceal=      | Secret manager and deployer                      |
@@ -516,6 +519,7 @@ package table names the command.
 |-------------------+---------+-----------------------+-----------------------------------------------------|
 | =guile-heks-bash= |   2.1.1 | — (library)           | Bash configuration generated from Scheme            |
 | =lambdock=        |   1.2.7 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
+| =whelk=           |   0.3.1 | =whelk=               | Desktop shell for Wayland and X11, configured in Scheme |
 | =heks-toon=       |   0.3.6 | =heks-toon=           | Keyboard reference, wallpapers, palettes, docs and reconfigure |
 
 ** The web site — =(jointhefreeworld packages site)=
@@ -618,7 +622,7 @@ The repository is one module per kind of package:
         guile.scm                  the Guile libraries
         applications.scm           the command-line programs
         emacs.scm                  the Emacs packages
-        misc.scm                   heks-bash, lambdock and heks-toon
+        misc.scm                   heks-bash, lambdock, whelk and heks-toon
         site.scm                   the jointhefreeworld site builder
 #+end_example
 

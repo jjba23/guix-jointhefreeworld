@@ -5,9 +5,9 @@
 
 ;;; Commentary:
 ;;
-;; A shell configuration written in Scheme, a dock written in C and GTK, and
-;; the window that shows the desktop's own keyboard reference, wallpapers and
-;; palettes.  They share nothing but their author, so each is written out in
+;; A shell configuration written in Scheme, a dock written in C and GTK, the
+;; desktop shell those two belong to, and the window that shows the desktop's
+;; own keyboard reference, wallpapers and palettes.  They share nothing but their author, so each is written out in
 ;; the build system it actually uses.
 ;;
 ;;; Code:
@@ -27,8 +27,10 @@
   #:use-module (gnu packages gtk)
   #:use-module (gnu packages guile)
   #:use-module (gnu packages pkg-config)
+  #:use-module (gnu packages xorg)
   #:export (guile-heks-bash
             lambdock
+            whelk
             heks-toon))
 
 (define-public guile-heks-bash
@@ -124,6 +126,51 @@ management protocol, themes itself with CSS, slides out of the edge it was
 given, places itself on any monitor, and embeds a GNU Guile Scheme engine so
 that its configuration can be changed while it runs, from a REPL, without a
 restart.")
+    (license license:expat)))
+
+(define-public whelk
+  (package
+    (name "whelk")
+    (version "0.3.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/jjba23/whelk.git")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0dvh5s0a90lj8xb9c7gkz2850lqkjq28d1hs6pdhw2ry1zf9nbia"))))
+    (build-system meson-build-system)
+    (arguments
+     ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
+     ;; GIO_EXTRA_MODULES at this closure, which is what lets the bar and the
+     ;; launcher resolve the desktop's icon theme instead of falling back to
+     ;; Adwaita.
+     (list #:glib-or-gtk? #t
+           #:parallel-build? #t
+           #:parallel-tests? #t))
+    (native-inputs
+     (list (list glib "bin")
+           pkg-config))
+    (inputs
+     ;; libx11 is what turns a bar into a dock with EWMH struts on an X11
+     ;; desktop; without it whelk still builds and runs on Wayland alone.
+     (list gtk
+           gtk4-layer-shell
+           guile-3.0
+           libx11))
+    (home-page "https://github.com/jjba23/whelk")
+    (synopsis "Desktop shell for Wayland and X11, configured in GNU Guile Scheme")
+    (description
+     "Whelk is a desktop shell built with GTK4.  Its bars, modules, launcher,
+notification centre and network panel are described in GNU Guile Scheme, and its
+configuration can be changed while it runs, from a REPL, without a restart.
+Bars are layer surfaces with an exclusive zone where wlr-layer-shell exists
+(niri, sway); on an X11 desktop they are dock windows with EWMH struts; and on a
+session with neither -- GNOME's Wayland session -- they degrade to ordinary
+windows instead of failing.  The shell reads the focused window and the global
+menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
     (license license:expat)))
 
 (define-public heks-toon

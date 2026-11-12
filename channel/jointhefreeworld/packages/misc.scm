@@ -85,7 +85,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "1.2.7")
+    (version "1.3.0")
     (source
      (origin
        (method git-fetch)
@@ -94,7 +94,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "07qfwvr2ydq3cc9d4rvh26jqpw5q8i9nn9gap0sfpb8374yycfq6"))))
+        (base32 "0mf31wll7b2n93l1qkq0a59rzcni570v2krdc1qw6y0qp9l18c01"))))
     (build-system meson-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -112,20 +112,23 @@ integrates ble.sh, fzf and direnv.")
      (list gtk
            gtk4-layer-shell
            guile-3.0
+           ;; The optional X11 backend: meson turns it on when it finds
+           ;; gtk4-x11.pc, which needs libX11 in the environment.
+           libx11
            wlr-protocols
            dconf
            gsettings-desktop-schemas
            shared-mime-info
            hicolor-icon-theme))
     (home-page "https://github.com/jjba23/lambdock")
-    (synopsis "Wayland desktop dock customizable with GNU Guile Scheme")
+    (synopsis "Desktop dock customizable with GNU Guile Scheme")
     (description
-     "Lambdock is a Wayland-native desktop dock built with GTK4 and
-gtk4-layer-shell.  It tracks windows through the Wayland foreign-toplevel
-management protocol, themes itself with CSS, slides out of the edge it was
-given, places itself on any monitor, and embeds a GNU Guile Scheme engine so
-that its configuration can be changed while it runs, from a REPL, without a
-restart.")
+     "Lambdock is a desktop dock built with GTK4.  On Wayland it anchors itself
+with gtk4-layer-shell and tracks windows through the foreign-toplevel management
+protocol; on X11 it docks itself through EWMH and reserves its edge with a strut.
+It themes itself with CSS, slides out of the edge it was given, places itself on
+any monitor, and embeds a GNU Guile Scheme engine so that its configuration can
+be changed while it runs, from a REPL, without a restart.")
     (license license:expat)))
 
 (define-public whelk

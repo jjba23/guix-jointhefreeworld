@@ -61,6 +61,7 @@
     "emacs-tekengrootte"
     "guile-heks-bash"
     "lambdock"
+    "whelk"
     "heks-toon"
     "jointhefreeworld"))
 

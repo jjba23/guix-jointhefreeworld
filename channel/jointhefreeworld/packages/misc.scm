@@ -34,7 +34,7 @@
 (define-public guile-heks-bash
   (package
     (name "guile-heks-bash")
-    (version "2.0.1")
+    (version "2.1.1")
     (source
      (origin
        (method git-fetch)
@@ -43,7 +43,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1zaslbl3sz6v7c3kphlwzgrd8na09ybxxvr9ki6hgbkb8hhk946q"))))
+        (base32 "0vsmy6br8kjzlinj5qjnbgdxwi845r4ph506ca3b0ga1bhaa1whc"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -129,7 +129,7 @@ restart.")
 (define-public heks-toon
   (package
     (name "heks-toon")
-    (version "0.3.3")
+    (version "0.3.6")
     (source
      (origin
        (method git-fetch)
@@ -138,7 +138,7 @@ restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0liyw6pvxjlhqiqzyjgxzhrvi99g1k5klqspbln0lr5gjs3cxp5g"))))
+        (base32 "0nlk9zx8fzr4xfvy9pn7y43al4mqmxvqc8gfsyrbcl1ihqbmjf2c"))))
     (build-system meson-build-system)
     (arguments
      (list #:glib-or-gtk? #t

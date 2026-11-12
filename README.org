@@ -464,14 +464,14 @@ exporter, an OpenAPI generator, and a CSS generator.
 
 | Package                   | Version | What it is                                             |
 |---------------------------+---------+--------------------------------------------------------|
-| =guile-kracht=            |   0.3.3 | Opt-in prelude that enhances Guile's standard library  |
+| =guile-kracht=            |   0.3.7 | Opt-in prelude that enhances Guile's standard library  |
 | =guile-scriba=            |   0.5.1 | Structured logging, from console lines to JSON on disk |
-| =guile-veritas=           |   1.4.0 | Testing framework with an embedded DSL                 |
-| =guile-bewaking=          |   0.5.1 | Encrypted, lifetime-limited authentication tokens      |
-| =guile-hygguile=          |   2.8.1 | Web UI components built from SXML                      |
-| =guile-orgwebalchemy=     |   1.2.4 | Org mode to HTML and Markdown converter                |
-| =guile-openapi-generator= |   0.1.0 | OpenAPI 3 to Guile code generator                      |
-| =guile-olive-css=         |   1.1.0 | Utility-class CSS generator, with a tree shaker        |
+| =guile-veritas=           |   1.4.3 | Testing framework with an embedded DSL                 |
+| =guile-bewaking=          |   0.5.5 | Encrypted, lifetime-limited authentication tokens      |
+| =guile-hygguile=          |   2.8.4 | Web UI components built from SXML                      |
+| =guile-orgwebalchemy=     |   1.2.8 | Org mode to HTML and Markdown converter                |
+| =guile-openapi-generator= |   0.1.4 | OpenAPI 3 to Guile code generator                      |
+| =guile-olive-css=         |   1.1.3 | Utility-class CSS generator, with a tree shaker        |
 
 ** Programs — =(jointhefreeworld packages applications)=
 :PROPERTIES:
@@ -484,15 +484,15 @@ package table names the command.
 | Package                     | Version | Command         | What it is                                       |
 |-----------------------------+---------+-----------------+--------------------------------------------------|
 | =maak=                      |  0.14.0 | =maak=          | Command runner à la Make, with Lisp inside       |
-| =sift=                      |  1.27.0 | =sift=          | Formatter and linter for Scheme, Emacs Lisp, CL  |
-| =ggg=                       |  0.16.4 | =ggg=           | SVG badge and glyph generator                    |
-| =iter-vitae=                |   1.4.0 | =iter-vitae=    | Curriculum vitae generator                       |
-| =lenkesamler=               |   0.0.5 | =lenkesamler=   | Bookmark collector and converter                 |
+| =sift=                      |  1.27.2 | =sift=          | Formatter and linter for Scheme, Emacs Lisp, CL  |
+| =ggg=                       |  0.22.2 | =ggg=           | SVG badge and glyph generator                    |
+| =iter-vitae=                |   1.5.0 | =iter-vitae=    | Curriculum vitae generator                       |
+| =lenkesamler=               |   0.0.9 | =lenkesamler=   | Bookmark collector and converter                 |
 | =consceal=                  |   0.1.6 | =consceal=      | Secret manager and deployer                      |
-| =skapa=                     |   0.0.6 | =skapa=         | Interactive project scaffolder                   |
-| =araneola=                  |   0.2.0 | =araneola=      | Site crawler and link checker                    |
-| =mutastructura=             |   0.9.6 | =mutastructura= | Relational database schema migrations            |
-| =cask-and-cons=             |  0.11.0 | =caco=          | Desktop setup tasks, named and written in Scheme |
+| =skapa=                     |  0.0.10 | =skapa=         | Interactive project scaffolder                   |
+| =araneola=                  |   0.2.4 | =araneola=      | Site crawler and link checker                    |
+| =mutastructura=             |   0.9.9 | =mutastructura= | Relational database schema migrations            |
+| =cask-and-cons=             |  0.12.1 | =caco=          | Desktop setup tasks, named and written in Scheme |
 
 ** Emacs packages — =(jointhefreeworld packages emacs)=
 :PROPERTIES:
@@ -502,10 +502,10 @@ package table names the command.
 | Package              | Version | Entry point                  | What it is                                       |
 |----------------------+---------+------------------------------+--------------------------------------------------|
 | =emacs-maak=         |   0.9.3 | =M-x maak-run-task=          | Discover and run Maak tasks from Emacs           |
-| =emacs-modusregel=   |   0.9.0 | =M-x modusregel-mode=        | Clean and fast mode line                         |
-| =emacs-veritas=      |   0.2.1 | =M-x veritas-mode=           | Emacs integration for the Veritas test framework |
-| =emacs-welkomscherm= |   1.3.1 | =M-x welkomscherm=           | Quiet welcome screen and dashboard               |
-| =emacs-tekengrootte= |   0.4.0 | =M-x tekengrootte-set-scale= | Proportionally scaled face sizes                 |
+| =emacs-modusregel=   |   0.9.3 | =M-x modusregel-mode=        | Clean and fast mode line                         |
+| =emacs-veritas=      |   0.2.3 | =M-x veritas-mode=           | Emacs integration for the Veritas test framework |
+| =emacs-welkomscherm= |   1.5.2 | =M-x welkomscherm=           | Quiet welcome screen and dashboard               |
+| =emacs-tekengrootte= |   0.4.4 | =M-x tekengrootte-set-scale= | Proportionally scaled face sizes                 |
 
 ** Other — =(jointhefreeworld packages misc)=
 :PROPERTIES:
@@ -514,9 +514,9 @@ package table names the command.
 
 | Package           | Version | Command / entry point | What it is                                          |
 |-------------------+---------+-----------------------+-----------------------------------------------------|
-| =guile-heks-bash= |   2.0.1 | — (library)           | Bash configuration generated from Scheme            |
+| =guile-heks-bash= |   2.1.1 | — (library)           | Bash configuration generated from Scheme            |
 | =lambdock=        |   1.2.7 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
-| =heks-toon=       |   0.3.3 | =heks-toon=           | Keyboard reference, wallpapers, palettes, docs and reconfigure |
+| =heks-toon=       |   0.3.6 | =heks-toon=           | Keyboard reference, wallpapers, palettes, docs and reconfigure |
 
 ** The web site — =(jointhefreeworld packages site)=
 :PROPERTIES:
@@ -525,7 +525,7 @@ package table names the command.
 
 | Package            | Version | Commands                                           | What it is                                |
 |--------------------+---------+----------------------------------------------------+-------------------------------------------|
-| =jointhefreeworld= |   1.3.0 | =jointhefreeworld-build=, =jointhefreeworld-serve= | The jointhefreeworld.org site and builder |
+| =jointhefreeworld= |   1.5.2 | =jointhefreeworld-build=, =jointhefreeworld-serve= | The jointhefreeworld.org site and builder |
 
 * Authentication and security
 :PROPERTIES:

@@ -135,7 +135,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-    (version "0.23.0")
+    (version "0.24.0")
     (source
      (origin
        (method git-fetch)
@@ -144,7 +144,7 @@ be changed while it runs, from a REPL, without a restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1gj9d8n2hjcvzijg7jl64hs918yl25xd0s8y8nyyasdd2a9jpvj0"))))
+        (base32 "1nnk7y17azfr13q3lzq1d6v94aw21nabgfz6rlk676xnsd00c3yb"))))
     (build-system meson-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and

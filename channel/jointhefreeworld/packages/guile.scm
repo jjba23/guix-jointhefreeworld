@@ -241,7 +241,7 @@ schemes described by the specification.")
 (define-public guile-olive-css
   (package
     (name "guile-olive-css")
-    (version "1.1.3")
+    (version "2.0.0")
     (source
      (origin
        (method git-fetch)
@@ -250,7 +250,7 @@ schemes described by the specification.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "135rnmjq4405963l66rjbf8jxqab509vyhkigiyppdr6y2gq2qjk"))))
+        (base32 "1jsjqa8psmg71fjxr1v3d275267mfn8l0a0nx3ys10f523vwhak3"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -272,4 +272,4 @@ declaration is a Scheme value rather than a string, the stylesheet is produced
 by the library, and the tree shaker keeps only the rules whose classes appear
 in a directory of built HTML.  Prebuilt stylesheets for the jointhefreeworld
 projects are installed under share/olive-css/resources/css.")
-    (license license:lgpl3+)))
+    (license license:expat)))

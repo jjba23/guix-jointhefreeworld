@@ -474,7 +474,7 @@ exporter, an OpenAPI generator, and a CSS generator.
 | =guile-hygguile=          |   2.8.4 | Web UI components built from SXML                      |
 | =guile-orgwebalchemy=     |   1.2.8 | Org mode to HTML and Markdown converter                |
 | =guile-openapi-generator= |   0.1.4 | OpenAPI 3 to Guile code generator                      |
-| =guile-olive-css=         |   1.1.3 | Utility-class CSS generator, with a tree shaker        |
+| =guile-olive-css=         |   2.0.0 | Utility-class CSS generator, with a tree shaker        |
 
 ** Programs — =(jointhefreeworld packages applications)=
 :PROPERTIES:

@@ -26,6 +26,7 @@
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages gtk)
   #:use-module (gnu packages guile)
+  #:use-module (gnu packages linux)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages xorg)
   #:export (guile-heks-bash
@@ -134,7 +135,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-    (version "0.3.1")
+    (version "0.21.1")
     (source
      (origin
        (method git-fetch)
@@ -143,7 +144,7 @@ be changed while it runs, from a REPL, without a restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0dvh5s0a90lj8xb9c7gkz2850lqkjq28d1hs6pdhw2ry1zf9nbia"))))
+        (base32 "05k2qw18gj8pqf21zkvbvybr11fahra2j0jnll4dcp987blvpws3"))))
     (build-system meson-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -155,14 +156,22 @@ be changed while it runs, from a REPL, without a restart.")
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")
+           dbus ; the integration tests can start their own private bus
            pkg-config))
     (inputs
      ;; libx11 is what turns a bar into a dock with EWMH struts on an X11
      ;; desktop; without it whelk still builds and runs on Wayland alone.
+     ;; linux-pam enables the screen locker; without it whelk still builds but
+     ;; the locker fails closed.
      (list gtk
            gtk4-layer-shell
            guile-3.0
-           libx11))
+           libx11
+           linux-pam))
+    ;; whelk calls wtype by name for menu shortcuts and the optional keyboard
+    ;; test path; keep it in the package's profile so a desktop launch sees it.
+    (propagated-inputs
+     (list wtype))
     (home-page "https://github.com/jjba23/whelk")
     (synopsis "Desktop shell for Wayland and X11, configured in GNU Guile Scheme")
     (description

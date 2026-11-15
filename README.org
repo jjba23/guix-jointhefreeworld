@@ -518,7 +518,7 @@ package table names the command.
 | Package           | Version | Command / entry point | What it is                                          |
 |-------------------+---------+-----------------------+-----------------------------------------------------|
 | =guile-heks-bash= |   2.1.1 | — (library)           | Bash configuration generated from Scheme            |
-| =lambdock=        |   1.2.7 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
+| =lambdock=        |   1.4.0 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile |
 | =whelk=           |  0.25.0 | =whelk=               | Desktop shell for Wayland and X11, configured in Scheme |
 | =heks-toon=       |   0.3.6 | =heks-toon=           | Keyboard reference, wallpapers, palettes, docs and reconfigure |
 

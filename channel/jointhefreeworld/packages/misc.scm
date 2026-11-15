@@ -37,7 +37,7 @@
 (define-public guile-heks-bash
   (package
     (name "guile-heks-bash")
-    (version "2.1.1")
+    (version "2.1.3")
     (source
      (origin
        (method git-fetch)
@@ -46,7 +46,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0vsmy6br8kjzlinj5qjnbgdxwi845r4ph506ca3b0ga1bhaa1whc"))))
+        (base32 "17kwzpfgr0g07q56dvgjjvn8m0ajz0yji5i1s9257dmza583dnwi"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -135,7 +135,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-    (version "0.27.3")
+    (version "0.30.0")
     (source
      (origin
        (method git-fetch)
@@ -144,7 +144,7 @@ be changed while it runs, from a REPL, without a restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0j4ddjsb5my21llp71y6ingpz2sf0sls53l04v3fwhk4gk6aj6ss"))))
+        (base32 "03j3bs7mlcm6xjjjak7zf4szqswa5n6bdal75343h7ra08a7iyp2"))))
     (build-system meson-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -188,7 +188,7 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
 (define-public heks-toon
   (package
     (name "heks-toon")
-    (version "0.3.6")
+    (version "0.3.9")
     (source
      (origin
        (method git-fetch)
@@ -197,7 +197,7 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0nlk9zx8fzr4xfvy9pn7y43al4mqmxvqc8gfsyrbcl1ihqbmjf2c"))))
+        (base32 "00q5c404i49r0gafmxflsz3sc3lxc71nrpbnscan0hvhiq11m366"))))
     (build-system meson-build-system)
     (arguments
      (list #:glib-or-gtk? #t

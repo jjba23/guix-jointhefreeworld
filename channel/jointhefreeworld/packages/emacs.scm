@@ -52,7 +52,7 @@ command away.")
 (define-public emacs-modusregel
   (package
     (name "emacs-modusregel")
-    (version "0.9.3")
+    (version "0.9.4")
     (source
      (origin
        (method git-fetch)
@@ -61,7 +61,7 @@ command away.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0j6fk931kak44jla7hm77p8p55bm4a9x7nz9xib20zf1vkypr3p8"))))
+        (base32 "0k2vj1dkzdmbdlmiipcr79scb4wvh0lb2ynj5vg2j52ljh4drd5n"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
@@ -78,7 +78,7 @@ counters, and aligns the same way in a graphical frame and in a terminal.")
 (define-public emacs-veritas
   (package
     (name "emacs-veritas")
-    (version "0.2.3")
+    (version "0.2.4")
     (source
      (origin
        (method git-fetch)
@@ -87,7 +87,7 @@ counters, and aligns the same way in a graphical frame and in a terminal.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "17bqpfnamzfpwc93mr1vl398yjkvgb9bs56s4gc4ar5jg0wap0hc"))))
+        (base32 "00cwmxjijbfb3kihisspyxqhc4csz7g25v9ibxczw9ws4pdvhfjk"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
@@ -105,7 +105,7 @@ failed.")
 (define-public emacs-welkomscherm
   (package
     (name "emacs-welkomscherm")
-    (version "1.5.3")
+    (version "1.5.4")
     (source
      (origin
        (method git-fetch)
@@ -114,7 +114,7 @@ failed.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "03frqgls74kvpz821sclp72rwk5xjf7s3hazrfvykgxxsjvkndsb"))))
+        (base32 "00c2k2wnjsmzri678wwq1s3sdagfc44rjmq642pfxnjdyf37yjvy"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
@@ -131,7 +131,7 @@ nothing of the editor that Emacs does not already provide.")
 (define-public emacs-tekengrootte
   (package
     (name "emacs-tekengrootte")
-    (version "0.4.4")
+    (version "0.4.5")
     (source
      (origin
        (method git-fetch)
@@ -140,7 +140,7 @@ nothing of the editor that Emacs does not already provide.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0vp5k0arq5nh4ari587cw4qrzji26raqzc42lri48m2plc71yb9a"))))
+        (base32 "1cpf4ypjpv6df9i022nnb23zp2ligfxm3r2sbvy0plwp7jc0w69b"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))

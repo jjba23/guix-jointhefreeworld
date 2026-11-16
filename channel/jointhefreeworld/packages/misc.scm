@@ -46,7 +46,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1cg75wyilh10c4yhjg53zmyym7n2awk7b0mimmql365mdhd5mgp8"))))
+        (base32 "1ij9kgsglkg6mv4i9vakrfm9m638p1rp2wv4c122840aabc87yk5"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -86,7 +86,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.0.5")
+    (version "2.0.6")
     (source
      (origin
        (method git-fetch)

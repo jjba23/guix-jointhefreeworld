@@ -86,7 +86,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "1.4.0")
+    (version "2.0.0")
     (source
      (origin
        (method git-fetch)
@@ -95,8 +95,8 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1rm7jr17d201j8yji1vilmzwa2shnm7q4q2hsigyvapdw7g3q85k"))))
-    (build-system meson-build-system)
+        (base32 "089n93ra0g2aqsqipbpirwnb8n6dbgfbvp6x1xrscr08cfap9i9b"))))
+    (build-system gnu-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
      ;; GIO_EXTRA_MODULES at this closure, which is what lets the dock read the
@@ -104,16 +104,28 @@ integrates ble.sh, fzf and direnv.")
      ;; instead of falling back to Adwaita.
      (list #:glib-or-gtk? #t
            #:parallel-build? #t
+           #:phases (modify-phases %standard-phases
+                      (delete 'configure)
+                      (replace 'check
+                        (lambda* (#:key tests? #:allow-other-keys)
+                          (when tests?
+                            (invoke "make" "check")))))
            #:parallel-tests? #t))
     (native-inputs
+     ;; `cargo` builds the crate and runs its display-free suite; `glib:bin' and
+     ;; `wayland' bring `glib-compile-resources' and `wayland-scanner', which
+     ;; `build.rs' runs to generate the resources and the protocol interfaces.
      (list (list glib "bin")
            pkg-config
-           gettext-minimal))
+           gettext-minimal
+           wayland
+           rust
+           (list rust "cargo")))
     (inputs
      (list gtk
            gtk4-layer-shell
            guile-3.0
-           ;; The optional X11 backend: meson turns it on when it finds
+           ;; The optional X11 backend: the build turns it on when it finds
            ;; gtk4-x11.pc, which needs libX11 in the environment.
            libx11
            wlr-protocols
@@ -153,6 +165,12 @@ be changed while it runs, from a REPL, without a restart.")
      ;; Adwaita.
      (list #:glib-or-gtk? #t
            #:parallel-build? #t
+           #:phases (modify-phases %standard-phases
+                      (delete 'configure)
+                      (replace 'check
+                        (lambda* (#:key tests? #:allow-other-keys)
+                          (when tests?
+                            (invoke "make" "check")))))
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")
@@ -202,6 +220,12 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
     (arguments
      (list #:glib-or-gtk? #t
            #:parallel-build? #t
+           #:phases (modify-phases %standard-phases
+                      (delete 'configure)
+                      (replace 'check
+                        (lambda* (#:key tests? #:allow-other-keys)
+                          (when tests?
+                            (invoke "make" "check")))))
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")

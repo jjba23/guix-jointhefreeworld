@@ -486,7 +486,7 @@ package table names the command.
 
 | Package         | Version | Command         | What it is                                       |
 |-----------------+---------+-----------------+--------------------------------------------------|
-| =maak=          |  0.23.0 | =maak=          | Command runner à la Make, with Lisp inside       |
+| =maak=          |  0.24.0 | =maak=          | Command runner à la Make, with Lisp inside       |
 | =sift=          |  1.36.0 | =sift=          | Formatter and linter for Scheme, Emacs Lisp, CL  |
 | =ggg=           |   2.0.3 | =ggg=           | SVG badge and glyph generator                    |
 | =iter-vitae=    |   1.5.2 | =iter-vitae=    | Curriculum vitae generator                       |

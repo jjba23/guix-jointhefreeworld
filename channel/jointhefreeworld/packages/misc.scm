@@ -86,7 +86,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.0.1")
+    (version "2.0.2")
     (source
      (origin
        (method git-fetch)
@@ -95,7 +95,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0mpwban55yzmk6khxgkgcc4qybfr1k0gwiws22ncvrsrq8dsgjkd"))))
+        (base32 "0g6zijjd8rx6gjrp9fbknwmy0aspza6334nf1b90swkay7rajhpr"))))
     (build-system gnu-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -104,12 +104,21 @@ integrates ble.sh, fzf and direnv.")
      ;; instead of falling back to Adwaita.
      (list #:glib-or-gtk? #t
            #:parallel-build? #t
+           ;; cargo builds and `cargo xtask' installs: the data files, the Scheme
+           ;; modules and the compiled catalogues have no cargo target of their
+           ;; own.
            #:phases (modify-phases %standard-phases
                       (delete 'configure)
+                      (delete 'build)
                       (replace 'check
                         (lambda* (#:key tests? #:allow-other-keys)
                           (when tests?
-                            (invoke "make" "check")))))
+                            (invoke "cargo" "test" "--offline" "--locked"))))
+                      (replace 'install
+                        (lambda _
+                          (invoke "cargo" "run" "--offline" "--locked"
+                                  "-p" "xtask" "--" "install"
+                                  "--prefix" #$output)))))
            #:parallel-tests? #t))
     (native-inputs
      ;; `cargo` builds the crate and runs its display-free suite; `glib:bin' and
@@ -165,12 +174,21 @@ be changed while it runs, from a REPL, without a restart.")
      ;; Adwaita.
      (list #:glib-or-gtk? #t
            #:parallel-build? #t
+           ;; cargo builds and `cargo xtask' installs: the data files, the Scheme
+           ;; modules and the compiled catalogues have no cargo target of their
+           ;; own.
            #:phases (modify-phases %standard-phases
                       (delete 'configure)
+                      (delete 'build)
                       (replace 'check
                         (lambda* (#:key tests? #:allow-other-keys)
                           (when tests?
-                            (invoke "make" "check")))))
+                            (invoke "cargo" "test" "--offline" "--locked"))))
+                      (replace 'install
+                        (lambda _
+                          (invoke "cargo" "run" "--offline" "--locked"
+                                  "-p" "xtask" "--" "install"
+                                  "--prefix" #$output)))))
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")
@@ -220,12 +238,21 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
     (arguments
      (list #:glib-or-gtk? #t
            #:parallel-build? #t
+           ;; cargo builds and `cargo xtask' installs: the data files, the Scheme
+           ;; modules and the compiled catalogues have no cargo target of their
+           ;; own.
            #:phases (modify-phases %standard-phases
                       (delete 'configure)
+                      (delete 'build)
                       (replace 'check
                         (lambda* (#:key tests? #:allow-other-keys)
                           (when tests?
-                            (invoke "make" "check")))))
+                            (invoke "cargo" "test" "--offline" "--locked"))))
+                      (replace 'install
+                        (lambda _
+                          (invoke "cargo" "run" "--offline" "--locked"
+                                  "-p" "xtask" "--" "install"
+                                  "--prefix" #$output)))))
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")

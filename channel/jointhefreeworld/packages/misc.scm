@@ -16,10 +16,12 @@
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix git-download)
+  #:use-module (guix build utils)
   #:use-module (guix build-system gnu)
   #:use-module (gnu packages commencement)
   #:use-module (guix build-system guile)
   #:use-module (guix build-system gnu)
+  #:use-module (guix build-system meson)
   #:use-module (gnu packages commencement)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages freedesktop)
@@ -109,7 +111,7 @@ integrates ble.sh, fzf and direnv.")
            ;; cargo builds and `cargo xtask' installs: the data files, the Scheme
            ;; modules and the compiled catalogues have no cargo target of their
            ;; own.
-           #:phases (modify-phases %standard-phases
+           #:phases #~(modify-phases %standard-phases
                       (delete 'configure)
                       (replace 'build
                         (lambda _
@@ -123,7 +125,7 @@ integrates ble.sh, fzf and direnv.")
                         (lambda _
                           (invoke "cargo" "run" "--offline" "--locked"
                                   "-p" "xtask" "--" "install"
-                                  "--prefix" #$output)))))
+                                  "--prefix" #$output))))
            #:parallel-tests? #t))
     (native-inputs
      ;; `cargo` builds the crate and runs its display-free suite; `glib:bin' and
@@ -165,7 +167,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-    (version "0.34.0")
+    (version "0.35.0")
     (source
      (origin
        (method git-fetch)
@@ -174,7 +176,7 @@ be changed while it runs, from a REPL, without a restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "17vkxfra4k3xsaqhrq77yizpkiv6aag0m6n3gim0w9rpm25bh3zp"))))
+        (base32 "09cw5ksqvvpx1q36j3d42xqjpba3ydzk9l1smvs7cb458ka58idj"))))
     (build-system meson-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -183,29 +185,13 @@ be changed while it runs, from a REPL, without a restart.")
      ;; Adwaita.
      (list #:glib-or-gtk? #t
            #:parallel-build? #t
-           ;; cargo builds and `cargo xtask' installs: the data files, the Scheme
-           ;; modules and the compiled catalogues have no cargo target of their
-           ;; own.
-           #:phases (modify-phases %standard-phases
-                      (delete 'configure)
-                      (replace 'build
-                        (lambda _
-                          (invoke "cargo" "build" "--offline" "--locked"
-                                  "--release")))
-                      (replace 'check
-                        (lambda* (#:key tests? #:allow-other-keys)
-                          (when tests?
-                            (invoke "cargo" "test" "--offline" "--locked"))))
-                      (replace 'install
-                        (lambda _
-                          (invoke "cargo" "run" "--offline" "--locked"
-                                  "-p" "xtask" "--" "install"
-                                  "--prefix" #$output)))))
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")
            dbus ; the integration tests can start their own private bus
-           pkg-config))
+           pkg-config
+           wayland ; provides wayland-scanner
+           gcc-toolchain))
     (inputs
      ;; libx11 is what turns a bar into a dock with EWMH struts on an X11
      ;; desktop; without it whelk still builds and runs on Wayland alone.
@@ -253,7 +239,7 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
            ;; cargo builds and `cargo xtask' installs: the data files, the Scheme
            ;; modules and the compiled catalogues have no cargo target of their
            ;; own.
-           #:phases (modify-phases %standard-phases
+           #:phases #~(modify-phases %standard-phases
                       (delete 'configure)
                       (replace 'build
                         (lambda _
@@ -267,7 +253,7 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
                         (lambda _
                           (invoke "cargo" "run" "--offline" "--locked"
                                   "-p" "xtask" "--" "install"
-                                  "--prefix" #$output)))))
+                                  "--prefix" #$output))))
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")

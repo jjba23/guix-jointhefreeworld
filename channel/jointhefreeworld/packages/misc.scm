@@ -18,6 +18,7 @@
   #:use-module (guix git-download)
   #:use-module (guix build utils)
   #:use-module (guix build-system gnu)
+  #:use-module (guix build-system glib-or-gtk)
   #:use-module (gnu packages commencement)
   #:use-module (guix build-system guile)
   #:use-module (guix build-system gnu)
@@ -32,6 +33,7 @@
   #:use-module (gnu packages guile)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages pkg-config)
+  #:use-module (gnu packages rust)
   #:use-module (gnu packages xorg)
   #:export (guile-heks-bash
             lambdock
@@ -99,15 +101,14 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0k54fha2vlqh3jjjs2nm81nmfp7cjlijryxvixy8zjix1dhcnsr9"))))
-    (build-system gnu-build-system)
+        (base32 "0cifknx8z19aivi0z08qhz68ckdnap99nchkgfrcgxdh0790qd5r"))))
+    (build-system glib-or-gtk-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
      ;; GIO_EXTRA_MODULES at this closure, which is what lets the dock read the
      ;; desktop's icon theme (and so resolve the icons of the running apps)
      ;; instead of falling back to Adwaita.
-     (list #:glib-or-gtk? #t
-           #:parallel-build? #t
+     (list #:parallel-build? #t
            ;; cargo builds and `cargo xtask' installs: the data files, the Scheme
            ;; modules and the compiled catalogues have no cargo target of their
            ;; own.

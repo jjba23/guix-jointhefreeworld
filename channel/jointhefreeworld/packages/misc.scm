@@ -17,8 +17,10 @@
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system gnu)
+  #:use-module (gnu packages commencement)
   #:use-module (guix build-system guile)
-  #:use-module (guix build-system meson)
+  #:use-module (guix build-system gnu)
+  #:use-module (gnu packages commencement)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages gettext)
@@ -46,7 +48,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1ij9kgsglkg6mv4i9vakrfm9m638p1rp2wv4c122840aabc87yk5"))))
+        (base32 "0s06q20isp4xqc1ny03r2fwamlca93ijsd5qv4s1p4fcidqjhvll"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -86,7 +88,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.0.6")
+    (version "2.0.7")
     (source
      (origin
        (method git-fetch)
@@ -109,7 +111,10 @@ integrates ble.sh, fzf and direnv.")
            ;; own.
            #:phases (modify-phases %standard-phases
                       (delete 'configure)
-                      (delete 'build)
+                      (replace 'build
+                        (lambda _
+                          (invoke "cargo" "build" "--offline" "--locked"
+                                  "--release")))
                       (replace 'check
                         (lambda* (#:key tests? #:allow-other-keys)
                           (when tests?
@@ -124,12 +129,16 @@ integrates ble.sh, fzf and direnv.")
      ;; `cargo` builds the crate and runs its display-free suite; `glib:bin' and
      ;; `wayland' bring `glib-compile-resources' and `wayland-scanner', which
      ;; `build.rs' runs to generate the resources and the protocol interfaces.
+     ;; `gcc-toolchain` is what provides `cc` and `ar`: `build.rs` compiles the
+     ;; generated resource bundle and protocol code, and Guix's implicit `gcc`
+     ;; installs `gcc`, not those names.
      (list (list glib "bin")
            pkg-config
            gettext-minimal
            wayland
            rust
-           (list rust "cargo")))
+           (list rust "cargo")
+           gcc-toolchain))
     (inputs
      (list gtk
            gtk4-layer-shell
@@ -179,7 +188,10 @@ be changed while it runs, from a REPL, without a restart.")
            ;; own.
            #:phases (modify-phases %standard-phases
                       (delete 'configure)
-                      (delete 'build)
+                      (replace 'build
+                        (lambda _
+                          (invoke "cargo" "build" "--offline" "--locked"
+                                  "--release")))
                       (replace 'check
                         (lambda* (#:key tests? #:allow-other-keys)
                           (when tests?
@@ -243,7 +255,10 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
            ;; own.
            #:phases (modify-phases %standard-phases
                       (delete 'configure)
-                      (delete 'build)
+                      (replace 'build
+                        (lambda _
+                          (invoke "cargo" "build" "--offline" "--locked"
+                                  "--release")))
                       (replace 'check
                         (lambda* (#:key tests? #:allow-other-keys)
                           (when tests?

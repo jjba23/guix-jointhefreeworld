@@ -631,7 +631,7 @@ what makes a migration safe to run again.")
 (define-public cask-and-cons
   (package
     (name "cask-and-cons")
-    (version "0.12.1")
+    (version "0.12.2")
     (source
      (origin
        (method git-fetch)
@@ -640,7 +640,7 @@ what makes a migration safe to run again.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0w2b3ycad40zdvlpfpslki99j045xzm33y3ppnsmkz7bfzrxmg5z"))))
+        (base32 "1v756pds1bdz0fvdl5lmysxj8ap4wji17k5mz0hqfyikw9r04nnb"))))
     (build-system guile-build-system)
     (arguments
      (list

@@ -92,7 +92,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.1.1")
+    (version "2.1.3")
     (source
      (origin
        (method git-fetch)
@@ -101,7 +101,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1fz7ivxjin0xk3fnf95pri89yica39s7zsn1m14zjhv0li7g23yd"))))
+        (base32 "1v0x1bmv052s6nyykd6pdjq5h9vd6lcqymkvzbl65m5hzdcf0jys"))))
     (build-system glib-or-gtk-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -116,6 +116,15 @@ integrates ble.sh, fzf and direnv.")
                       (delete 'configure)
                       (replace 'build
                         (lambda _
+                          ;; Compiled in: the dock finds its Scheme modules and
+                          ;; its catalogues by path, not through a wrapper, so a
+                          ;; build that leaves these unset produces a binary that
+                          ;; only runs from the source tree.
+                          (setenv "LAMBDOCK_SCHEME_DIR"
+                                  (string-append #$output
+                                                 "/share/guile/site/3.0"))
+                          (setenv "LAMBDOCK_LOCALEDIR"
+                                  (string-append #$output "/share/locale"))
                           (invoke "cargo" "build" "--offline" "--locked"
                                   "--release")))
                       (replace 'check

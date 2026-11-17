@@ -92,7 +92,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.1.13")
+    (version "2.2.0")
     (source
      (origin
        (method git-fetch)
@@ -101,7 +101,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0mfbjawhvddliw14vpvzpsd1gc3hndriknlfymz523p11z7m8m3d"))))
+        (base32 "15n615ryr0r64c16ynasgx27ksabwxh1qs3pz4w9jy1v2xg1fqgx"))))
     (build-system glib-or-gtk-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -113,29 +113,29 @@ integrates ble.sh, fzf and direnv.")
            ;; modules and the compiled catalogues have no cargo target of their
            ;; own.
            #:phases #~(modify-phases %standard-phases
-                      (delete 'configure)
-                      (replace 'build
-                        (lambda _
-                          ;; Compiled in: the dock finds its Scheme modules and
-                          ;; its catalogues by path, not through a wrapper, so a
-                          ;; build that leaves these unset produces a binary that
-                          ;; only runs from the source tree.
-                          (setenv "LAMBDOCK_SCHEME_DIR"
-                                  (string-append #$output
-                                                 "/share/guile/site/3.0"))
-                          (setenv "LAMBDOCK_LOCALEDIR"
-                                  (string-append #$output "/share/locale"))
-                          (invoke "cargo" "build" "--offline" "--locked"
-                                  "--release")))
-                      (replace 'check
-                        (lambda* (#:key tests? #:allow-other-keys)
-                          (when tests?
-                            (invoke "cargo" "test" "--offline" "--locked"))))
-                      (replace 'install
-                        (lambda _
-                          (invoke "cargo" "run" "--offline" "--locked"
-                                  "-p" "xtask" "--" "install"
-                                  "--prefix" #$output))))
+                        (delete 'configure)
+                        (replace 'build
+                          (lambda _
+                            ;; Compiled in: the dock finds its Scheme modules and
+                            ;; its catalogues by path, not through a wrapper, so a
+                            ;; build that leaves these unset produces a binary that
+                            ;; only runs from the source tree.
+                            (setenv "LAMBDOCK_SCHEME_DIR"
+                                    (string-append #$output
+                                                   "/share/guile/site/3.0"))
+                            (setenv "LAMBDOCK_LOCALEDIR"
+                                    (string-append #$output "/share/locale"))
+                            (invoke "cargo" "build" "--offline" "--locked"
+                                    "--release")))
+                        (replace 'check
+                          (lambda* (#:key tests? #:allow-other-keys)
+                            (when tests?
+                              (invoke "cargo" "test" "--offline" "--locked"))))
+                        (replace 'install
+                          (lambda _
+                            (invoke "cargo" "run" "--offline" "--locked"
+                                    "-p" "xtask" "--" "install"
+                                    "--prefix" #$output))))
            #:parallel-tests? #t))
     (native-inputs
      ;; `cargo` builds the crate and runs its display-free suite; `glib:bin' and
@@ -300,20 +300,20 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
            ;; modules and the compiled catalogues have no cargo target of their
            ;; own.
            #:phases #~(modify-phases %standard-phases
-                      (delete 'configure)
-                      (replace 'build
-                        (lambda _
-                          (invoke "cargo" "build" "--offline" "--locked"
-                                  "--release")))
-                      (replace 'check
-                        (lambda* (#:key tests? #:allow-other-keys)
-                          (when tests?
-                            (invoke "cargo" "test" "--offline" "--locked"))))
-                      (replace 'install
-                        (lambda _
-                          (invoke "cargo" "run" "--offline" "--locked"
-                                  "-p" "xtask" "--" "install"
-                                  "--prefix" #$output))))
+                        (delete 'configure)
+                        (replace 'build
+                          (lambda _
+                            (invoke "cargo" "build" "--offline" "--locked"
+                                    "--release")))
+                        (replace 'check
+                          (lambda* (#:key tests? #:allow-other-keys)
+                            (when tests?
+                              (invoke "cargo" "test" "--offline" "--locked"))))
+                        (replace 'install
+                          (lambda _
+                            (invoke "cargo" "run" "--offline" "--locked"
+                                    "-p" "xtask" "--" "install"
+                                    "--prefix" #$output))))
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")

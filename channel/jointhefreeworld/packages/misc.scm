@@ -92,7 +92,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.0.9")
+    (version "2.1.0")
     (source
      (origin
        (method git-fetch)
@@ -101,7 +101,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1zsjjxfkaw30dr7vj18xxy2m5wvx9lpdnp21d4k4x961fs74nbpw"))))
+        (base32 "0bp3jwyzj2s11gwjirngs7snhwd5kv6kv9s9xrdvy39ny8dlml3b"))))
     (build-system glib-or-gtk-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -135,6 +135,12 @@ integrates ble.sh, fzf and direnv.")
      ;; `gcc-toolchain` is what provides `cc` and `ar`: `build.rs` compiles the
      ;; generated resource bundle and protocol code, and Guix's implicit `gcc`
      ;; installs `gcc`, not those names.
+     ;;
+     ;; The rust here has to be at least 1.92: gtk4-rs 0.11 declares that as its
+     ;; MSRV, and cargo refuses an older toolchain instead of trying. A Guix
+     ;; revision that still ships rust 1.85 stops in the build phase with
+     ;; "gtk4-sys@0.11.5 requires rustc 1.92" -- that is the pin, not this file,
+     ;; so build the package with a newer `--channels` rather than patching it.
      (list (list glib "bin")
            pkg-config
            gettext-minimal

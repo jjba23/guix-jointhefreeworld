@@ -92,7 +92,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.1.9")
+    (version "2.1.10")
     (source
      (origin
        (method git-fetch)
@@ -101,7 +101,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0ppsaxzcimr3jljg0brahdmrf36yq5jvaypaigqaznkynbmxlcbx"))))
+        (base32 "1vns6ld02hhdr96y8vv42sxh1lvikfyghf2r9nlxb72fdidxvw02"))))
     (build-system glib-or-gtk-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -183,7 +183,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-    (version "0.38.0")
+    (version "0.39.1")
     (source
      (origin
        (method git-fetch)
@@ -192,22 +192,66 @@ be changed while it runs, from a REPL, without a restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "15nw0klgcynrdjniv7zsr2dfksa74idzc0d427kvqq8l5n3aamhj"))))
-    (build-system meson-build-system)
+        (base32 "0vmz5mqa1l7ac30naxscmmqpr19wi3qvnk6ri325sl7xcqk8kk3f"))))
+    ;; The crate graph is vendored in the source, so the build runs cargo
+    ;; offline and has no crate inputs to resolve.  cargo xtask install is
+    ;; what puts the Scheme modules, desktop entry and icons beside the
+    ;; binary; a plain cargo install would leave an installed whelk without
+    ;; the files its prefix fallback looks for.
+    (build-system glib-or-gtk-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
      ;; GIO_EXTRA_MODULES at this closure, which is what lets the bar and the
      ;; launcher resolve the desktop's icon theme instead of falling back to
      ;; Adwaita.
-     (list #:glib-or-gtk? #t
-           #:parallel-build? #t
-           #:parallel-tests? #t))
+     (list #:parallel-build? #t
+           #:parallel-tests? #t
+           #:phases
+           #~(modify-phases %standard-phases
+               (delete 'configure)
+               ;; Cargo verifies the checksum of every vendored file.  Patching
+               ;; a shebang inside rust/vendor would therefore invalidate the
+               ;; vendor tree before the build starts; none of those scripts is
+               ;; installed or used by the crate build.
+               (delete 'patch-source-shebangs)
+               (delete 'patch-generated-file-shebangs)
+               (replace 'build
+                 (lambda _
+                   (invoke "cargo" "build" "--workspace" "--locked"
+                           "--offline" "--release")))
+               (replace 'check
+                 (lambda* (#:key tests? #:allow-other-keys)
+                   (when tests?
+                     ;; GTK tests need a display even when they never map a
+                     ;; window, and GLib must not write to the build user's
+                     ;; home.
+                     (setenv "HOME" (getcwd))
+                     (setenv "XDG_RUNTIME_DIR" (getcwd))
+                     (setenv "GTK_A11Y" "test")
+                     (setenv "GDK_BACKEND" "x11")
+                     (setenv "GSK_RENDERER" "cairo")
+                     (invoke "xvfb-run" "-a" "cargo" "test"
+                             "--workspace" "--locked" "--offline"))))
+               (replace 'install
+                 (lambda* (#:key outputs #:allow-other-keys)
+                   (invoke "cargo" "run" "--locked" "--offline"
+                           "-p" "xtask" "--" "install"
+                           "--prefix" (assoc-ref outputs "out")
+                           "--no-build"))))))
     (native-inputs
+     ;; cargo builds and runs the Rust and Guile suites; xvfb-run supplies
+     ;; the display those GTK tests need, and dbus lets the notification
+     ;; tests start a private session bus.  The rust must be at least 1.92:
+     ;; gtk4-rs 0.11 declares that MSRV and cargo refuses an older toolchain.
      (list (list glib "bin")
-           dbus ; the integration tests can start their own private bus
+           dbus
+           guile-3.0
            pkg-config
-           wayland ; provides wayland-scanner
-           gcc-toolchain))
+           wayland
+           rust
+           (list rust "cargo")
+           gcc-toolchain
+           xvfb-run))
     (inputs
      ;; libx11 is what turns a bar into a dock with EWMH struts on an X11
      ;; desktop; without it whelk still builds and runs on Wayland alone.

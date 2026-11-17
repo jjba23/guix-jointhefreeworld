@@ -116,7 +116,7 @@ the power of Lisp (Guile Scheme) to define tasks, build steps and other
 automation, calling external shell commands and integrating with existing
 scripts and tools.  It is inspired by GNU Make but does away with much of the
 complexity that comes with its history.")
-    (license license:gpl3+)))
+    (license license:expat)))
 
 (define-public ggg
   (package

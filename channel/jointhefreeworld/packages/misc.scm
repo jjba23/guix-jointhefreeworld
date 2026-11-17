@@ -43,7 +43,7 @@
 (define-public guile-heks-bash
   (package
     (name "guile-heks-bash")
-    (version "2.1.4")
+    (version "2.1.5")
     (source
      (origin
        (method git-fetch)
@@ -92,7 +92,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.1.4")
+    (version "2.1.5")
     (source
      (origin
        (method git-fetch)
@@ -101,7 +101,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "03mgm83kh5d6sc1filkkzlrl7br6jwfqagvnhs527fq2nxqfzdn0"))))
+        (base32 "18w882yys2hbvw58xcbsylb2xa903apzygc6c3sw71kcvgcbrfwd"))))
     (build-system glib-or-gtk-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and

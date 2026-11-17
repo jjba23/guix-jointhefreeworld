@@ -183,7 +183,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-    (version "0.40.1")
+    (version "0.41.1")
     (source
      (origin
        (method git-fetch)
@@ -192,7 +192,7 @@ be changed while it runs, from a REPL, without a restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0pglsycv93cj537l6d0cmhjhqb39lxaf41ji8dd7fmhqw3jrynzf"))))
+        (base32 "08dkyaw7c3zfbrwhd09qwwpwvfhvx04c5x5y40y6k6blilpczjla"))))
     ;; The crate graph is vendored in the source, so the build runs cargo
     ;; offline and has no crate inputs to resolve.  cargo xtask install is
     ;; what puts the Scheme modules, desktop entry and icons beside the

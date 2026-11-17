@@ -42,10 +42,10 @@
 (define-public maak
   (package
     (name "maak")
-    (version "0.25.0")
-    ;; The releases are cut on GitHub, which is where the tag is pushed; the
-    ;; Codeberg repository carries the history but stops at v0.14.0, so a newer
-    ;; version has nothing to fetch there.
+    (version "1.0.0")
+    ;; The releases are cut on GitHub, which is where the tag is pushed;
+    ;; Codeberg archived its copy of this repository on 2026-11-08, so a tag
+    ;; newer than that archive has nothing to fetch there.
     (source
      (origin
        (method git-fetch)
@@ -54,7 +54,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1mbxv3qk52rwqy62hx8m9agbx3935blvbl3j9hg9f4i8xf8193qh"))))
+        (base32 "032z6n0pdckihc14iz747bbdgikbzgv2sikn508aliwh3pjvs378"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -108,7 +108,7 @@
      (list bash-minimal
            coreutils-minimal
            util-linux))
-    (home-page "https://codeberg.org/jjba23/maak")
+    (home-page "https://github.com/jjba23/maak")
     (synopsis "Command runner à la Make using Guile Scheme")
     (description
      "Maak is a command runner and control plane for projects.  It lets you use

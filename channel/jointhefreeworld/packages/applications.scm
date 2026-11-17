@@ -121,7 +121,7 @@ complexity that comes with its history.")
 (define-public ggg
   (package
     (name "ggg")
-    (version "2.0.3")
+    (version "2.1.0")
     (source
      (origin
        (method git-fetch)
@@ -130,7 +130,7 @@ complexity that comes with its history.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "15zzw2246c7p6s5aza095clp6yw4krz18jg4zfv2rxz4gfzl0hx1"))))
+        (base32 "15bp7077xxk6a8mmw77dmisznj4waf8mjl7csisavgq19hayw51d"))))
     (build-system guile-build-system)
     (arguments
      (list

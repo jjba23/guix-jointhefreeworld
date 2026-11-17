@@ -649,11 +649,8 @@ what makes a migration safe to run again.")
       #~(modify-phases %standard-phases
           (add-before 'build 'install-program-files
             (lambda _
-              (let ((bin (string-append #$output "/bin"))
-                    (data (string-append
+              (let ((data (string-append
                            #$output "/share/guile/site/3.0/cask-and-cons")))
-                (install-file "caco" bin)
-                (chmod (string-append bin "/caco") #o755)
                 (install-file "src/cask-and-cons/omniwm-settings.toml" data)
                 (install-file "src/cask-and-cons/shell-lib.zsh" data)
                 (install-file "src/cask-and-cons/notes.zsh" data)
@@ -670,15 +667,23 @@ what makes a migration safe to run again.")
                   "                      (format #f \"src/cask-and-cons/~a\" name))")))))
           (add-after 'install-documentation 'install-launcher
             (lambda _
-              ;; The checkout's launcher adds ./src to the load path, which is
-              ;; right in the checkout and wrong in the store.  The installed
-              ;; launcher lets the wrapper's GUILE_LOAD_PATH do that job.
-              (let ((launcher (string-append #$output "/bin/caco")))
+              ;; 0.12.2 dropped the `caco' program and its main.scm: the work
+              ;; is a task file run through maak, and the tasks read their data
+              ;; from the checkout.  So the checkout is what gets installed and
+              ;; `caco' is the maak call the project's zsh function makes.
+              ;; shortcut: it runs the installed tree, not a user's own file;
+              ;; a user with their own maak.scm runs `maak -C <checkout>'.
+              (let* ((tree (string-append #$output "/share/cask-and-cons"))
+                     (bin (string-append #$output "/bin"))
+                     (launcher (string-append bin "/caco")))
+                (install-file "maak.scm" tree)
+                (copy-recursively "src" (string-append tree "/src"))
+                (mkdir-p bin)
                 (call-with-output-file launcher
                                        (lambda (port)
                                          (format port
-                                                 "#!~a/bin/bash~%exec guile -c '((@ (cask-and-cons main) main) (command-line))' \"$@\"~%"
-                                                 #$bash-minimal)))
+                                                 "#!~a/bin/bash~%exec maak -C ~a \"$@\"~%"
+                                                 #$bash-minimal tree)))
                 (chmod launcher #o755))))
           (add-after 'patch-shebangs 'wrap-program
             (lambda _
@@ -686,7 +691,8 @@ what makes a migration safe to run again.")
                 (wrap-program wrapper
                               #:sh (string-append #$bash-minimal "/bin/bash")
                               `("PATH" ":" prefix
-                                (,(string-append #$guile-3.0 "/bin")
+                                (,(string-append #$maak "/bin")
+                                 ,(string-append #$guile-3.0 "/bin")
                                  ,(string-append #$bash-minimal "/bin")
                                  ,(string-append #$coreutils-minimal "/bin")
                                  ,(string-append #$util-linux "/bin")))
@@ -700,6 +706,7 @@ what makes a migration safe to run again.")
     (inputs
      (list bash-minimal
            coreutils-minimal
+           maak
            util-linux))
     (home-page "https://github.com/jjba23/cask-and-cons")
     (synopsis "Desktop setup tasks from a Cask and Cons file")

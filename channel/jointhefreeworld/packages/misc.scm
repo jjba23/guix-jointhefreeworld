@@ -184,7 +184,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-    (version "0.45.0")
+    (version "0.46.0")
     (source
      (origin
        (method git-fetch)
@@ -193,7 +193,7 @@ be changed while it runs, from a REPL, without a restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0mnj3iawj74lgmiqrg6w5r6qwqk72vg5yp2rhvn7v3x1swx1ls8y"))))
+        (base32 "17n8dmpnb1r4schs2v0828mdr04m7snqv3r12yg463c1wl1qvpgb"))))
     ;; The crate graph is vendored in the source, so the build runs cargo
     ;; offline and has no crate inputs to resolve.  cargo xtask install is
     ;; what puts the Scheme modules, desktop entry and icons beside the
@@ -238,7 +238,20 @@ be changed while it runs, from a REPL, without a restart.")
                    (invoke "cargo" "run" "--locked" "--offline"
                            "-p" "xtask" "--" "install"
                            "--prefix" (assoc-ref outputs "out")
-                           "--no-build"))))))
+                           "--no-build")))
+               ;; `curl` and `wtype` are called by name at run time.  A
+               ;; propagated input only reaches the profile of whoever installs
+               ;; the package, and a compositor starts the shell with the PATH
+               ;; it inherited rather than a login shell's, so the binary
+               ;; carries both store paths itself.
+               (add-after 'install 'wrap-runtime-tools
+                 (lambda* (#:key inputs #:allow-other-keys)
+                   (let* ((path (string-append
+                                 (dirname (search-input-file inputs "/bin/wtype"))
+                                 ":"
+                                 (dirname (search-input-file inputs "/bin/curl")))))
+                     (wrap-program (string-append #$output "/bin/whelk")
+                       `("PATH" ":" prefix (,path)))))))))
     (native-inputs
      ;; cargo builds and runs the Rust and Guile suites; xvfb-run supplies
      ;; the display those GTK tests need, and dbus lets the notification
@@ -262,7 +275,11 @@ be changed while it runs, from a REPL, without a restart.")
            gtk4-layer-shell
            guile-3.0
            libx11
-           linux-pam))
+           linux-pam
+           ;; Called by name at run time; the wrap phase above puts them on the
+           ;; binary's PATH, and they stay propagated for a profile's scripts.
+           curl
+           wtype))
     ;; whelk calls wtype by name for menu shortcuts and the optional keyboard
     ;; test path, and curl to read a weather or stock card; keep both in the
     ;; package's profile so a desktop launch sees them.

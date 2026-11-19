@@ -25,6 +25,7 @@
   #:use-module (guix build-system meson)
   #:use-module (gnu packages commencement)
   #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gnu packages curl)
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages gettext)
   #:use-module (gnu packages glib)
@@ -183,7 +184,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-    (version "0.43.0")
+    (version "0.44.0")
     (source
      (origin
        (method git-fetch)
@@ -192,7 +193,7 @@ be changed while it runs, from a REPL, without a restart.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "12bs9a00zrxnz70hz8clx524k36yy9bljs1ak8k00zx5f4fmgzgp"))))
+        (base32 "0gi5x0p2w4amzzy7g9cla4c1fc66mczhvkzhm089sgnqsr2qqz6c"))))
     ;; The crate graph is vendored in the source, so the build runs cargo
     ;; offline and has no crate inputs to resolve.  cargo xtask install is
     ;; what puts the Scheme modules, desktop entry and icons beside the
@@ -263,9 +264,10 @@ be changed while it runs, from a REPL, without a restart.")
            libx11
            linux-pam))
     ;; whelk calls wtype by name for menu shortcuts and the optional keyboard
-    ;; test path; keep it in the package's profile so a desktop launch sees it.
+    ;; test path, and curl to read a weather or stock card; keep both in the
+    ;; package's profile so a desktop launch sees them.
     (propagated-inputs
-     (list wtype))
+     (list wtype curl))
     (home-page "https://github.com/jjba23/whelk")
     (synopsis "Desktop shell for Wayland and X11, configured in GNU Guile Scheme")
     (description

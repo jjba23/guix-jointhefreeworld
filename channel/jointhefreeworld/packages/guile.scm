@@ -182,30 +182,30 @@ counterparts, easing the learning curve and reducing cognitive load.")
 (define-public guile-orgwebalchemy
   (package
     (name "guile-orgwebalchemy")
-    (version "1.2.9")
+    (version "1.3.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/orgwebalchemy.git")
+             (url "https://github.com/jjba23/orgwebalchemy.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "00mi8hlmfhp69fiflsjg52r4axmr2fy981nv31aypihqvr8chq9q"))))
+        (base32 "1h7fq2a194cn1igyngkhq1x5w2ilqcszkmpmacskvphrznps6lqc"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
     (native-inputs
      (list guile-3.0))
-    (home-page "https://codeberg.org/jjba23/orgwebalchemy")
+    (home-page "https://github.com/jjba23/orgwebalchemy")
     (synopsis "Org mode to HTML and Markdown converter for Guile Scheme")
     (description
      "Orgwebalchemy parses Org mode documents with a Parsing Expression Grammar
-and renders them as HTML or Markdown.  It is the Org exporter behind the
-jointhefreeworld web applications: headings, lists, tables, source blocks,
-links and the usual Org furniture are read by one grammar and written by two
-renderers.")
-    (license license:lgpl3+)))
+and renders them as HTML, Markdown, JSON or SXML.  It is the Org exporter behind
+the jointhefreeworld web applications: headings, lists, tables, source blocks,
+links and the usual Org furniture are read by one grammar and written by three
+renderers, and the tree itself can be handed to another language as JSON.")
+    (license license:expat)))
 
 (define-public guile-openapi-generator
   (package

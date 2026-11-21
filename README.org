@@ -496,7 +496,7 @@ package table names the command.
 | =araneola=      |   0.2.6 | =araneola=      | Site crawler and link checker                    |
 | =mutastructura= |  0.9.11 | =mutastructura= | Relational database schema migrations            |
 | =cask-and-cons= |  0.12.2 | =caco=          | Desktop setup tasks, named and written in Scheme |
-| =guile-dokgen=  |   0.7.0 | =dokgen=        | API documentation for Guile libraries, as Texinfo  |
+| =guile-dokgen=  |   0.8.0 | =dokgen=        | API documentation for Guile libraries, as Texinfo  |
 
 ** Emacs packages — =(jointhefreeworld packages emacs)=
 :PROPERTIES:

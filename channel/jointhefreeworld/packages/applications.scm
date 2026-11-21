@@ -790,7 +790,7 @@ to.")
 (define-public guile-dokgen
   (package
     (name "guile-dokgen")
-    (version "0.9.1")
+    (version "0.9.2")
     (source
      (origin
        (method git-fetch)
@@ -799,7 +799,7 @@ to.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "106bwldrmbizvj4653rcr7gk7rslpc7269dsnlclchf4fpn4hbvh"))))
+        (base32 "06yf4cdsil7kafs6jk96bl4qwin6xmiapq5cxdsbn7a9zz1napxm"))))
     (build-system guile-build-system)
     (arguments
      (list

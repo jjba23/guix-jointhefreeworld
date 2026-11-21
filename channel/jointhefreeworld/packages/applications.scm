@@ -43,7 +43,7 @@
 (define-public maak
   (package
     (name "maak")
-    (version "1.1.0")
+    (version "1.1.1")
     ;; The releases are cut on GitHub, which is where the tag is pushed;
     ;; Codeberg archived its copy of this repository on 2026-11-08, so a tag
     ;; newer than that archive has nothing to fetch there.
@@ -55,7 +55,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0gfqpvy4syj8yz99wzar4bdyia9fnvd19n9p8748gmgr6gp0lajh"))))
+        (base32 "0zzk6ikj0qmkdkxxxr2ab342ldk8my8dw7ld17xhzz7i1lrsik5d"))))
     (build-system guile-build-system)
     (arguments
      (list

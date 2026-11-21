@@ -36,6 +36,7 @@
                araneola
                mutastructura
                cask-and-cons
+               guile-dokgen
                emacs-maak
                emacs-modusregel
                emacs-veritas

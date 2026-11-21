@@ -37,7 +37,8 @@
             skapa
             araneola
             mutastructura
-            cask-and-cons))
+            cask-and-cons
+            guile-dokgen))
 
 (define-public maak
   (package
@@ -784,4 +785,79 @@ documented, independently testable and aware of which dialect they are looking
 at.  It speaks the shapes an editor and a pipeline need -- a compile-style
 line, JSON, SARIF, GitHub annotations, and a language server the editors talk
 to.")
+    (license license:expat)))
+
+(define-public guile-dokgen
+  (package
+    (name "guile-dokgen")
+    (version "0.7.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/jjba23/guile-dokgen.git")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0xh6fkp2rccxy0mly2wmiqx0q752dcwzxq16j24fvjqfdx5cbvn0"))))
+    (build-system guile-build-system)
+    (arguments
+     (list
+      #:source-directory "src"
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'install-documentation 'install-launcher
+            (lambda _
+              ;; The checkout's launcher adds the src/ next to it to the load
+              ;; path, which is right in a checkout and wrong in the store.  It
+              ;; is installed exactly as written: the wrapper below hands it
+              ;; DOKGEN_LOAD_PATH, which the launcher already knows how to use,
+              ;; so no substitution has to keep up with the launcher's wording.
+              (let ((bin (string-append #$output "/bin")))
+                (mkdir-p bin)
+                (install-file "bin/dokgen" bin)
+                (chmod (string-append bin "/dokgen") #o755))))
+          (add-after 'patch-shebangs 'wrap-program
+            (lambda _
+              (let ((wrapper (string-append #$output "/bin/dokgen"))
+                    (site (string-append #$output "/share/guile/site/3.0"))
+                    (ccache (string-append #$output
+                                           "/lib/guile/3.0/site-ccache")))
+                (wrap-program wrapper
+                              #:sh (string-append #$bash-minimal "/bin/bash")
+                              `("PATH" ":" prefix
+                                (,(string-append #$guile-3.0 "/bin")))
+                              `("DOKGEN_LOAD_PATH" ":" = (,site))
+                              ;; guile-config and guile-lib are propagated
+                              ;; inputs, so a profile puts them on Guile's
+                              ;; load path; naming them here as well is what
+                              ;; makes the store's own binary answer.
+                              `("GUILE_LOAD_PATH" ":" prefix
+                                (,(string-append #$guile-config
+                                                 "/share/guile/site/3.0")
+                                 ,(string-append #$guile-lib
+                                                 "/share/guile/site/3.0")))
+                              ;; The compiled modules live in a directory of
+                              ;; their own, so Guile has to be told where they
+                              ;; are: without it every run compiles the seven
+                              ;; modules into the user's cache before it
+                              ;; answers.
+                              `("GUILE_LOAD_COMPILED_PATH" ":" prefix
+                                (,ccache)))))))))
+    (native-inputs (list guile-3.0))
+    (inputs (list bash-minimal guile-3.0))
+    (propagated-inputs (list guile-config
+                             guile-lib))
+    (home-page "https://github.com/jjba23/guile-dokgen")
+    (synopsis "Generate API documentation for GNU Guile Scheme projects")
+    (description
+     "Guile Dokgen extracts the API documentation of GNU Guile Scheme modules
+and writes it as Texinfo: every exported procedure, macro, variable, parameter
+object and record type, with the docstring that documents it.  The
+documentation is read from the module that is loaded rather than parsed from
+its text, so a name the program can call is a name the manual documents.  A
+docstring may carry a mermaid diagram, which is drawn through a renderer of the
+user's choice and written as source when none is installed, and the @code{check}
+command reports the exported names that have no docstring, for a build that
+holds a library to a documented API.")
     (license license:expat)))

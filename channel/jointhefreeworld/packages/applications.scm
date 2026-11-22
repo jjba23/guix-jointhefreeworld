@@ -26,6 +26,7 @@
                                      guile-bewaking guile-veritas))
   #:use-module (gnu packages imagemagick)
   #:use-module (gnu packages linux)
+  #:use-module (gnu packages maths)
   #:use-module (gnu packages tls)
   #:use-module (jointhefreeworld packages guile)
   #:export (maak
@@ -790,7 +791,7 @@ to.")
 (define-public guile-dokgen
   (package
     (name "guile-dokgen")
-    (version "0.9.2")
+    (version "0.10.1")
     (source
      (origin
        (method git-fetch)
@@ -799,7 +800,7 @@ to.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "06yf4cdsil7kafs6jk96bl4qwin6xmiapq5cxdsbn7a9zz1napxm"))))
+        (base32 "0gxsxjc2clz12m6yp45hqfkladp5yifibwcb9s3706w0dmj8mng0"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -817,6 +818,16 @@ to.")
                 (mkdir-p bin)
                 (install-file "bin/dokgen" bin)
                 (chmod (string-append bin "/dokgen") #o755))))
+          (add-after 'install-documentation 'install-bundled-assets
+            (lambda _
+              ;; A `.scm' install does not carry the Mermaid renderer, and
+              ;; without it a generated page cannot draw a diagram whose
+              ;; image was not built.  It lives beside the module that
+              ;; looks for it, with its license.
+              (let ((site (string-append #$output
+                                         "/share/guile/site/3.0/dokgen")))
+                (install-file "src/dokgen/mermaid.min.js" site)
+                (install-file "src/dokgen/mermaid.LICENSE" site))))
           (add-after 'patch-shebangs 'wrap-program
             (lambda _
               (let ((wrapper (string-append #$output "/bin/dokgen"))
@@ -826,7 +837,11 @@ to.")
                 (wrap-program wrapper
                               #:sh (string-append #$bash-minimal "/bin/bash")
                               `("PATH" ":" prefix
-                                (,(string-append #$guile-3.0 "/bin")))
+                                (,(string-append #$guile-3.0 "/bin")
+                                 ;; A plot is drawn during a documentation
+                                 ;; build; a project that uses dokgen should
+                                 ;; not have to install gnuplot itself.
+                                 ,(string-append #$gnuplot "/bin")))
                               `("DOKGEN_LOAD_PATH" ":" = (,site))
                               ;; guile-config and guile-lib are propagated
                               ;; inputs, so a profile puts them on Guile's
@@ -845,7 +860,7 @@ to.")
                               `("GUILE_LOAD_COMPILED_PATH" ":" prefix
                                 (,ccache)))))))))
     (native-inputs (list guile-3.0))
-    (inputs (list bash-minimal guile-3.0))
+    (inputs (list bash-minimal guile-3.0 gnuplot))
     (propagated-inputs (list guile-config
                              guile-lib))
     (home-page "https://github.com/jjba23/guile-dokgen")
@@ -856,8 +871,9 @@ and writes it as Texinfo: every exported procedure, macro, variable, parameter
 object and record type, with the docstring that documents it.  The
 documentation is read from the module that is loaded rather than parsed from
 its text, so a name the program can call is a name the manual documents.  A
-docstring may carry a mermaid diagram, which is drawn through a renderer of the
-user's choice and written as source when none is installed, and the @code{check}
-command reports the exported names that have no docstring, for a build that
-holds a library to a documented API.")
+docstring may carry a mermaid or gnuplot diagram: mermaid is drawn in the page
+from a bundled renderer when no image was built, gnuplot is drawn at build time
+when it is installed, and either is kept as source when it cannot be drawn.
+The @code{check} command reports the exported names that have no docstring, for
+a build that holds a library to a documented API.")
     (license license:expat)))

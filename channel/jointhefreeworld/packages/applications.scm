@@ -82,7 +82,11 @@
                     (zsh (string-append
                           #$output "/share/zsh/site-functions")))
                 (mkdir-p bash)
-                (install-file "scripts/maak-completion.bash" bash)
+                ;; bash loads a completion from this directory by the name of the
+                ;; command, so the file is called `maak' and not after the file
+                ;; it is generated from.
+                (copy-file "scripts/maak-completion.bash"
+                           (string-append bash "/maak"))
                 (mkdir-p fish)
                 (copy-file "scripts/maak-completion.fish"
                            (string-append fish "/maak.fish"))

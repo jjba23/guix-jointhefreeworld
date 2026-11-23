@@ -93,7 +93,7 @@ integrates ble.sh, fzf and direnv.")
 (define-public lambdock
   (package
     (name "lambdock")
-    (version "2.2.3")
+    (version "2.2.9")
     (source
      (origin
        (method git-fetch)
@@ -102,7 +102,7 @@ integrates ble.sh, fzf and direnv.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1aqcavl8xj701d05scna6f3cbcqbpji0z9bkp1prik0055wj99n0"))))
+        (base32 "1z5l0f5awc5kr80sqrb0vy3yarbdhwar5dmplrb37wxi0gpljxk2"))))
     (build-system glib-or-gtk-build-system)
     (arguments
      ;; The wrap-glib-or-gtk phase points GSETTINGS_SCHEMA_DIR and
@@ -184,7 +184,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-        (version "0.50.0")
+        (version "0.50.1")
     (source
       (origin
         (method git-fetch)
@@ -193,7 +193,7 @@ be changed while it runs, from a REPL, without a restart.")
               (commit (string-append "v" version))))
         (file-name (git-file-name name version))
         (sha256
-         (base32 "16vc3jpz70174i0pqwz4dpc91rgmxz9b37i97dpknhwrv5g42rvc"))))
+         (base32 "1z8hlb37f6pgf00aid4gnf8w28spxdfk616z687j7phjrwwnxxgh"))))
     ;; The crate graph is vendored in the source, so the build runs cargo
     ;; offline and has no crate inputs to resolve.  cargo xtask install is
     ;; what puts the Scheme modules, desktop entry and icons beside the

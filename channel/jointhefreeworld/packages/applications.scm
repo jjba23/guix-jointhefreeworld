@@ -403,7 +403,7 @@ ever holding them in the clear.")
 (define-public skapa
   (package
     (name "skapa")
-    (version "0.0.20")
+    (version "0.0.21")
     (source
      (origin
        (method git-fetch)
@@ -412,7 +412,7 @@ ever holding them in the clear.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "00scs6qnw699lh5qsxjci8mpsbnnma1r0prhxpkwd1z2nza2zn6g"))))
+        (base32 "1fjyi38fjaklfm9g0nvk3m4n5pr3z9z7n5ymzz9qdn1rnr0l5wsw"))))
     (build-system guile-build-system)
     (arguments
      (list

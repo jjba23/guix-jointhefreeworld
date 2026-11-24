@@ -247,16 +247,19 @@ be updated and evolved over the years, and it supports multilingual content.")
 (define-public lenkesamler
   (package
     (name "lenkesamler")
-    (version "0.0.10")
+    (version "0.1.0")
+    ;; The releases are cut on GitHub, which is where the tag is pushed;
+    ;; Codeberg archived its copy of this repository, so the tag has nothing
+    ;; to fetch there.
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/lenkesamler.git")
+             (url "https://github.com/jjba23/lenkesamler.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1p9pbp64jf4z9i9g8m4vylrzmckjrlkqj8wwbmwlyli4q3zk8ck4"))))
+        (base32 "0vyav8d1p769al8q7s6v4hj3ndc06ipdw1j6ylkw4m89alay90zl"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -311,14 +314,14 @@ be updated and evolved over the years, and it supports multilingual content.")
     (propagated-inputs
      (list guile-gnutls
            guile-json-4))
-    (home-page "https://codeberg.org/jjba23/lenkesamler")
+    (home-page "https://github.com/jjba23/lenkesamler")
     (synopsis "Bookmark collector and converter written in Guile Scheme")
     (description
      "Lenkesamler (Norwegian for \"link collector\") gathers, checks and converts
 bookmarks.  It reads the bookmark files browsers write, verifies the addresses
 they contain, and emits the same collection as HTML, JSON, Markdown, Org or a
 Netscape bookmarks file.")
-    (license license:agpl3+)))
+    (license license:expat)))
 
 (define-public consceal
   (package

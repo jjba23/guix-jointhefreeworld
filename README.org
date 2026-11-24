@@ -490,7 +490,7 @@ package table names the command.
 | =sift=          |  1.39.2 | =sift=          | Formatter and linter for Scheme, Emacs Lisp, CL  |
 | =ggg=           |   2.0.3 | =ggg=           | SVG badge and glyph generator                    |
 | =iter-vitae=    |   1.5.2 | =iter-vitae=    | Curriculum vitae generator                       |
-| =lenkesamler=   |  0.0.10 | =lenkesamler=   | Bookmark collector and converter                 |
+| =lenkesamler=   |   0.1.0 | =lenkesamler=   | Bookmark collector and converter                 |
 | =consceal=      |   0.1.6 | =consceal=      | Secret manager and deployer                      |
 | =skapa=         |  0.0.11 | =skapa=         | Interactive project scaffolder                   |
 | =araneola=      |   0.2.6 | =araneola=      | Site crawler and link checker                    |

@@ -44,7 +44,7 @@
 (define-public guile-heks-bash
   (package
     (name "guile-heks-bash")
-    (version "2.2.1")
+    (version "2.2.6")
     (source
      (origin
        (method git-fetch)
@@ -53,7 +53,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1nb2819j4gbws2yslxpqgn95kgxqx039l67hfr1qld97f1jd4svz"))))
+        (base32 "15780snhsqwmxy6qfmwfsx7ahb4gsijqy9kyajp7nx0axd5amqa3"))))
     (build-system guile-build-system)
     (arguments
      (list

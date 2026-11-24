@@ -127,7 +127,7 @@ complexity that comes with its history.")
 (define-public ggg
   (package
     (name "ggg")
-    (version "2.1.0")
+    (version "2.1.5")
     (source
      (origin
        (method git-fetch)
@@ -136,7 +136,7 @@ complexity that comes with its history.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "15bp7077xxk6a8mmw77dmisznj4waf8mjl7csisavgq19hayw51d"))))
+        (base32 "1g9sx0jc71f86439ddcm6s1iqasz3vl75va8yjminwsrg7lyjvdl"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -187,7 +187,7 @@ from S-expressions, producing pixel-perfect output.")
 (define-public iter-vitae
   (package
     (name "iter-vitae")
-    (version "1.5.2")
+    (version "1.5.7")
     (source
      (origin
        (method git-fetch)
@@ -196,7 +196,7 @@ from S-expressions, producing pixel-perfect output.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "07kam0fkbmap5f6yswci1immpa4grgr6f8k1hpfalj5jz289r8fl"))))
+        (base32 "157lxqzr92r0b5yr5wnps4zfk6c9k8n8jz4z3hlyji4n16hirivd"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -476,7 +476,7 @@ a template system that a project can extend.")
 (define-public araneola
   (package
     (name "araneola")
-    (version "0.2.6")
+    (version "0.2.11")
     (source
      (origin
        (method git-fetch)
@@ -485,7 +485,7 @@ a template system that a project can extend.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0q3ayyfkx9vh5xhw0030qgpjmr0arn2kbhsmgbpfvpcdc2sn9dgp"))))
+        (base32 "11zccsc0igs345yc91327whk0av9d7w4qi776ky3rvz6l8flmb1v"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -556,7 +556,7 @@ file from what it found.")
 (define-public mutastructura
   (package
     (name "mutastructura")
-    (version "0.9.11")
+    (version "0.9.16")
     (source
      (origin
        (method git-fetch)
@@ -565,7 +565,7 @@ file from what it found.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0b0386kkf7w8qygpwxnd5zwg1g5wa2l8gzxir9ihww0qpnf1s9nf"))))
+        (base32 "1vcw6rx7fkqqm1xscs9c6ww1jf1cbdwvwzzqmn8a6l3z6mnkr00d"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -640,7 +640,7 @@ what makes a migration safe to run again.")
 (define-public cask-and-cons
   (package
     (name "cask-and-cons")
-    (version "0.12.2")
+    (version "0.12.7")
     (source
      (origin
        (method git-fetch)
@@ -649,7 +649,7 @@ what makes a migration safe to run again.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1v756pds1bdz0fvdl5lmysxj8ap4wji17k5mz0hqfyikw9r04nnb"))))
+        (base32 "1dp848vpxbzypxpnckvqafj1cxxdqmavwzg0cf6d8vcv9q6n3prf"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -730,7 +730,7 @@ runs on rather than a script that assumes the answer.")
 (define-public sift
   (package
     (name "sift")
-    (version "1.39.2")
+    (version "1.39.6")
     (source
      (origin
        (method git-fetch)
@@ -745,7 +745,7 @@ runs on rather than a script that assumes the answer.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0bqh3b571mdscyrzq1wa0rrhirlfq46x8xvj0qinm53yhlg0gddw"))))
+        (base32 "0429i13p77xavlfj0p10ka08rz629mz87155whrnyabs12bxkcdi"))))
     (build-system guile-build-system)
     (arguments
      (list

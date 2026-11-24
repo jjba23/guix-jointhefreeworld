@@ -403,16 +403,16 @@ ever holding them in the clear.")
 (define-public skapa
   (package
     (name "skapa")
-    (version "0.0.11")
+    (version "0.0.20")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/skapa.git")
+             (url "https://github.com/jjba23/skapa.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1f2qrq3mxzsvgr73ranhilcc1d64rcsha5vl4ppm0ibfinvgjr8d"))))
+        (base32 "00scs6qnw699lh5qsxjci8mpsbnnma1r0prhxpkwd1z2nza2zn6g"))))
     (build-system guile-build-system)
     (arguments
      (list
@@ -464,14 +464,14 @@ ever holding them in the clear.")
     (propagated-inputs
      (list guile-scriba
            guile-json-4))
-    (home-page "https://codeberg.org/jjba23/skapa")
+    (home-page "https://github.com/jjba23/skapa")
     (synopsis "Interactive project scaffolder written in Guile Scheme")
     (description
      "Skapa (Swedish for \"create\") is a command-line wizard that scaffolds a new
 project.  It asks the questions a project has to answer -- its name, its
 language, its licence -- and writes the files that follow from the answers from
 a template system that a project can extend.")
-    (license license:agpl3+)))
+    (license license:expat)))
 
 (define-public araneola
   (package

@@ -492,7 +492,7 @@ package table names the command.
 | =iter-vitae=    |   1.5.2 | =iter-vitae=    | Curriculum vitae generator                       |
 | =lenkesamler=   |   0.1.0 | =lenkesamler=   | Bookmark collector and converter                 |
 | =consceal=      |   0.1.6 | =consceal=      | Secret manager and deployer                      |
-| =skapa=         |  0.0.11 | =skapa=         | Interactive project scaffolder                   |
+| =skapa=         |  0.0.20 | =skapa=         | Interactive project scaffolder                   |
 | =araneola=      |   0.2.6 | =araneola=      | Site crawler and link checker                    |
 | =mutastructura= |  0.9.11 | =mutastructura= | Relational database schema migrations            |
 | =cask-and-cons= |  0.12.2 | =caco=          | Desktop setup tasks, named and written in Scheme |

@@ -313,26 +313,15 @@ menu from niri's IPC, sway's IPC or EWMH, whichever the session provides.")
         (base32 "00q5c404i49r0gafmxflsz3sc3lxc71nrpbnscan0hvhiq11m366"))))
     (build-system meson-build-system)
     (arguments
+     ;; The phases are meson's own.  0.3.9 is a C program with a Scheme brain
+     ;; and a `meson.build' that installs everything - the binary, the data
+     ;; files, the Scheme modules and the compiled catalogues - so the `cargo'
+     ;; phases this package carried were a build the project no longer has, and
+     ;; they failed with "cargo: not found" before the first object was
+     ;; compiled.  The project's own `guix.scm' is the same list of inputs and
+     ;; the same build system, which is why the two cannot drift again.
      (list #:glib-or-gtk? #t
            #:parallel-build? #t
-           ;; cargo builds and `cargo xtask' installs: the data files, the Scheme
-           ;; modules and the compiled catalogues have no cargo target of their
-           ;; own.
-           #:phases #~(modify-phases %standard-phases
-                        (delete 'configure)
-                        (replace 'build
-                          (lambda _
-                            (invoke "cargo" "build" "--offline" "--locked"
-                                    "--release")))
-                        (replace 'check
-                          (lambda* (#:key tests? #:allow-other-keys)
-                            (when tests?
-                              (invoke "cargo" "test" "--offline" "--locked"))))
-                        (replace 'install
-                          (lambda _
-                            (invoke "cargo" "run" "--offline" "--locked"
-                                    "-p" "xtask" "--" "install"
-                                    "--prefix" #$output))))
            #:parallel-tests? #t))
     (native-inputs
      (list (list glib "bin")

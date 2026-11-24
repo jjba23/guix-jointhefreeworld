@@ -36,29 +36,29 @@
 (define-public guile-kracht
   (package
     (name "guile-kracht")
-    (version "0.3.8")
+    (version "0.4.0")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://codeberg.org/jjba23/kracht.git")
+             (url "https://github.com/jjba23/kracht.git")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1v2n50hqwlihscl7f5y9hp815aznyrzzpk96whflqaqvjnzyxzb0"))))
+        (base32 "0disfg5hzaal1zv64ia7s5aick43q9j4ma14j8igzazbrakjnz65"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))
     (native-inputs
      (list guile-3.0))
-    (home-page "https://codeberg.org/jjba23/kracht")
+    (home-page "https://github.com/jjba23/kracht")
     (synopsis "Opt-in prelude that enhances Guile's standard library")
     (description
      "Kracht (Dutch for power, and a recursive acronym for \"KRACHT Reliable And
 Consistent Helper Tools\") is a prelude for Guile Scheme: an opt-in set of
 procedures for lists, strings, I/O, SQL and HTML that a program can import
 without forking the language's standard library.")
-    (license license:lgpl3+)))
+    (license license:expat)))
 
 (define-public guile-scriba
   (package

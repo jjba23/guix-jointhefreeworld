@@ -33,7 +33,7 @@ dependencies and launchers they were tested with.
 
 - *Guix users* who want the newest =maak=, =ggg=, =iter-vitae=,
   =mutastructura=, or =emacs-modusregel= without writing package definitions.
-- *Scheme hackers* building on [[https://codeberg.org/jjba23/kracht][Kracht]],
+- *Scheme hackers* building on [[https://github.com/jjba23/kracht][Kracht]],
   [[https://github.com/jjba23/scriba][Scriba]],
   [[https://github.com/jjba23/veritas][Veritas]],
   [[https://github.com/jjba23/hygguile][Hygguile]], or the rest of the stack.
@@ -467,7 +467,7 @@ exporter, an OpenAPI generator, and a CSS generator.
 
 | Package                   | Version | What it is                                             |
 |---------------------------+---------+--------------------------------------------------------|
-| =guile-kracht=            |   0.3.8 | Opt-in prelude that enhances Guile's standard library  |
+| =guile-kracht=            |   0.4.0 | Opt-in prelude that enhances Guile's standard library  |
 | =guile-scriba=            |   1.0.1 | Structured logging, from console lines to JSON on disk |
 | =guile-veritas=           |   1.4.5 | Testing framework with an embedded DSL                 |
 | =guile-bewaking=          |   0.5.7 | Encrypted, lifetime-limited authentication tokens      |

@@ -21,9 +21,13 @@
   #:use-module (gnu packages bash)
   #:use-module (gnu packages gnupg)
   #:use-module (gnu packages guile)
+  ;; The bindings this module uses and no others: see the note in
+  ;; (jointhefreeworld packages guile) about why this is a `#:select' rather than
+  ;; a `#:hide' of the packages the channel shadows.
   #:use-module ((gnu packages guile-xyz)
-                #:hide (guile-kracht guile-hygguile
-                                     guile-bewaking guile-veritas))
+                #:select (guile-config guile-dbd-mysql guile-dbd-postgresql
+                                       guile-dbd-sqlite3 guile-dbi guile-lib
+                                       guile-uuid))
   #:use-module (gnu packages imagemagick)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages maths)

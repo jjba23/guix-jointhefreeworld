@@ -21,9 +21,14 @@
   #:use-module (gnu packages curl)
   #:use-module (gnu packages gnupg)
   #:use-module (gnu packages guile)
+  ;; Only the bindings this module uses are imported: `#:hide' would name the
+  ;; packages this channel shadows, and a name upstream drops - `guile-kracht'
+  ;; left `(gnu packages guile-xyz)' in the Guix of 2026-11-24 - turns the whole
+  ;; channel into "no binding `guile-kracht' to hide".  A `#:select' makes the
+  ;; upstream copies invisible without naming them, so a package moving in or out
+  ;; of Guix cannot stop the channel from loading.
   #:use-module ((gnu packages guile-xyz)
-                #:hide (guile-kracht guile-hygguile
-                                     guile-bewaking guile-veritas))
+                #:select (guile-fibers guile-uuid))
   #:export (guile-kracht
             guile-scriba
             guile-veritas

@@ -25,6 +25,7 @@
   #:use-module (guix build-system meson)
   #:use-module (gnu packages commencement)
   #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gnu packages audio)
   #:use-module (gnu packages curl)
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages gettext)
@@ -184,7 +185,7 @@ be changed while it runs, from a REPL, without a restart.")
 (define-public whelk
   (package
     (name "whelk")
-        (version "0.51.1")
+        (version "0.52.0")
     (source
       (origin
         (method git-fetch)
@@ -193,7 +194,7 @@ be changed while it runs, from a REPL, without a restart.")
               (commit (string-append "v" version))))
         (file-name (git-file-name name version))
         (sha256
-         (base32 "1iczh52ka00iwj5y3vyxfk0nsfy1dv7r9wq2as30df88fch5jv4n"))))
+         (base32 "0srx9k8g0nzjjpldzc7g1r9igb9ripv3sdl2rx79vxzpsxsx328m"))))
     ;; The crate graph is vendored in the source, so the build runs cargo
     ;; offline and has no crate inputs to resolve.  cargo xtask install is
     ;; what puts the Scheme modules, desktop entry and icons beside the
@@ -239,17 +240,19 @@ be changed while it runs, from a REPL, without a restart.")
                            "-p" "xtask" "--" "install"
                            "--prefix" (assoc-ref outputs "out")
                            "--no-build")))
-               ;; `curl` and `wtype` are called by name at run time.  A
-               ;; propagated input only reaches the profile of whoever installs
-               ;; the package, and a compositor starts the shell with the PATH
-               ;; it inherited rather than a login shell's, so the binary
-               ;; carries both store paths itself.
+               ;; `curl`, `wtype` and `cava` are called by name at run time.
+               ;; A propagated input only reaches the profile of whoever
+               ;; installs the package, and a compositor starts the shell with
+               ;; the PATH it inherited rather than a login shell's, so the
+               ;; binary carries their store paths itself.
                (add-after 'install 'wrap-runtime-tools
                  (lambda* (#:key inputs #:allow-other-keys)
                    (let* ((path (string-append
                                  (dirname (search-input-file inputs "/bin/wtype"))
                                  ":"
-                                 (dirname (search-input-file inputs "/bin/curl")))))
+                                 (dirname (search-input-file inputs "/bin/curl"))
+                                 ":"
+                                 (dirname (search-input-file inputs "/bin/cava")))))
                      (wrap-program (string-append #$output "/bin/whelk")
                        `("PATH" ":" prefix (,path)))))))))
     (native-inputs
@@ -278,13 +281,14 @@ be changed while it runs, from a REPL, without a restart.")
            linux-pam
            ;; Called by name at run time; the wrap phase above puts them on the
            ;; binary's PATH, and they stay propagated for a profile's scripts.
+           cava
            curl
            wtype))
     ;; whelk calls wtype by name for menu shortcuts and the optional keyboard
-    ;; test path, and curl to read a weather or stock card; keep both in the
-    ;; package's profile so a desktop launch sees them.
+    ;; test path, curl to read a weather or stock card and cava for the
+    ;; visualizer; keep all three in the profile so a desktop launch sees them.
     (propagated-inputs
-     (list wtype curl))
+     (list cava wtype curl))
     (home-page "https://github.com/jjba23/whelk")
     (synopsis "Desktop shell for Wayland and X11, configured in GNU Guile Scheme")
     (description

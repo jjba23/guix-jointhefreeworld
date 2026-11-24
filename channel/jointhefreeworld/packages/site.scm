@@ -161,4 +161,4 @@ images beside the result.  This package installs that program together with the
 Emacs packages it uses, and provides @command{jointhefreeworld-build}, which
 builds the checkout it is run from, and @command{jointhefreeworld-serve}, which
 serves the result.")
-    (license license:agpl3+)))
+    (license license:expat)))

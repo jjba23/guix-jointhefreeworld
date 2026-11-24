@@ -73,7 +73,7 @@ customization, beauty and performance in mind.  It reports unsaved, read-only,
 narrowed and remote buffers only when there is something to report, prettifies
 major mode names including their tree-sitter variants, shows Eglot and Flymake
 counters, and aligns the same way in a graphical frame and in a terminal.")
-    (license license:gpl3+)))
+    (license license:expat)))
 
 (define-public emacs-veritas
   (package
@@ -100,7 +100,7 @@ indexed with Imenu and reported in the mode line.  It runs them from the
 project, the current file, the test at point or the suite at point, and shows
 the result in a compilation buffer whose entries jump back to the line that
 failed.")
-    (license license:lgpl3+)))
+    (license license:expat)))
 
 (define-public emacs-welkomscherm
   (package
@@ -153,4 +153,4 @@ times the scale, and changing the scale resizes every face declared that way.
 The scale itself is named rather than numbered, from nano to colossal, so a
 configuration says how large a heading should be relative to the text around
 it rather than how many points it should occupy.")
-    (license license:gpl3+)))
+    (license license:expat)))

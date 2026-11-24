@@ -88,7 +88,7 @@ prompt, the aliases, the functions and the integrations the machine should
 have.  The generated configuration keeps the same prompt, palette and git
 segment on every machine, with a per-machine sigil, accent and badge, and it
 integrates ble.sh, fzf and direnv.")
-    (license license:gpl3+)))
+    (license license:expat)))
 
 (define-public lambdock
   (package

@@ -88,7 +88,7 @@ log routing, formatting and filtering: human-readable console logs during
 development, machine-readable JSON logs in production, and rotating plaintext
 logs on disk.  It includes an auto-logger configured through environment
 variables, dynamically scoped log contexts and ahead-of-time level filtering.")
-    (license license:lgpl3+)))
+    (license license:expat)))
 
 (define-public guile-veritas
   (package
@@ -148,7 +148,7 @@ failures with the values that produced them.")
 credentials that carry information securely.  Tokens are protected through
 multiple layers of cryptography and obfuscation, producing secure tokens usable
 as web session cookies or as authenticating API calls.")
-    (license license:lgpl3+)))
+    (license license:expat)))
 
 (define-public guile-hygguile
   (package
@@ -177,7 +177,7 @@ as web session cookies or as authenticating API calls.")
 from Guile Scheme.  It defines an expressive domain-specific language over
 S-expressions and SXML, and ships components whose names resemble their HTML
 counterparts, easing the learning curve and reducing cognitive load.")
-    (license license:lgpl3+)))
+    (license license:expat)))
 
 (define-public guile-orgwebalchemy
   (package
@@ -236,7 +236,7 @@ JSON and generates Guile Scheme code: validated record data models, controllers
 (plain Guile or Artanis) and HTTP clients (plain Guile or libcurl), including
 support for polymorphism, enumerations, JSON merge patch and the security
 schemes described by the specification.")
-    (license license:agpl3+)))
+    (license license:expat)))
 
 (define-public guile-olive-css
   (package

@@ -182,7 +182,7 @@ projects: the technologies they use, the projects they appreciate, the versions
 they support and the sponsors they thank.  It reads Scheme files in which the
 glyphs are declared, supports badges of one to three parts, and renders SVG
 from S-expressions, producing pixel-perfect output.")
-    (license license:agpl3+)))
+    (license license:expat)))
 
 (define-public iter-vitae
   (package
@@ -242,7 +242,7 @@ description of its owner.  It separates the data from the presentation, the way
 a model-view-controller application does, and writes a web-site version of the
 document with SXML and Olive CSS.  It is designed for long-term use, so a CV can
 be updated and evolved over the years, and it supports multilingual content.")
-    (license license:agpl3+)))
+    (license license:expat)))
 
 (define-public lenkesamler
   (package
@@ -468,7 +468,7 @@ ever holding them in the clear.")
 project.  It asks the questions a project has to answer -- its name, its
 language, its licence -- and writes the files that follow from the answers from
 a template system that a project can extend.")
-    (license license:gpl3+)))
+    (license license:agpl3+)))
 
 (define-public araneola
   (package
@@ -548,7 +548,7 @@ a template system that a project can extend.")
 what it finds: broken links, missing pages, duplicate addresses and the shape
 of the site as a crawler sees it.  It can also write a sitemap and a robots
 file from what it found.")
-    (license license:agpl3+)))
+    (license license:expat)))
 
 (define-public mutastructura
   (package
@@ -632,7 +632,7 @@ to managing database states, with a command-line interface and library
 functions for PostgreSQL, MySQL and SQLite.  Migrations run transactionally and
 are recorded with a SHA-256 checksum in a migrations_history table, which is
 what makes a migration safe to run again.")
-    (license license:agpl3+)))
+    (license license:expat)))
 
 (define-public cask-and-cons
   (package
@@ -722,7 +722,7 @@ a desktop -- installing a tool, pointing a program at a configuration, keeping
 two machines in step -- into one command with named tasks.  The tasks are
 written in Guile Scheme, so a task can be a value computed from the machine it
 runs on rather than a script that assumes the answer.")
-    (license license:gpl3+)))
+    (license license:expat)))
 
 (define-public sift
   (package

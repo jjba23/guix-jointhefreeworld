@@ -68,7 +68,7 @@ without forking the language's standard library.")
 (define-public guile-scriba
   (package
     (name "guile-scriba")
-    (version "1.0.5")
+    (version "1.1.0")
     (source
      (origin
        (method git-fetch)
@@ -77,7 +77,7 @@ without forking the language's standard library.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "05400561ci8kgb10zcznb1kaqglhjfz2kacw1di9w08z3zz077pl"))))
+        (base32 "1b8axhxjdxm4nypfhbzyj12cklmraahqw9kj85jqz2699jykzd1r"))))
     (build-system guile-build-system)
     (arguments
      (list #:source-directory "src"))

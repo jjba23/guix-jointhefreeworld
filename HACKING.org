@@ -44,6 +44,11 @@ pin a commit instead of a tag, put the full SHA-1 in =commit=.
 Projects without a release tag are pinned to a commit and carry a version that
 says so; the same command with =--branch trunk= gives the values.
 
+=bibelot= and =hasp= are Cargo packages.  Their crate inputs are generated from
+the lock files in =channel/jointhefreeworld/packages/locks/=.  When either
+project cuts a release, copy that tag's =Cargo.lock= over the matching file
+before building the package.
+
 * Adding a package
 
 Add a =define-public= form to the module the package belongs to, export the name

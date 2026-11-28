@@ -57,6 +57,9 @@ A single channel containing:
 - *whelk*, the GTK4 desktop shell next to it: bars, launcher and panels written
   in Scheme, a layer surface on niri and sway, a dock with struts on X11, and
   ordinary windows where layer-shell does not exist;
+- *hasp*, the lock screen and session authenticator whelk starts when the
+  session locks;
+- *bibelot*, the floating desktop widget library whelk embeds;
 - *heks-toon*, the GTK4 window with the desktop's keyboard reference, wallpapers
   and palettes, painted from the palette the desktop is wearing;
 - *heks-bash*, a Bash configuration generated from Scheme;
@@ -112,7 +115,7 @@ The full catalogue, with versions and entry points, is
 | Git                           | For the checkout workflow and for verifying the signed history.                                                    |
 | GnuPG                         | Optional, but useful for inspecting the signing key and for maintainers signing commits.                           |
 | Emacs 29.1 or newer           | Only if you want the Emacs packages.  =modusregel= asks for 29.1; the other packages are happier on older Emacsen. |
-| GTK4 and a Wayland compositor | Only if you want =lambdock= or =whelk=.                                                                            |
+| GTK4 and a Wayland compositor | Only if you want =lambdock=, =whelk= or =hasp=.                                                                    |
 
 Nothing here needs root.  Guix installs into your profile; the packages do not
 write outside the store, and Guix manages profiles and caches.
@@ -520,7 +523,9 @@ package table names the command.
 |-------------------+---------+-----------------------+----------------------------------------------------------------|
 | =guile-heks-bash= |   2.2.6 | — (library)           | Bash configuration generated from Scheme                       |
 | =lambdock=        |  2.3.2 | =lambdock=            | Wayland dock built with GTK4, configurable in Guile            |
-| =whelk=           |  0.53.0 | =whelk=               | Desktop shell for Wayland and X11, configured in Scheme        |
+| =bibelot=         |   0.1.0 | — (library)           | Floating desktop widget cards                                  |
+| =hasp=            |   0.1.1 | =hasp=                | Wayland lock screen and session authenticator                  |
+| =whelk=           |  0.54.0 | =whelk=               | Desktop shell for Wayland and X11, configured in Scheme        |
 | =heks-toon=       |   0.3.9 | =heks-toon=           | Keyboard reference, wallpapers, palettes, docs and reconfigure |
 
 ** The web site — =(jointhefreeworld packages site)=
@@ -623,7 +628,7 @@ The repository is one module per kind of package:
         guile.scm                  the Guile libraries
         applications.scm           the command-line programs
         emacs.scm                  the Emacs packages
-        misc.scm                   heks-bash, lambdock, whelk and heks-toon
+        misc.scm                   heks-bash, lambdock, bibelot, hasp, whelk and heks-toon
         site.scm                   the jointhefreeworld site builder
 #+end_example
 

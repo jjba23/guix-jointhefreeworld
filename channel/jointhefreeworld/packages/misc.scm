@@ -6,9 +6,10 @@
 ;;; Commentary:
 ;;
 ;; A shell configuration written in Scheme, a dock written in C and GTK, the
-;; desktop shell those two belong to, and the window that shows the desktop's
-;; own keyboard reference, wallpapers and palettes.  They share nothing but their author, so each is written out in
-;; the build system it actually uses.
+;; desktop shell those two belong to, its separate lock screen and widget
+;; library, and the window that shows the desktop's own keyboard reference,
+;; wallpapers and palettes.  They share nothing but their author, so each is
+;; written out in the build system it actually uses.
 ;;
 ;;; Code:
 
@@ -18,7 +19,9 @@
   #:use-module (guix git-download)
   #:use-module (guix build utils)
   #:use-module (guix build-system gnu)
+#:use-module (guix build-system cargo)
   #:use-module (guix build-system glib-or-gtk)
+#:use-module (guix import crate)
   #:use-module (gnu packages commencement)
   #:use-module (guix build-system guile)
   #:use-module (guix build-system gnu)
@@ -26,6 +29,7 @@
   #:use-module (gnu packages commencement)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages audio)
+#:use-module (gnu packages bash)
   #:use-module (gnu packages curl)
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages gettext)
@@ -39,8 +43,13 @@
   #:use-module (gnu packages xorg)
   #:export (guile-heks-bash
             lambdock
+            bibelot
+            hasp
             whelk
             heks-toon))
+
+(define %package-directory
+  (dirname (current-filename)))
 
 (define-public guile-heks-bash
   (package
@@ -182,10 +191,117 @@ any monitor, and embeds a GNU Guile Scheme engine so that its configuration can
 be changed while it runs, from a REPL, without a restart.")
     (license license:expat)))
 
+(define-public bibelot
+  (package
+    (name "bibelot")
+    (version "0.1.0")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+              (url "https://github.com/jjba23/bibelot.git")
+              (commit (string-append "v" version))))
+        (file-name (git-file-name name version))
+        (sha256
+         (base32 "0s1vsndh3mr1b1x3lbam16n18dk65lfia5qcaja1xdakyn7g30gc"))))
+    (build-system cargo-build-system)
+    (arguments
+     '(#:cargo-package-crates '()
+       #:install-source? #f
+       #:phases
+       (modify-phases %standard-phases
+         (replace 'check
+           (lambda* (#:key tests? #:allow-other-keys)
+             (when tests?
+               (setenv "HOME" (getcwd))
+               (setenv "XDG_RUNTIME_DIR" (getcwd))
+               (invoke "cargo" "test" "--locked"))))
+         (replace 'install
+           (lambda* (#:key outputs #:allow-other-keys)
+             (let ((out (assoc-ref outputs "out")))
+               (install-file "scheme/bibelot/theme.scm"
+                             (string-append out
+                                            "/share/guile/site/3.0/bibelot"))
+               (install-file "README.org"
+                             (string-append out "/share/doc/bibelot"))
+               (install-file "docs/widgets.org"
+                             (string-append out "/share/doc/bibelot"))
+               (install-file "LICENSE"
+                             (string-append out "/share/licenses/bibelot"))))))))
+    (native-inputs (list guile-3.0 pkg-config))
+    (inputs
+     (append
+      (cargo-inputs-from-lockfile
+       (string-append %package-directory "/locks/bibelot.lock"))
+      (list gtk gtk4-layer-shell guile-3.0 wayland)))
+    (home-page "https://github.com/jjba23/bibelot")
+    (synopsis "Floating desktop widget cards")
+    (description
+     "Bibelot owns the desktop widget catalogue, its readings, placement and
+state file, the Gtk4 card surfaces, and the (bibelot theme) Scheme module.  It
+is a library: a host shell supplies the application, skin and settings path.")
+    (license license:expat)))
+
+(define-public hasp
+  (package
+    (name "hasp")
+    (version "0.1.1")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+              (url "https://github.com/jjba23/hasp.git")
+              (commit (string-append "v" version))))
+        (file-name (git-file-name name version))
+        (sha256
+         (base32 "1c2fygllj2ln31lcn1y7whrkcd0lw440j89i3g449r8g2rs3j244"))))
+    (build-system cargo-build-system)
+    (arguments
+     '(#:cargo-package-crates '("hasp")
+       #:install-source? #f
+       #:phases
+       (modify-phases %standard-phases
+         (replace 'check
+           (lambda* (#:key tests? #:allow-other-keys)
+             (when tests?
+               (setenv "HOME" (getcwd))
+               (setenv "XDG_RUNTIME_DIR" (getcwd))
+               (setenv "GTK_A11Y" "test")
+               (setenv "GDK_BACKEND" "x11")
+               (setenv "GSK_RENDERER" "cairo")
+               (invoke "xvfb-run" "-a" "cargo" "test" "--locked"))))
+         (replace 'install
+           (lambda* (#:key outputs #:allow-other-keys)
+             (let* ((out (assoc-ref outputs "out")))
+               (install-file "target/release/hasp"
+                             (string-append out "/bin"))
+               (install-file "scheme/hasp/theme.scm"
+                             (string-append out
+                                            "/share/guile/site/3.0/hasp"))
+               (install-file "packaging/pam/hasp-lock"
+                             (string-append out "/share/doc/hasp/pam"))
+               (install-file "README.org"
+                             (string-append out "/share/doc/hasp"))
+               (install-file "LICENSE"
+                             (string-append out "/share/licenses/hasp"))))))))
+    (native-inputs (list guile-3.0 pkg-config xvfb-run dbus))
+    (inputs
+     (append
+      (cargo-inputs-from-lockfile
+       (string-append %package-directory "/locks/hasp.lock"))
+      (list gtk gtk4-layer-shell guile-3.0 linux-pam wayland)))
+    (home-page "https://github.com/jjba23/hasp")
+    (synopsis "Wayland lock screen and session authenticator")
+    (description
+     "Hasp is a compositor-enforced Wayland lock screen with a layer-shell
+fallback, a PAM conversation and a reviewed unix_chkpwd fallback, logind
+triggers, and a GNU Guile Scheme theme.")
+    (license license:expat)))
+
 (define-public whelk
   (package
     (name "whelk")
-        (version "0.53.0")
+    (version "0.54.0")
     (source
       (origin
         (method git-fetch)
@@ -194,7 +310,7 @@ be changed while it runs, from a REPL, without a restart.")
               (commit (string-append "v" version))))
         (file-name (git-file-name name version))
         (sha256
-         (base32 "0cmyrc32yn958f7rwvyi1irz43s6csxjwk2v2bwv78063hcm23g7"))))
+         (base32 "03hl38xn3k4d2vqq3n33l3sgv788ix0jjic6lv45lk5w1zw2jy5l"))))
     ;; The crate graph is vendored in the source, so the build runs cargo
     ;; offline and has no crate inputs to resolve.  cargo xtask install is
     ;; what puts the Scheme modules, desktop entry and icons beside the
@@ -252,7 +368,9 @@ be changed while it runs, from a REPL, without a restart.")
                                  ":"
                                  (dirname (search-input-file inputs "/bin/curl"))
                                  ":"
-                                 (dirname (search-input-file inputs "/bin/cava")))))
+                                 (dirname (search-input-file inputs "/bin/cava"))
+                                 ":"
+                                 (dirname (search-input-file inputs "/bin/hasp")))))
                      (wrap-program (string-append #$output "/bin/whelk")
                        `("PATH" ":" prefix (,path)))))))))
     (native-inputs
@@ -272,13 +390,15 @@ be changed while it runs, from a REPL, without a restart.")
     (inputs
      ;; libx11 is what turns a bar into a dock with EWMH struts on an X11
      ;; desktop; without it whelk still builds and runs on Wayland alone.
-     ;; linux-pam enables the screen locker; without it whelk still builds but
-     ;; the locker fails closed.
+     ;; hasp is the separate lock-screen program: whelk starts it for locking
+     ;; and follows its logind session.  Carrying it here makes an installed
+     ;; whelk come with a working locker.
      (list gtk
            gtk4-layer-shell
            guile-3.0
+           bash-minimal
            libx11
-           linux-pam
+           hasp
            ;; Called by name at run time; the wrap phase above puts them on the
            ;; binary's PATH, and they stay propagated for a profile's scripts.
            cava
@@ -288,7 +408,7 @@ be changed while it runs, from a REPL, without a restart.")
     ;; test path, curl to read a weather or stock card and cava for the
     ;; visualizer; keep all three in the profile so a desktop launch sees them.
     (propagated-inputs
-     (list cava wtype curl))
+     (list cava wtype curl hasp))
     (home-page "https://github.com/jjba23/whelk")
     (synopsis "Desktop shell for Wayland and X11, configured in GNU Guile Scheme")
     (description

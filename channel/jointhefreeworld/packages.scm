@@ -44,6 +44,8 @@
                emacs-tekengrootte
                guile-heks-bash
                lambdock
+               bibelot
+               hasp
                whelk
                heks-toon
                jointhefreeworld))
